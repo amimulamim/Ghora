@@ -26,6 +26,7 @@ async function getAllTripsByID(ID){
 
     `
     const binds={
+        id:ID
     }
     return (await database.execute(sql,binds,database.options)).rows;
 }

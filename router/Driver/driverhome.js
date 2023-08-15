@@ -16,7 +16,8 @@ router.get('/', async (req, res) =>{
         console.log('driver nai');
         return res.redirect('/Driver/login');
     }
-    let e_mail=req.driver.email;
+    let e_mail=req.driver.EMAIL;
+    console.log('tererere'+e_mail);
     const driverInfo=await DB_drivers.getDriverByEmail(e_mail);
     //res.status(200).json(driverInfo.data);
     res.render('driverLayout.ejs', {

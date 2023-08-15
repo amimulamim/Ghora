@@ -8,13 +8,15 @@ async function getDriverByEmail(email)
     SELECT 
         ID,
         EMAIL,
-        NAME,
+        NAME
     FROM 
         DRIVER
     WHERE
         EMAIL=:email
     `;
-const binds = {}
+const binds = {
+    email:email
+}
 return (await database.execute(sql, binds, database.options)).rows;
 
 }
