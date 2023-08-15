@@ -1,18 +1,19 @@
 //libraries
 const express=require('express');
 const DB_trips=require('../../../Database/DB-driver-trips');
+const { json } = require('body-parser');
 
 //creating routers
 const router=express.Router({mergeParams:true});
 
 router.get('/',async(req,res) =>{
     if(req.driver==null){
-        return res.redirect('driver/login');
+        return res.redirect('/driver/login');
     }
 
     const requestsNearby=await DB_trips.getAllTripRequests();
     //will do front end here . for now in json format
-
+    console.log(json(requestsNearby.data));
     res.status(200).json(requestsNearby.data);
     // res.render('layout.ejs', {
     //     user:req.user,

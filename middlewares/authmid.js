@@ -32,7 +32,7 @@ function authUser(req, res, next){
 
                     req.user = {
                         USERNAME:results[0].USERNAME,
-                        EMAIL: email,
+                        EMAIL: decodedEmail,
                         NAME: results[0].NAME,
                         //IMAGE:results[0].IMAGE
                     }

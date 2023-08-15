@@ -8,7 +8,7 @@ async function getAllTripRequests(){
     SELECT 
          *
     FROM 
-        TRIP_REQUESTS
+        TRIP_REQUEST
     `
     const binds={
     }

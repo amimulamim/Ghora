@@ -6,19 +6,15 @@ const DB_drivers=require('../../Database/DB-driver-api');
 // creating router
 const router = express.Router({mergeParams : true});
 
-//sub routers
-const tripReqRouter=require('./TripRequests/requests');
-
 //HOME page
 router.get('/', async (req, res) =>{
-
     if( req.driver == null ){
         console.log('driver nai');
-        return res.redirect('/Driver/login');
+        return res.redirect('/driver/login');
     }
     let e_mail=req.driver.EMAIL;
     console.log('tererere'+e_mail);
-    const driverInfo=await DB_drivers.getDriverByEmail(e_mail);
+    //const driverInfo=await DB_drivers.getDriverByEmail(e_mail);
     //res.status(200).json(driverInfo.data);
     res.render('driverLayout.ejs', {
         title:'home',
@@ -27,8 +23,5 @@ router.get('/', async (req, res) =>{
     });
 
 });
-
-//setting up sub routers
-router.use('/requests',tripReqRouter);
 
 module.exports = router;

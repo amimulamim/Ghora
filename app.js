@@ -30,7 +30,7 @@ app.use(express.static('public'))
 
 //app.set('strict routing', true);
 // using router
-app.use(Auth.authDriver);
+//app.use(Auth.authDriver);
 //app.use('/driver', driverRouter);
 
 app.use('/driver', driverRouter);
