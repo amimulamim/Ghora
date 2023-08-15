@@ -1,0 +1,14 @@
+SELECT count(DISTINCT id) from DRIVER
+WHERE
+(
+    (TO_CHAR(phone) LIKE '88017%' OR
+    TO_CHAR(phone) LIKE '88018%' OR
+TO_CHAR(phone) LIKE '88016%' OR
+TO_CHAR(phone) LIKE '88015%' OR
+TO_CHAR(phone) LIKE '88013%' OR
+TO_CHAR(phone) LIKE '88014%' OR
+    TO_CHAR(phone) LIKE '88019%')
+		AND (LENGTH(TO_CHAR(phone))=13)
+);
+
+SELECT lengthTO_CHAR(PHONE) FROM DRIVER;
