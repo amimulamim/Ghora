@@ -1,0 +1,336 @@
+Old-Dhaka
+
+Latitude: 23.7075
+Longitude: 90.4078
+Dhanmondi
+
+Latitude: 23.7465
+Longitude: 90.3760
+Gulshan
+
+Latitude: 23.7925
+Longitude: 90.4155
+Banani
+
+Latitude: 23.7945
+Longitude: 90.4036
+Uttara
+
+Latitude: 23.8752
+Longitude: 90.3985
+Mirpur
+
+Latitude: 23.8103
+Longitude: 90.3615
+Mohammadpur
+
+Latitude: 23.7658
+Longitude: 90.3582
+Baridhara
+
+Latitude: 23.8054
+Longitude: 90.4125
+Motijheel
+
+Latitude: 23.7315
+Longitude: 90.4176
+Farmgate
+
+Latitude: 23.7569
+Longitude: 90.3775
+Tejgaon
+
+Latitude: 23.7572
+Longitude: 90.4046
+Badda
+
+Latitude: 23.7802
+Longitude: 90.4313
+Paltan
+
+Latitude: 23.7249
+Longitude: 90.4075
+Niketon
+
+Latitude: 23.7822
+Longitude: 90.4223
+Rampura
+
+Latitude: 23.7403
+Longitude: 90.4520
+Jatrabari
+
+Latitude: 23.7028
+Longitude: 90.4411
+Khilgaon
+
+Latitude: 23.7326
+Longitude: 90.4467
+Mirpur-DOHS
+
+Latitude: 23.8007
+Longitude: 90.3627
+Bashundhara
+
+Latitude: 23.8197
+Longitude: 90.4282
+
+Mohakhali
+
+Latitude: 23.7768
+Longitude: 90.4054
+Lalmatia
+
+Latitude: 23.7624
+Longitude: 90.3722
+Shahbagh
+
+Latitude: 23.7370
+Longitude: 90.3946
+Science-Laboratory
+
+Latitude: 23.7378
+Longitude: 90.3645
+Ramna
+
+Latitude: 23.7389
+Longitude: 90.4091
+Banglamotor
+
+Latitude: 23.7504
+Longitude: 90.3962
+Shantinagar
+
+Latitude: 23.7342
+Longitude: 90.4131
+New-Market
+
+Latitude: 23.7294
+Longitude: 90.3990
+Bongshal
+
+Latitude: 23.7159
+Longitude: 90.4061
+Naya-Paltan
+
+Latitude: 23.7335
+Longitude: 90.4098
+
+Malibagh
+
+Latitude: 23.7555
+Longitude: 90.4067
+Mirpur1
+
+Latitude: 23.8056
+Longitude: 90.3550
+Gulistan
+
+Latitude: 23.7231
+Longitude: 90.4146
+Wari
+
+Latitude: 23.7118
+Longitude: 90.4095
+Kakrail
+
+Latitude: 23.7352
+Longitude: 90.4119
+Tongi
+
+Latitude: 23.8940
+Longitude: 90.4139
+Uttar Khan
+
+Latitude: 23.8922
+Longitude: 90.4719
+Bimanbandar
+
+Latitude: 23.8456
+Longitude: 90.3978
+
+Moghbazar
+
+Latitude: 23.7512
+Longitude: 90.4136
+Merul-Badda
+
+Latitude: 23.7800
+Longitude: 90.4439
+Shyamoli
+
+Latitude: 23.7806
+Longitude: 90.3626
+Azimpur
+
+Latitude: 23.7316
+Longitude: 90.3898
+Dilkusha
+
+Latitude: 23.7279
+Longitude: 90.4197
+Gandaria
+
+Latitude: 23.7046
+Longitude: 90.4160
+Kamrangirchar
+
+Latitude: 23.6952
+Longitude: 90.4211
+Narinda
+
+Latitude: 23.7089
+Longitude: 90.4102
+Rayer-Bazar
+
+Latitude: 23.7495
+Longitude: 90.3681
+
+Shantibagh
+
+Latitude: 23.7283
+Longitude: 90.4019
+Pallabi
+
+Latitude: 23.8211
+Longitude: 90.3537
+Sabujbagh
+
+Latitude: 23.7535
+Longitude: 90.4203
+Agargaon
+
+Latitude: 23.7773
+Longitude: 90.3781
+Basabo
+
+Latitude: 23.7447
+Longitude: 90.4200
+Tolarbagh
+
+Latitude: 23.7843
+Longitude: 90.4159
+Rampura
+
+Latitude: 23.7483
+Longitude: 90.4499
+Wari-Bateshwar
+
+Latitude: 23.7095
+Longitude: 90.4202
+Nawabganj
+
+Latitude: 23.7062
+Longitude: 90.3983
+
+Banasree
+
+Latitude: 23.7546
+Longitude: 90.4082
+Chawk-Bazar
+
+Latitude: 23.7110
+Longitude: 90.4111
+Hazaribagh
+
+Latitude: 23.7119
+Longitude: 90.3565
+Kotwali
+
+Latitude: 23.7096
+Longitude: 90.4085
+Nababganj
+
+Latitude: 23.7561
+Longitude: 90.4259
+Shampur
+
+Latitude: 23.7071
+Longitude: 90.4712
+Sutrapur
+
+Latitude: 23.7109
+Longitude: 90.4020
+Tikatuli
+
+Latitude: 23.7152
+Longitude: 90.4099
+Wari-Demra
+
+Latitude: 23.7160
+Longitude: 90.4390
+
+Lalbagh
+
+Latitude: 23.7093
+Longitude: 90.4033
+Postogola
+
+Latitude: 23.6976
+Longitude: 90.4424
+Savar
+
+Latitude: 23.8463
+Longitude: 90.2563
+Keraniganj
+
+Latitude: 23.6977
+Longitude: 90.4096
+Hemayetpur
+
+Latitude: 23.9112
+Longitude: 90.2776
+Dohar
+
+Latitude: 23.6341
+Longitude: 90.1149
+
+Demra
+
+Latitude: 23.6937
+Longitude: 90.4670
+Kamalapur
+
+Latitude: 23.7235
+Longitude: 90.4137
+Babubazar
+
+Latitude: 23.7099
+Longitude: 90.4115
+Dhamrai
+
+Latitude: 23.8140
+Longitude: 90.2380
+Narayanganj
+
+Latitude: 23.6224
+Longitude: 90.5022
+Tongi
+
+Latitude: 23.8962
+Longitude: 90.4041
+
+Dakhinkhan
+
+Latitude: 23.9112
+Longitude: 90.4183
+Dohar
+
+Latitude: 23.6301
+Longitude: 90.1705
+Kanchpur
+
+Latitude: 23.7369
+Longitude: 90.5642
+Madhya Badda
+
+Latitude: 23.7854
+Longitude: 90.4210
+Moghbazar-Malibagh
+
+Latitude: 23.7477
+Longitude: 90.4116
+Siddikbazar
+
+Latitude: 23.7245
+Longitude: 90.4141
