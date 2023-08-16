@@ -1,27 +1,64 @@
 // Initialize and add the map
 let map;
 
+let x=navigator.geolocation;
+let mapOptions;
+let mymarker;
+let coords;
+
+
+
+x.getCurrentPosition(success,failure);
+
+function success(position){
+  var mylat=position.coords.latitude;
+  var mylong=position.coords.longitude;
+ // var coords=new google.maps.LatLng(mylat,mylong);
+ coords = { lat: mylat, lng: mylong };
+  mapOptions={
+    zoom: 13,
+    center: coords,
+    mapId: "DEMO_MAP_ID",
+   // mapTypeId:google.maps.MapType.ROADMAP
+
+
+  }
+  /*mymarker = new AdvancedMarkerElement({
+    map: map,
+    position: coords,
+    title: "Uluru",
+  });*/
+}
+
+function failure(){
+
+}
+
+
 async function initMap() {
   // The location of Uluru
-  const position = { lat: 23.7262323, lng: 90.390709 };
+  
   // Request needed libraries.
   //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
+  
   // The map, centered at Uluru
-  map = new Map(document.getElementById("map"), {
+  map = new google.maps.Map(document.getElementById("map"),mapOptions); 
+  /*{
     zoom: 13,
     center: position,
     mapId: "DEMO_MAP_ID",
-  });
+  });*/
 
   // The marker, positioned at Uluru
-  const marker = new AdvancedMarkerElement({
-    map: map,
-    position: position,
-    title: "Uluru",
+  const marker=new AdvancedMarkerElement({
+    map:map,
+    position:coords,
+    title:"Uluru"
   });
+  
 }
 
 initMap();
