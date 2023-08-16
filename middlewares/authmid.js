@@ -59,7 +59,7 @@ function authDriver(req, res, next){
                 // get user prompt (id, handle, message count) from id
                 const decodedEmail = decoded.superEmail;
                 let results = await DB_auth_driver.getLoginInfoByEmail(decodedEmail);
-                console.log(decodedEmail);
+               // console.log(decodedEmail);
                 // if no such user or token doesn't match, do nothing
                if(results.length == 0){
                     console.log('auth: invalid cookie');

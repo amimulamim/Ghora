@@ -19,7 +19,7 @@ router.get('/', async (req, res) =>{
     res.render('driverLayout.ejs', {
         title:'home',
         page:'driverHome',
-        
+
 
     });
 
