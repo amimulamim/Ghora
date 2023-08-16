@@ -15,7 +15,7 @@ async function startup() {
         });
         console.log('pool created');
     } catch (err) {
-        console.log("ki holo"+process.env.DB_USER);
+        console.log("ki error holo"+process.env.DB_USER+"error: "+err.message);
     }
 }
 

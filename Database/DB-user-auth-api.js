@@ -25,7 +25,7 @@ async function getUserIDByEmail(email){
 // async function createNewUser(user){
 //     const sql = `
 //         INSERT INTO
-//             APP_USER(NAME,EMAIL, PASSWORD,ADDRESS)
+//             USERS(username,NAME,EMAIL, PASSWORD,ADDRESS)
 //         VALUES 
 //             (:name,:email,:password,:address)
 //     `;

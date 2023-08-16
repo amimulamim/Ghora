@@ -10,7 +10,9 @@ const Auth = require('./middlewares/authmid');
 
 // router
 //const router = require('./router/indexRouter');
+//Ghora\router\driverindexRouter.js
 const driverRouter = require('./router/driverindexRouter');
+const usersRouter=require('./router/usersindexRouter');
 // app creation
 const app = express();
 
@@ -34,6 +36,7 @@ app.use(express.static('public'))
 //app.use('/driver', driverRouter);
 
 app.use('/driver', driverRouter);
+app.use('/users',usersRouter);
 
 
 // using error handling middlware
