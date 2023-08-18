@@ -3,10 +3,10 @@ const database = require('./database');
 
 
 // function to get id from email
-async function getUserIDByEmail(email){
+async function getUsernameByEmail(email){
     const sql = `
         SELECT 
-            ID
+            USERNAME
         FROM 
             USERS
         WHERE 
@@ -22,21 +22,22 @@ async function getUserIDByEmail(email){
 // function to creat new user
 // user should have handle, email, pass, dob
 // {id} will be returned
-// async function createNewUser(user){
-//     const sql = `
-//         INSERT INTO
-//             USERS(username,NAME,EMAIL, PASSWORD,ADDRESS)
-//         VALUES 
-//             (:name,:email,:password,:address)
-//     `;
-//     const binds = {
-//         name: user.name,
-//         email :user.email,
-//         password: user.password,
-//         address: "user.address",
-//     }
-//     return await database.execute(sql, binds, {});
-// }
+async function createNewUser(user){
+    const sql = `
+        INSERT INTO
+            USERS(username,NAME,EMAIL, PASSWORD,SEX)
+        VALUES 
+            (:username,:name,:email,:password,:sex)
+    `;
+    const binds = {
+        name: user.name,
+        email :user.email,
+        password: user.password,
+        address: user.sex,
+        username: user.username
+    }
+    return await database.execute(sql, binds, {});
+}
 
 // return login info (id, handle, password) from handle
 async function getLoginInfoByEmail(email){
@@ -63,7 +64,7 @@ async function getLoginInfoByUsername(username){
             USERNAME,
             NAME,
             PASSWORD,
-            EMAIL,
+            EMAIL
             --IMAGE
         FROM
             USERS
@@ -80,8 +81,8 @@ async function getLoginInfoByUsername(username){
 
 
 module.exports = {
-    getUserIDByEmail,
-    //createNewUser,
+    getUsernameByEmail,
+    createNewUser,
     getLoginInfoByEmail,
     getLoginInfoByUsername,
   // updateUserTokenById,

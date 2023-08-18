@@ -1,6 +1,6 @@
 //libraries
 const express=require('express');
-const DB_trips=require('../../../Database/DB-users-trips');
+const DB_trips=require('../../../Database/DB-user-trips');
 const { json } = require('body-parser');
 
 //creating routers
@@ -8,7 +8,7 @@ const router=express.Router({mergeParams:true});
 
 router.get('/',async(req,res) =>{
     if(req.users==null){
-        return res.redirect('/users/login');
+        return res.redirect('/user/login');
     }
 
     const requestsNearby=await DB_trips.makeTripRequests();

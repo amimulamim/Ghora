@@ -1,8 +1,4 @@
 <div class=" row p-5 ms-5 me-5 g-0">
-    <div class="col-5 rounded-2">
-        <!--<%- include('components/carousel2',{carousalImages:['/images/loginCarousel1.png','/images/loginCarousel2.png','/images/loginCarousel3.png','/images/loginCarousel4.png','/images/loginCarousel5.png']}) %>-->
-
-    </div>
     <div class="shadow mt-2 mb-2 col-7 p-3 rounded-2">
         <h3 style="text-align: center">Driver Login</h3>
         <form class="p-4" action="/driver/login" method="POST">
@@ -49,6 +45,23 @@
                     </ul>
                 </div>
             <% } %>
+            <!-- <div class="row">
+                <div class="col">
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input id="rememberme" name="_spring_security_remember_me" class="custom-control-input"
+                               checked="checked" type="checkbox" value="true"><input type="hidden"
+                                                                                     name="__spring_security_remember_me"
+                                                                                     value="on">
+                        <label class="custom-control-label" for="rememberme">
+                            Remember Me
+                        </label>
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <a class="forget-password-link" href="#">Forgot
+                        Password?</a>
+                </div>
+            </div> -->
 
             <!-- submit -->
             <div class="d-grid gap-2 mt-3 ">
@@ -56,27 +69,13 @@
                     In
                 </button>
             </div>
-
-            
-
-            
-
-
-
-
-
-
-
-
         </form>
-
+        <div class="d-flex justify-content-around">
+            <p>Don’t have an account?<a class="js--registration-form-btn" href="/driver/signup"><b>Sign Up Now!</b></a>
+            </p>
+        </div>
 
     </div>
-
-
-
-    
-
 </div>
 
 

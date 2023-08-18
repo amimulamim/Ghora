@@ -16,8 +16,8 @@ router.get('/', (req, res) => {
         const errors = [];
         return res.render('driverLayout.ejs', {
             title : 'Login - Ghora',
-            page : 'driverLogin',
-            user : null,
+            page : ['driverLogin'],
+            driver : null,
             form: {
                 email: "",
                 password: ""
@@ -66,8 +66,8 @@ router.post('/', async (req, res) => {
         } else {
             res.render('driverLayout.ejs', {
                 title : 'Login - Ghora',
-                page : 'driverLogin',
-                user : null,
+                page : ['driverLogin'],
+                driver : null,
                 errors : errors,
                 form: {
                     email: req.body.email,
