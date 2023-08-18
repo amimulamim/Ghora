@@ -1,11 +1,9 @@
 <div class=" row p-5 ms-5 me-5 g-0">
-    <!-- <div class="col-5 rounded-2">
-        <%- include('components/carousel2',{carousalImages:['images/loginCarousel1.png','images/loginCarousel2.png','images/loginCarousel3.png','images/loginCarousel4.png','images/loginCarousel5.png']}) %>
-    </div> -->
+   
     <div class="shadow mt-2 mb-2 col-7 p-3 rounded-2 align-middle">
         <ul class="mt-3 nav nav-tabs justify-content-center">
             <li class="nav-item active">
-                <a href="/users/login" class="nav-link">Login</a>
+                <a href="/user/login" class="nav-link">Login</a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link active">Sign Up</a>
@@ -15,7 +13,7 @@
 
         <!--    start-->
 
-        <form action="/users/signup" method="POST" class="card-body">
+        <form action="/user/signup" method="POST" class="card-body">
             <!-- handle -->
             <div class="form-floating mb-3">
 
@@ -84,7 +82,7 @@
 
         <!--    end-->
         <div class="d-flex justify-content-around">
-            <p>Already have an account?<a class="js--registration-form-btn" href="/users/login"><b>Login Now!</b></a>
+            <p>Already have an account?<a class="js--registration-form-btn" href="/user/login"><b>Login Now!</b></a>
             </p>
         </div>
     </div>

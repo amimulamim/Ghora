@@ -15,9 +15,9 @@ router.get('/', (req, res) => {
 
     if(req.user == null){
         const errors = [];
-        return res.render('usersLayout.ejs', {
+        return res.render('userLayout.ejs', {
             title : 'Login - Ghora',
-            page : ['usersLogin'],
+            page : ['userLogin'],
             user : null,
             form: {
                 email: "",
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
             errors : errors
         })
     } else {
-        res.redirect('/users');
+        res.redirect('/user');
     }
 });
 
@@ -62,12 +62,12 @@ router.post('/', async (req, res) => {
         if(errors.length == 0){
             {
                 console.log('hahaha');
-                res.redirect('/users');
+                res.redirect('/user');
             }
         } else {
-            res.render('usersLayout.ejs', {
+            res.render('userLayout.ejs', {
                 title : 'Login - Ghora',
-                page : ['usersLogin'],
+                page : ['userLogin'],
                 user : null,
                 errors : errors,
                 form: {
@@ -78,7 +78,7 @@ router.post('/', async (req, res) => {
         }
     } else {
         //console.log(req.user);
-        res.redirect('/users');
+        res.redirect('/user');
     }
 });
 

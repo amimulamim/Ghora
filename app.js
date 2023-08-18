@@ -13,7 +13,7 @@ const Auth = require('./middlewares/authmid');
 //Ghora\router\driverindexRouter.js
 const initRouter=require('./router/initpageRouter');
 // const driverRouter = require('./router/driverindexRouter');
-// const usersRouter=require('./router/usersindexRouter');
+// const usersRouter=require('./router/userindexRouter');
 // app creation
 const app = express();
 

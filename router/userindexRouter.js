@@ -5,16 +5,18 @@ const express = require('express');
 const router = express.Router({mergeParams : true});
 const usersAuth=require('../middlewares/authmid').authUser;
 // sub-routers
-const tripReqRouter=require('./Users/TripRequests/userreq');
-
-const loginRouter = require('./Users/Auth/login');
+const tripReqRouter=require('./User/TripRequests/userreq');
+const loginRouter = require('./User/Auth/login');
+const signupRouter=require('./User/Auth/signup');
+const { sign } = require('jsonwebtoken');
 // setting up sub-routers
 router.use('/login', loginRouter);
+router.use('/signup',signupRouter);
 
 
 // ROUTE: home page
 router.use(usersAuth);
-router.get('/',require('./Users/usersHome'));
+router.get('/',require('./User/userHome'));
 
 //setting up sub routers
 router.use('/requests',tripReqRouter);
