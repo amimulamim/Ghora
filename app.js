@@ -11,8 +11,9 @@ const Auth = require('./middlewares/authmid');
 // router
 //const router = require('./router/indexRouter');
 //Ghora\router\driverindexRouter.js
-const driverRouter = require('./router/driverindexRouter');
-const usersRouter=require('./router/usersindexRouter');
+const initRouter=require('./router/initpageRouter');
+// const driverRouter = require('./router/driverindexRouter');
+// const usersRouter=require('./router/usersindexRouter');
 // app creation
 const app = express();
 
@@ -28,15 +29,16 @@ app.use(morgan('tiny'));
 app.set('view engine', 'ejs');
 
 // allow public directory
-app.use(express.static('public'))
+//app.use(express.static('public'))
 
 //app.set('strict routing', true);
 // using router
 //app.use(Auth.authDriver);
 //app.use('/driver', driverRouter);
+app.use('/',initRouter);
 
-app.use('/driver', driverRouter);
-app.use('/users',usersRouter);
+// app.use('/driver', driverRouter);
+// app.use('/users',usersRouter);
 
 
 // using error handling middlware

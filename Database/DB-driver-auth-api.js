@@ -20,23 +20,24 @@ async function getDriverIDByEmail(email){
 }
 
 // function to creat new user
-// user should have handle, email, pass, dob
-// {id} will be returned
-// async function createNewUser(user){
-//     const sql = `
-//         INSERT INTO
-//             APP_USER(NAME,EMAIL, PASSWORD,ADDRESS)
-//         VALUES 
-//             (:name,:email,:password,:address)
-//     `;
-//     const binds = {
-//         name: user.name,
-//         email :user.email,
-//         password: user.password,
-//         address: "user.address",
-//     }
-//     return await database.execute(sql, binds, {});
-// }
+//user should have handle, email, pass, dob
+//{id} will be returned
+async function createNewDriver(driver){
+    const sql = `
+        INSERT INTO
+            DRIVER(NAME,EMAIL,PASSWORD,PHONE,SEX)
+        VALUES 
+            (:name,:email,:password,:phone,:sex)
+    `;
+    const binds = {
+        name: driver.name,
+        email :driver.email,
+        password: driver.password,
+        phone: driver.phone,
+        sex : 'M'//driver.sex
+    }
+    return await database.execute(sql, binds, {});
+}
 
 // return login info (id, handle, password) from handle
 async function getLoginInfoByEmail(email){
@@ -81,7 +82,7 @@ async function getLoginInfoByID(id){
 
 module.exports = {
     getDriverIDByEmail,
-    //createNewUser,
+    createNewDriver,
     getLoginInfoByEmail,
     getLoginInfoByID,
   // updateUserTokenById,

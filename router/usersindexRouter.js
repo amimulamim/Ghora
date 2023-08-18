@@ -14,7 +14,7 @@ router.use('/login', loginRouter);
 
 // ROUTE: home page
 router.use(usersAuth);
-router.get('/',require('./Users/usershome'));
+router.get('/',require('./Users/usersHome'));
 
 //setting up sub routers
 router.use('/requests',tripReqRouter);

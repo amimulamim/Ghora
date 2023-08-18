@@ -13,18 +13,11 @@ const router = express.Router({mergeParams : true});
 router.get('/', (req, res) => {
     // if not logged in take to login page
 
-
-
-
-
-
-
-
     if(req.user == null){
         const errors = [];
         return res.render('usersLayout.ejs', {
             title : 'Login - Ghora',
-            page : 'userLogin',
+            page : ['usersLogin'],
             user : null,
             form: {
                 email: "",
@@ -74,7 +67,7 @@ router.post('/', async (req, res) => {
         } else {
             res.render('usersLayout.ejs', {
                 title : 'Login - Ghora',
-                page : 'userLogin',
+                page : ['usersLogin'],
                 user : null,
                 errors : errors,
                 form: {
