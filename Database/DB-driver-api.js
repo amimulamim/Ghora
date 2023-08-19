@@ -12,10 +12,10 @@ async function getDriverByEmail(email)
     FROM 
         DRIVER
     WHERE
-        EMAIL=:email
+        EMAIL= :email
     `;
 const binds = {
-    email:email
+    email: email
 }
 return (await database.execute(sql, binds, database.options)).rows;
 
@@ -33,26 +33,45 @@ async function getAllDrivers(){
 
 
 async function getAllInfo(email){
-    const sql=
-    `
+    const sql=`
     SELECT 
         ID,
         NAME,
         EMAIL,
         PHONE,
-        SEX
-    FROM DRIVER 
-    WHERE EMAIL=:email
-    `
+        SEX,
+        WALLET_ID
+    FROM 
+        DRIVER 
+    WHERE 
+        EMAIL= :email
+    `;
     const binds={
         email:email
     }
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
+async function getWalletId(email){
+    const sql=
+   `SELECT
+     WALLET_ID
+     FROM 
+     DRIVER
+     WHERE EMAIL= :email 
+    `;
+    const binds={
+        email: email
+    }
+
+    return (await database.execute(sql,binds,database.options)).rows;
+
+}
+
 
 module.exports = {
     getAllDrivers,
     getDriverByEmail,
-    getAllInfo
+    getAllInfo,
+    getWalletId
 }

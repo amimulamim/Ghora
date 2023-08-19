@@ -3,31 +3,35 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 
 // my modules
-const DB_auth_driver = require('../../../Database/DB-driver-auth-api');
-const authUtils = require('../../../utils/auth-utils');
+const DB_driver=require('../../../Database/DB-driver-api');
+const DB_wallet=require('../../../Database/DB-wallet-api');
+//const DB_auth_driver = require('../../../Database/DB-driver-auth-api');
+//const authUtils = require('../../../utils/auth-utils');
 
 // creating router
 const router = express.Router({mergeParams : true});
 
 // ROUTE: login (get)
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     // if not logged in take to login page
     if(req.driver == null){
-        const errors = [];
-        
-        return res.render('driverLayout.ejs', {
-            title : 'Login - Ghora',
-            page : ['driverLogin'],
-            driver : null,
-            form: {
-                email: "",
-                password: ""
-            },
-            errors : errors
-        })
+       return res.redirect('/driver/login');
     } else {
-        console.log("log "+req.driver.email)
-        res.redirect('/driver');
+        console.log("wakkllet paisi ",req.driver);
+        const driverwalletId=await DB_driver.getWalletId(req.driver.EMAIL);
+        
+
+        console.log(driverwalletId[0].WALLET_ID);
+        const walletInfo=await DB_wallet.getWalletInfo(driverwalletId[0].WALLET_ID);
+        console.log(walletInfo[0].ACCOUNT_NO);
+        res.render('driverLayout.ejs',{
+            driver: req.driver,
+            page:['driverWallet'],
+            title:req.driver.NAME,
+            wallet:walletInfo,
+            navbar:1
+        });
+
     }
 });
 
@@ -40,8 +44,8 @@ router.post('/', async (req, res) => {
         let results, errors = [];
         // get login info for handle (id, handle, password)
         results = await DB_auth_driver.getLoginInfoByEmail(req.body.email);
-        console.log(results[0].PASSWORD);
-        //console.log(req.body.password);
+        //console.log(results[0].PASSWORD);
+        console.log(req.body.password);
 
         // if no result, there is no such user
         if(results.length == 0){

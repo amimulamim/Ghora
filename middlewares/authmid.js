@@ -74,7 +74,8 @@ function authDriver(req, res, next){
                         ID:results[0].ID,
                         EMAIL: decodedEmail,
                         NAME: results[0].NAME,
-                        PHONE:results[0].PHONE
+                        PHONE:results[0].PHONE,
+                        WALLET_ID:results[0].WALLET_ID
                         //IMAGE:results[0].IMAGE
                     }
                 }

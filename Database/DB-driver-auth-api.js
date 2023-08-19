@@ -62,7 +62,8 @@ async function getLoginInfoByEmail(email){
             ID,
             NAME,
             PASSWORD,
-            PHONE
+            PHONE,
+            WALLET_ID
         FROM
             DRIVER
         WHERE
