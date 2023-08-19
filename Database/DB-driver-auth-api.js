@@ -19,6 +19,22 @@ async function getDriverIDByEmail(email){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function getDriverIDByPhone(phone){
+    const sql = `
+        SELECT 
+            ID
+        FROM 
+            DRIVER
+        WHERE 
+            PHONE = :phone
+        `;
+    const binds = {
+        phone : phone
+    }
+
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
 // function to creat new user
 //user should have handle, email, pass, dob
 //{id} will be returned
@@ -45,7 +61,8 @@ async function getLoginInfoByEmail(email){
         SELECT 
             ID,
             NAME,
-            PASSWORD
+            PASSWORD,
+            PHONE
         FROM
             DRIVER
         WHERE
@@ -85,6 +102,7 @@ module.exports = {
     createNewDriver,
     getLoginInfoByEmail,
     getLoginInfoByID,
+    getDriverIDByPhone
   // updateUserTokenById,
    // getUserPromptById,
    // updateLoginTimeById

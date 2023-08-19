@@ -49,6 +49,9 @@ router.post('/', async (req, res) => {
         results = await DB_auth_driver.getDriverIDByEmail(req.body.email);
         if(results.length > 0)
             errors.push('Email is already registered to a user');
+        resphone=await DB_auth_driver.getDriverIDByPhone(req.body.phone);
+        if(resphone.length > 0)
+            errors.push('Phone number is already registered to a user');
 
         // check if password confimation is right
         if(req.body.password !== req.body.password2)
