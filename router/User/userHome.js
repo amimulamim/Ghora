@@ -9,12 +9,12 @@ const router = express.Router({mergeParams : true});
 
 //HOME page
 router.get('/', async (req, res) =>{
-    if( req.driver == null ){
+    if( req.users == null ){
         console.log('user nai');
         return res.redirect('/user/login');
     }
     let e_mail=req.users.EMAIL;
-    console.log('tererere'+e_mail);
+    console.log('tererere '+e_mail);
     //const driverInfo=await DB_drivers.getDriverByEmail(e_mail);
     //res.status(200).json(driverInfo.data);
     res.render('userLayout.ejs', {
