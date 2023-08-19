@@ -32,7 +32,27 @@ async function getAllDrivers(){
 }
 
 
+async function getAllInfo(email){
+    const sql=
+    `
+    SELECT 
+        ID,
+        NAME,
+        EMAIL,
+        PHONE,
+        SEX
+    FROM DRIVER 
+    WHERE EMAIL=:email
+    `
+    const binds={
+        email:email
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
+
+
 module.exports = {
     getAllDrivers,
-    getDriverByEmail
+    getDriverByEmail,
+    getAllInfo
 }

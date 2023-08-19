@@ -3,8 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>User_NAME</title>
+  
+  <link rel="stylesheet" type="text/css" href="../../public/css/navbar.css"/>
+  
 	<!--<link rel="stylesheet" href="./public/css/homestyles.css">./homestyles.css -->
-  <style>
+  <!--
+    <style>
     @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 
 *{
@@ -178,7 +182,10 @@ body{
 */
 
   </style>
+-->
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+ 
  <!-- <script type="module" src="./script.js"></script> -->
 </head>
 
@@ -186,10 +193,10 @@ body{
 
 
 <body>
-
+  <link rel="stylesheet" type="text/css" href="../../public/css/navbar.css"/>
 <nav class="navbar navbar-dark bg-dark sticky-md-top ps-3">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">GHORA USER</a>
+        <a class="navbar-brand" href="#"><%=driver.EMAIL %></a>
         <form  action="/driver/logout" method="POST" class="my-logout-form">
             
             <input type="submit" value="Log Out" class="btn  btn-secondary">
@@ -200,12 +207,12 @@ body{
 
 <div class="wrapper">
     <div class="sidebar">
-        <h2>User_NAME</h2>
+        <h2><%=driver.NAME %></h2>
         <ul>
 
             <!--id="driverButton"  class="active" onclick = "window.location.href='/driver/login'-->
             <li ><a href="/"><i class="fas fa-home"></i>Home</a></li>
-            <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="/driver/info"><i class="fas fa-user"></i>Profile</a></li>
             <li><a href="#"><i class="fas fa-address-card"></i>Wallet</a></li>
             <li><a href="#"><i class="fas fa-project-diagram"></i>History</a></li>
             <li><a href="#"><i class="fas fa-blog"></i>Accept Nearby Request</a></li>

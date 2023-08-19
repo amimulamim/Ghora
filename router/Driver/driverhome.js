@@ -15,10 +15,12 @@ router.get('/', async (req, res) =>{
     let e_mail=req.driver.EMAIL;
     console.log('tererere'+e_mail);
     //const driverInfo=await DB_drivers.getDriverByEmail(e_mail);
-    //res.status(200).json(driverInfo.data);
+    //res.status(200).json(driverdInfo.data);
     res.render('driverLayout.ejs', {
-        title:'home',
+        title:req.driver.NAME,
         page:['driverHome'],
+        driver:req.driver
+
 
 
     });
