@@ -50,7 +50,7 @@ async function createNewDriver(driver){
         email :driver.email,
         password: driver.password,
         phone: driver.phone,
-        sex : 'M'//driver.sex
+        sex : driver.sex
     }
     return await database.execute(sql, binds, {});
 }

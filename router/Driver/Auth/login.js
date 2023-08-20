@@ -40,7 +40,8 @@ router.post('/', async (req, res) => {
         let results, errors = [];
         // get login info for handle (id, handle, password)
         results = await DB_auth_driver.getLoginInfoByEmail(req.body.email);
-        console.log(results[0].PASSWORD);
+        //console.log(results[0].PASSWORD);
+        console.log("auth e paisi ",results);
         //console.log(req.body.password);
 
         // if no result, there is no such user
