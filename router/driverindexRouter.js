@@ -7,11 +7,10 @@ const driverAuth=require('../middlewares/authmid').authDriver;
 // sub-routers
 const driverInfoRouter=require('./Driver/Info/info');
 const driverWalletRouter=require('./Driver/Wallet/wallet');
-
 const tripReqRouter=require('./Driver/TripRequests/requests');
 const loginRouter = require('./Driver/Auth/login');
 const signupRouter=require('./Driver/Auth/signup');
-
+const logoutRouter = require('./Driver/Auth/logout');
 
 // ROUTE: home page
 //router.use(driverAuth);
@@ -29,5 +28,5 @@ router.use('/login', loginRouter);
 router.use('/signup',signupRouter);
 router.use('/info',driverInfoRouter);
 router.use('/wallet',driverWalletRouter);
-
+router.use('/logout',logoutRouter);
 module.exports = router;
