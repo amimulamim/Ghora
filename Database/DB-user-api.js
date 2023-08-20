@@ -30,9 +30,45 @@ async function getAllUsers(){
     const binds = {}
     return (await database.execute(sql, binds, database.options)).rows;
 }
+async function getAllInfo(email){
+    const sql=`
+    SELECT 
+        USERNAME,
+        NAME,
+        EMAIL,
+        PHONE,
+        SEX,
+        WALLET_ID
+    FROM 
+        USERS
+    WHERE 
+        EMAIL= :email
+    `;
+    const binds={
+        email:email
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
+async function getWalletId(email){
+    const sql=
+   `SELECT
+     WALLET_ID
+     FROM 
+     USERS
+     WHERE EMAIL= :email 
+    `;
+    const binds={
+        email: email
+    }
+
+    return (await database.execute(sql,binds,database.options)).rows;
+
+}
 
 
 module.exports = {
     getAllUsers,
-    getUsersByEmail
+    getUsersByEmail,
+    getAllInfo,
+    getWalletId
 }

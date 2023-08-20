@@ -77,6 +77,22 @@ async function getLoginInfoByUsername(username){
 
     return (await database.execute(sql, binds, database.options)).rows;
 }
+async function getUsernameByPhone(phone){
+    const sql = `
+        SELECT 
+            USERNAME
+        FROM 
+            USERS
+            
+        WHERE 
+            PHONE = :phone
+        `;
+    const binds = {
+        phone : phone
+    }
+
+    return (await database.execute(sql, binds, database.options)).rows;
+}
 
 
 
@@ -85,6 +101,7 @@ module.exports = {
     createNewUser,
     getLoginInfoByEmail,
     getLoginInfoByUsername,
+    getUsernameByPhone
   // updateUserTokenById,
    // getUserPromptById,
    // updateLoginTimeById

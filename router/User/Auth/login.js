@@ -12,9 +12,9 @@ const router = express.Router({mergeParams : true});
 // ROUTE: login (get)
 router.get('/', (req, res) => {
     // if not logged in take to login page
-
     if(req.user == null){
         const errors = [];
+        
         return res.render('userLayout.ejs', {
             title : 'Login - Ghora',
             page : ['userLogin'],
@@ -26,6 +26,7 @@ router.get('/', (req, res) => {
             errors : errors
         })
     } else {
+        console.log("log "+req.user.email)
         res.redirect('/user');
     }
 });
@@ -40,6 +41,7 @@ router.post('/', async (req, res) => {
         // get login info for handle (id, handle, password)
         results = await DB_auth_user.getLoginInfoByEmail(req.body.email);
         //console.log(results[0].PASSWORD);
+        console.log("auth e paisi ",results);
         //console.log(req.body.password);
 
         // if no result, there is no such user
@@ -49,7 +51,7 @@ router.post('/', async (req, res) => {
             // match passwords
             const match = await bcrypt.compare(req.body.password, results[0].PASSWORD);
             if(!match){
-                // if successful login the driver
+                // if successful login the user
                 console.log('dhukse');
                 await authUtils.loginUser(res, req.body.email);
             }

@@ -18,7 +18,7 @@ async function loginUser(res, email){
         maxAge: 900000, 
         httpOnly: true
     }
-    res.cookie('sessionToken', token, options);
+    res.cookie('userSessionToken', token, options);
 }
 
 async function loginDriver(res, email){

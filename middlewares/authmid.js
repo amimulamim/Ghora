@@ -8,8 +8,8 @@ const DB_auth_user = require('../Database/DB-user-auth-api');
 function authUser(req, res, next){
     req.user = null;
     // check if user has cookie token
-    if(req.cookies.sessionToken){
-        let token = req.cookies.sessionToken;
+    if(req.cookies.userSessionToken){
+        let token = req.cookies.userSessionToken;
         // verify token was made by server
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) =>{
             if(err){
@@ -34,6 +34,9 @@ function authUser(req, res, next){
                         USERNAME:results[0].USERNAME,
                         EMAIL: decodedEmail,
                         NAME: results[0].NAME,
+                        PHONE:results[0].PHONE,
+                        WALLET_ID:results[0].WALLET_ID
+
                         //IMAGE:results[0].IMAGE
                     }
                 }

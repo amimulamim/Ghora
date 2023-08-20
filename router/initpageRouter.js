@@ -5,9 +5,11 @@ const router = express.Router({ mergeParams: true });
 
 // sub-routers
 const driverAuth=require('../middlewares/authmid').authDriver;
+const userAuth=require('../middlewares/authmid').authUser;
 const driverRouter = require('./driverindexRouter');
 const usersRouter=require('./userindexRouter');
 // setting up sub-routers
+router.use(userAuth);
 router.use(driverAuth);
 
 

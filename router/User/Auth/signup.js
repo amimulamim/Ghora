@@ -47,8 +47,13 @@ router.post('/', async (req, res) => {
         // check if email is alredy used or not
         console.log(req.body);
         results = await DB_auth_user.getUsernameByEmail(req.body.email);
+        resphone = await DB_auth_user.getUsernameByPhone(req.body.phone);
+        
         if(results.length > 0)
             errors.push('Email is already registered to a user');
+       
+        if(resphone.length > 0)
+            errors.push('Phone number is already registered to a user');
 
         // check if password confimation is right
         if(req.body.password !== req.body.password2)
