@@ -48,12 +48,19 @@ router.post('/', async (req, res) => {
         console.log(req.body);
         results = await DB_auth_user.getUsernameByEmail(req.body.email);
         resphone = await DB_auth_user.getUsernameByPhone(req.body.phone);
+        console.log("phone =",req.body.phone)
+        resusername=await DB_auth_user.getLoginInfoByUsername(req.body.username);
+        
         
         if(results.length > 0)
             errors.push('Email is already registered to a user');
        
         if(resphone.length > 0)
             errors.push('Phone number is already registered to a user');
+
+        if(resusername.length>0){
+            errors.push('Username is already registered to a user');
+        }
 
         // check if password confimation is right
         if(req.body.password !== req.body.password2)
@@ -77,6 +84,7 @@ router.post('/', async (req, res) => {
                 user : null,
                 errors : errors,
                 form : {
+                    username:req.body.username,
                     name : req.body.name,
                     email : req.body.email,
                     password : req.body.password,
@@ -89,6 +97,8 @@ router.post('/', async (req, res) => {
         else{
             // if no error, create user object to be sent to database api
             let user = {
+                username:req.body.username,
+
                 name: req.body.name,
                 password: req.body.password,
                 email: req.body.email,
@@ -103,6 +113,7 @@ router.post('/', async (req, res) => {
                     // create user via db-api, id is returned
                     user.password = hash;
                     let result = await DB_auth_user.createNewUser(user);
+                    
                     let result2 = await DB_auth_user.getLoginInfoByEmail(user.email);
                     // login the user too
                     //await DB_cart.addNewCart(result2[0].ID);

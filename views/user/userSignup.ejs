@@ -15,7 +15,12 @@
         <form action="/user/signup" method="POST" class="card-body">
             <!-- handle -->
             <div class="form-floating mb-3">
-
+                <input type="text" class="form-control" name="username" required
+                       value="<%= (typeof form != 'undefined') ? form.username : '' %>">
+                <label for="handle">Username</label>
+            </div>
+        
+            <div class="form-floating mb-3">
                 <input type="text" class="form-control" name="name" required
                        value="<%= (typeof form != 'undefined') ? form.name : '' %>">
                 <label for="handle">Name</label>

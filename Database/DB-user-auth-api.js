@@ -25,16 +25,18 @@ async function getUsernameByEmail(email){
 async function createNewUser(user){
     const sql = `
         INSERT INTO
-            USERS(username,NAME,EMAIL, PASSWORD,SEX)
+            USERS(username,NAME,EMAIL,phone, PASSWORD,SEX,IS_ADMIN)
         VALUES 
-            (:username,:name,:email,:password,:sex)
+            (:username,:name,:email,:phone,:password,:sex,:is_admin)
     `;
     const binds = {
         name: user.name,
         email :user.email,
+        phone:user.phone,
         password: user.password,
-        address: user.sex,
-        username: user.username
+        sex: user.sex,
+        username: user.username,
+        is_admin:0
     }
     return await database.execute(sql, binds, {});
 }
@@ -45,7 +47,8 @@ async function getLoginInfoByEmail(email){
         SELECT 
             USERNAME,
             NAME,
-            PASSWORD
+            PASSWORD,
+            EMAIL
         FROM
             USERS
         WHERE
