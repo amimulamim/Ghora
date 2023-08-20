@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title><%= title %></title>
-    </head>
-    <body>
-        <div></div>
-        
-        <div>
-        <h1>
-            ID :<b> <%= wallet[0].ID %> </b>
-       </h1>
-       <h1>
-            Account No:<%= wallet[0].ACCOUNT_NO %>
-       </h1>
-       <h1>
-            Balance :<%= wallet[0].BALANCE %>
-        </h1>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body>
+    <div></div>
+    <% if (errors.length> 0) { %>
+        <div class="row mx-0 pb-0 alert alert-danger">
+            <ul>
+                <% for (e of errors) { %>
+                    <li>
+                        <%= e %>
+                    </li>
+                    <% } %>
+            </ul>
         </div>
+        <% }else{%>
+            <div>
+                <h1>
+                    ID :<b>
+                        <%= wallet[0].ID %>
+                    </b>
+                </h1>
+                <h1>
+                    Account No:<%= wallet[0].ACCOUNT_NO %>
+                </h1>
+                <h1>
+                    Balance :<%= wallet[0].BALANCE %>
+                </h1>
+            </div>
+            <%}%>
 
 
 
-    </body>
+</body>
+
 </html>

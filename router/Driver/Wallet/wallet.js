@@ -17,14 +17,22 @@ router.get('/', async (req, res) => {
     if(req.driver == null){
        return res.redirect('/driver/login');
     } else {
+        let errors=[];
         console.log("wakkllet paisi ",req.driver);
         const driverwalletId=await DB_driver.getWalletId(req.driver.EMAIL);
-        
-
-        console.log(driverwalletId[0].WALLET_ID);
-        const walletInfo=await DB_wallet.getWalletInfo(driverwalletId[0].WALLET_ID);
-        console.log(walletInfo[0].ACCOUNT_NO);
+        let walletInfo=[];
+        if(driverwalletId[0].WALLET_ID==null){
+            errors.push("NO WALLET FOUND");
+            // res.redirect('/driver');
+        }
+        else{
+            walletInfo=await DB_wallet.getWalletInfo(driverwalletId[0].WALLET_ID);
+            console.log(walletInfo[0].ACCOUNT_NO);
+        }
+        //console.log(driverwalletId[0].WALLET_ID);
+      
         res.render('driverLayout.ejs',{
+            errors:errors,
             driver: req.driver,
             page:['driverWallet'],
             title:req.driver.NAME,
