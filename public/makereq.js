@@ -1,13 +1,50 @@
 // Replace 'YOUR_GOOGLE_MAPS_API_KEY' with your actual Google Maps API key
 const apiKey = 'AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA';
 
-async function initMap() {
+
+let x=navigator.geolocation;
+let mapOptions;
+let mymarker;
+let coords;
+
+
+
+x.getCurrentPosition(success,failure);
+
+function success(position){
+  var mylat=position.coords.latitude;
+  var mylong=position.coords.longitude;
+ // var coords=new google.maps.LatLng(mylat,mylong);
+ coords = { lat: mylat, lng: mylong };
+  mapOptions={
+    zoom: 13,
+    center: coords,
+    mapId: "DEMO_MAP_ID",
+   // mapTypeId:google.maps.MapType.ROADMAP
+
+
+  }
+  /*mymarker = new AdvancedMarkerElement({
+    map: map,
+    position: coords,
+    title: "Uluru",
+  });*/
+}
+
+function failure(){
+
+}
+
+ function initMap() {
   const directionsService = new google.maps.DirectionsService();
   const directionsRenderer = new google.maps.DirectionsRenderer();
-  
+  //console.log("coords :"+coords);
   const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
-    center: { lat: 23.7266616, lng: 90.381105 } 
+    center: { lat: 23.7266616, lng: 90.381105 } ,
+    //center: coords,
+    mapId: "DEMO_MAP_ID",
+   // mapTypeId:google.maps.MapType.ROADMAP
   });
   
   directionsRenderer.setMap(map);
