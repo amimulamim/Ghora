@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Make a request</title>
+  <style>
+    #map {
+      height: 400px;
+    }
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA"></script>
+</head>
+<body>
+  <h1 style="margin-left: 50%;">Requst For a Ride</h1>
+  
+  <div>
+    <label for="start">Start Location:</label>
+    <input type="text" id="start" placeholder="Pick UP" style="margin-left: 50%;"/>
+  </div>
+  
+  <div>
+    <label for="destination">Destination Location:</label>
+    <input type="text" id="destination" placeholder="Drop Off" style="margin-left: 46.5%;" />
+  </div>
+  
+  <button id="calculateRoute" style="margin-left: 60%;">REQUEST FOR A RIDE</button>
+  
+  <div id="map"></div>
+
+  <div id="output"></div>
+  
+  <script src="makereq.js"></script>
+</body>
+</html>
+

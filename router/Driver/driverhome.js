@@ -5,7 +5,7 @@ const DB_drivers=require('../../Database/DB-driver-api');
 
 // creating router
 const router = express.Router({mergeParams : true});
-
+const map=require('../Map/liveloc');
 //HOME page
 router.get('/', async (req, res) =>{
     if( req.driver == null ){
@@ -16,6 +16,7 @@ router.get('/', async (req, res) =>{
     console.log('tererere'+e_mail);
     //const driverInfo=await DB_drivers.getDriverByEmail(e_mail);
     //res.status(200).json(driverdInfo.data);
+    // map.initMap();
     res.render('driverLayout.ejs', {
         title:req.driver.NAME,
         page:['driverHome'],

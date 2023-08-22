@@ -117,10 +117,15 @@ router.post('/', async (req, res) => {
                     let result2 = await DB_auth_user.getLoginInfoByEmail(user.email);
                     // login the user too
                     //await DB_cart.addNewCart(result2[0].ID);
+                    if(result2[0]==undefined){
+                        console.log("ERROR at creating user");
+                    }
+                    else{
                     await authUtils.loginUser(res, result2[0].EMAIL)
                     // redirect to home page
                     //res.redirect(`/profile/${user.handle}/settings`);
                     res.redirect('/user');
+                    }
                 }
             });
         }
