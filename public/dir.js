@@ -4,6 +4,8 @@
 // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 
+//import myaxios from '../node_modules/axios';
+
 
 const apiKey = 'AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA';
 
@@ -45,6 +47,7 @@ function failure(){
 function initMap() {
     const map = new google.maps.Map(document.getElementById("map"), {
       mapTypeControl: false,
+      
       center: { lat: 23.7266616, lng: 90.381105 } ,
       zoom: 13,
     });
@@ -63,7 +66,7 @@ function initMap() {
       this.map = map;
       this.originPlaceId = "";
       this.destinationPlaceId = "";
-      this.travelMode = google.maps.TravelMode.WALKING;
+      this.travelMode = google.maps.TravelMode.DRIVING;
       this.directionsService = new google.maps.DirectionsService();
       this.directionsRenderer = new google.maps.DirectionsRenderer();
       this.directionsRenderer.setMap(map);
@@ -76,6 +79,7 @@ function initMap() {
         originInput,
         { fields: ["place_id"] },
       );
+//console.log(originAutocomplete);
       // Specify just the place data fields that you need.
       const destinationAutocomplete = new google.maps.places.Autocomplete(
         destinationInput,
@@ -116,7 +120,60 @@ function initMap() {
       autocomplete.bindTo("bounds", this.map);
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
-  
+        const idp=place.place_id;
+
+
+      
+
+// var options = {
+//     host: 'maps.googleapis.com',
+//     path: '/maps/api/geocode/json',
+//     method: 'GET',
+//     useQuerystring: true,
+//     qs: 'place_id='+idp+'&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA'
+// };
+
+// var getreq = https.request(options, function(response) {
+//     console.log("response: ",response);
+//     //Uncomment the code below when you start getting valid responses
+//     //response.on('data', function (chunk) {
+//     //    console.log('BODY: ' + chunk);
+//     //});
+// });
+// console.log(getreq);
+// getreq.end();
+
+
+
+        console.log('api req='+'https://maps.googleapis.com/maps/api/geocode/json?place_id='+idp+'&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA');
+       // console.log("place is: ",);
+        
+
+
+//         const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?place_id=${idp}&key=${apiKey}`;
+
+// axios.get(apiUrl)
+//   .then(response => {
+//     if (response.data.status === 'OK') {
+//       const location = response.data.results[0].geometry.location;
+//       const latitude = location.lat;
+//       const longitude = location.lng;
+//       console.log(`Latitude: ${latitude}`);
+//       console.log(`Longitude: ${longitude}`);
+//     } else {
+//       console.log('Geocoding API request failed.');
+//     }
+//   })
+//   .catch(error => {
+//     console.error('Error:', error);
+//   });
+
+
+
+
+
+
+
         if (!place.place_id) {
           window.alert("Please select an option from the dropdown list.");
           return;
@@ -131,6 +188,13 @@ function initMap() {
         this.route();
       });
     }
+
+    
+
+
+
+
+
     route() {
       if (!this.originPlaceId || !this.destinationPlaceId) {
         return;
@@ -144,18 +208,64 @@ function initMap() {
           destination: { placeId: this.destinationPlaceId },
           travelMode: this.travelMode,
         },
-        (response, status) => {
+        async (response, status) => {
           if (status === "OK") {
             me.directionsRenderer.setDirections(response);
 
             //directionsRenderer.setDirections(response);
-           console.log("distance is ="+ response.routes[0].legs[0].distance.text);
-           console.log("Expected duration: "+ response.routes[0].legs[0].duration.text);
+          //  console.log("distance is ="+ response.routes[0].legs[0].distance.text);
+          //  console.log("Expected duration: "+ response.routes[0].legs[0].duration.text);
+          //  console.log("response is ",response);
             const output=document.querySelector('#output');
               output.innerHTML="<div class='alert-info'> FROM:" + document.getElementById("origin-input").value +".<br/> To: "+ document.getElementById("destination-input").value+".<br/> Driving Distance: "+ response.routes[0].legs[0].distance.text+".<br/> Duration: "+ response.routes[0].legs[0].duration.text+".</div>";
+              
+              
+              // Assuming you have a form and a button with the id "submit-button"
+
+  const req_data = {
+    origin: 'api req='+'https://maps.googleapis.com/maps/api/geocode/json?place_id='+this.originPlaceId+'&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
+    destination: 'api req='+'https://maps.googleapis.com/maps/api/geocode/json?place_id='+this.destinationPlaceId+'&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
+    travelMode: this.travelMode,
+    distance: response.routes[0].legs[0].distance.text,
+    duration: response.routes[0].legs[0].duration.text
+  
+  };
+  const sendresponse = await fetch("/user/riderequest/currentreq", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: req_data,
+  });
+
+  if (sendresponse.ok) {
+    // Data saved successfully
+    console.log("Data saved successfully");
+    console.log("data is:",req_data);
+  }
+
+  else{
+    console.log("Data not saved");
+  }
+              
+              
+              
+              
+              
+              
+              
+              
               //directionsRenderer.setDirections(response);
 
-
+              // response.render('some.ejs',{
+              //   form:{
+              //     origin: document.getElementById("origin-input").value,
+              //     destination: document.getElementById("destination-input").value,
+              //     travelMode: document.getElementById("mode-selector").value,
+              //     distance: response.routes[0].legs[0].distance.text,
+              //     duration: response.routes[0].legs[0].duration.text
+              //   }
+              // });
 
 
 
@@ -165,6 +275,11 @@ function initMap() {
         },
       );
     }
+
+
+
+
+
   }
   
   window.initMap = initMap;

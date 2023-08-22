@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
         driverInfo=await DB_auth_driver.getLoginInfoByEmail(req.driver.EMAIL);
         console.log('eta',driverInfo[0]);
         res.render('driverlayout.ejs', {
-            title : 'Sign Up - Ghora',
+            title : 'Edit Profile - Ghora',
             page : ['profileEdit'],
             driver : req.driver,
             errors : errors,
