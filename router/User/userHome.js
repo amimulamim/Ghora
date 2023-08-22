@@ -14,14 +14,13 @@ router.get('/', async (req, res) =>{
     }
     let e_mail=req.user.EMAIL;
     console.log('tererere'+e_mail);
-    //const userInfo=await DB_users.getuserByEmail(e_mail);
-    //res.status(200).json(userdInfo.data);
+    const userInfo=await DB_users.getAllInfo(e_mail);
+    //res.status(200).json(userInfo.data);
     res.render('userLayout.ejs', {
         title:req.user.NAME,
         page:['userHome'],
-        user:req.user
-
-
+        user:req.user,
+        info:userInfo
 
     });
 
