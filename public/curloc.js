@@ -46,6 +46,9 @@ async function initMap() {
   
   // The map, centered at Uluru
   map = new google.maps.Map(document.getElementById("map"),mapOptions); 
+  const trafficLayer = new google.maps.TrafficLayer();
+
+  trafficLayer.setMap(map);
   /*{
     zoom: 13,
     center: position,
