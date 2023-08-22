@@ -11,6 +11,7 @@ const tripReqRouter=require('./Driver/TripRequests/requests');
 const loginRouter = require('./Driver/Auth/login');
 const signupRouter=require('./Driver/Auth/signup');
 const logoutRouter = require('./Driver/Auth/logout');
+const editRouter=require('./Driver/Info/editinfo');
 
 // ROUTE: home page
 //router.use(driverAuth);
@@ -29,4 +30,5 @@ router.use('/signup',signupRouter);
 router.use('/info',driverInfoRouter);
 router.use('/wallet',driverWalletRouter);
 router.use('/logout',logoutRouter);
+router.use('/edit',editRouter);
 module.exports = router;

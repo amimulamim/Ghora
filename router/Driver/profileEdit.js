@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
             errors : errors
         });
     } else {
-        res.redirect('/driver/infp');
+        res.redirect('/driver/info');
     }
 });
 

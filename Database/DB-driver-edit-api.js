@@ -2,18 +2,27 @@ const database = require('./database');
 
 
 // function to get id from email
-async function ediEmail(driver)
+async function updateDriverInfo(driver)
 {
     const sql = `
-    UPDATE DRIVER
-    SET EMAIL=:email
-    WHERE ID=:id 
+    UPDATE 
+        DRIVER
+    SET 
+        PASSWORD=:password,
+        PHONE=:phone,
+        --SEX=:sex,
+        NAME=:name
+    WHERE
+        EMAIL=:email
     `;
 const binds = {
-    id:driver.ID,
-    email:driver.EMAIL
+    email:driver.email,
+    password:driver.password,
+    phone:driver.phone,
+    //sex:driver.SEX,
+    name:driver.name
 }
-return (await database.execute(sql, binds, database.options)).rows;
+return await database.execute(sql, binds, {});
 
 }
 async function editName(driver){
@@ -97,11 +106,12 @@ async function editWallet(driver){
 
 
 module.exports = {
-    ediEmail,
-    editName,
-    editPassword,
-    editPhone,
-    editPlate,
-    editSex,
-    editWallet
+    // ediEmail,
+    // editName,
+    // editPassword,
+    // editPhone,
+    // editPlate,
+    // editSex,
+    // editWallet
+    updateDriverInfo
 }

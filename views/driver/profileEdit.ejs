@@ -1,18 +1,8 @@
 <div class=" row p-5 ms-5 me-5 g-0">
     <div class="shadow mt-2 mb-2 col-7 p-3 rounded-2 align-middle">
-        <ul class="mt-3 nav nav-tabs justify-content-center">
-            <li class="nav-item active">
-                <a href="/driver/login" class="nav-link">Login</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link active">Sign Up</a>
-            </li>
-
-        </ul>
-
         <!--    start-->
 
-        <form action="/driver/signup" method="POST" class="card-body">
+        <form action="/driver/edit" method="POST" class="card-body">
             <!-- handle -->
             <div class="form-floating mb-3">
 
@@ -22,13 +12,13 @@
 
             </div>
             <!-- email -->
-            <div class="form-floating mb-3">
+            <!-- <div class="form-floating mb-3">
 
                 <input type="email" class="form-control" name="email" required
                        value="<%= (typeof form != 'undefined') ? form.email : '' %>">
                 <label for="email">Email</label>
 
-            </div>
+            </div> -->
             <!-- phone no -->
             <div class="form-floating mb-3">
                 <input type="tel" class="form-control" name="phone" required
@@ -69,17 +59,13 @@
             <% } %>
             <!-- submit -->
             <div class="d-grid gap-2 mt-3">
-                <button type="submit" class="btn btn-lg btn-primary" style="background-color: #33c24d;border: 0">Create
-                    Account
+                <button type="submit" class="btn btn-lg btn-primary" style="background-color: #33c24d;border: 0">
+                    Submit
                 </button>
             </div>
 
         </form>
 
-        <!--    end-->
-        <div class="d-flex justify-content-around">
-            <p>Already have an account?<a class="js--registration-form-btn" href="/driver/login"><b>Login Now!</b></a>
-            </p>
         </div>
     </div>
 </div>
