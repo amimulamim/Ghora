@@ -20,6 +20,28 @@ const binds = {
 return (await database.execute(sql, binds, database.options)).rows;
 
 }
+
+async function updateDriverLocation(dvloc){
+    
+    const sql = `
+    UPDATE 
+        DRIVER
+    SET 
+        LAT = :lat,
+        LNG = :lng
+    WHERE ID = :id
+            `;
+    const binds = {
+        lat: dvloc.LATITUDE,
+        lng: dvloc.LONGITUDE,
+        id:dvloc.DRIVER_ID
+    }
+    console.log(binds);
+    //return (await database.execute(sql, binds, {}));
+    return await database.execute(sql, binds, {});
+
+}
+
 async function getAllDrivers(){
     const sql = `
         SELECT 
@@ -74,5 +96,6 @@ module.exports = {
     getAllDrivers,
     getDriverByEmail,
     getAllInfo,
-    getWalletId
+    getWalletId,
+    updateDriverLocation
 }

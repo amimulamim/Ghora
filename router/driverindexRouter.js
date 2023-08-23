@@ -16,6 +16,7 @@ const dvhomeRouter=require('./Driver/driverhome');
 // ROUTE: home page
 //router.use(driverAuth);
 router.get('/',dvhomeRouter);
+router.post('/',dvhomeRouter);
 router.get('/a',async(req,res)=>
 {
     console.log(req.driver);

@@ -2,7 +2,7 @@
 let map;
 let coords;
 
-
+//function updateLocation(){
 
 let x=navigator.geolocation;
 let mapOptions;
@@ -36,6 +36,15 @@ function success(position){
 function failure(){
 
 }
+//}
+
+// const interval=setInterval(updateLocation,500);
+// setTimeout(()=>{
+//   clearInterval(interval);
+//   console.log("location updated");
+
+// },10000);
+//updateLocation();
 
 
 async function initMap() {
@@ -52,6 +61,27 @@ async function initMap() {
   const trafficLayer = new google.maps.TrafficLayer();
 
   trafficLayer.setMap(map);
+
+  const sendresponse = await fetch("/driver", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(coords),
+  });
+
+  if (sendresponse.ok) {
+    // Data saved successfully
+    console.log("Driver live loc successfully");
+    console.log("data is:",coords);
+  }
+
+  else{
+    console.log("live loc not sent");
+  }
+
+
+
   /*{
     zoom: 13,
     center: position,
