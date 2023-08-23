@@ -12,10 +12,10 @@ const loginRouter = require('./Driver/Auth/login');
 const signupRouter=require('./Driver/Auth/signup');
 const logoutRouter = require('./Driver/Auth/logout');
 const editRouter=require('./Driver/Info/editinfo');
-
+const dvhomeRouter=require('./Driver/driverhome');
 // ROUTE: home page
 //router.use(driverAuth);
-router.get('/',require('./Driver/driverHome'));
+router.get('/',dvhomeRouter);
 router.get('/a',async(req,res)=>
 {
     console.log(req.driver);
@@ -31,4 +31,5 @@ router.use('/info',driverInfoRouter);
 router.use('/wallet',driverWalletRouter);
 router.use('/logout',logoutRouter);
 router.use('/edit',editRouter);
+
 module.exports = router;
