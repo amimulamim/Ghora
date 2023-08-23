@@ -43,11 +43,26 @@ function failure(){
 
 }
 
+// function initMap(){
+//   const until=setInterval(() => {
+//     if(coords===undefined){
+//       return;
+//     }
+//     else{
+//       initializeMap();
+//       clearInterval(until);
+//     }
+    
+//   }, 1000);
+
+  
+// }
 
 function initMap() {
+    //alert(1);
     const map = new google.maps.Map(document.getElementById("map"), {
       mapTypeControl: false,
-      
+      // center:coords
       center: { lat: 23.7266616, lng: 90.381105 } ,
       zoom: 13,
     });
@@ -225,17 +240,19 @@ function initMap() {
   const req_data = {
     origin: 'https://maps.googleapis.com/maps/api/geocode/json?place_id='+this.originPlaceId+'&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
     destination: 'https://maps.googleapis.com/maps/api/geocode/json?place_id='+this.destinationPlaceId+'&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
+    origin: 'https://maps.googleapis.com/maps/api/geocode/json?place_id='+this.originPlaceId+'&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
+    destination: 'https://maps.googleapis.com/maps/api/geocode/json?place_id='+this.destinationPlaceId+'&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
     travelMode: this.travelMode,
     distance: response.routes[0].legs[0].distance.text,
     duration: response.routes[0].legs[0].duration.text
   
   };
   const sendresponse = await fetch("/user/requests", {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: req_data,
+    body: JSON.stringify(req_data),
   });
 
   if (sendresponse.ok) {
