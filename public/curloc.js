@@ -1,10 +1,13 @@
 // Initialize and add the map
 let map;
+let coords;
+
+
 
 let x=navigator.geolocation;
 let mapOptions;
 let mymarker;
-let coords;
+
 
 
 
@@ -61,6 +64,8 @@ async function initMap() {
     position:coords,
     title:"Your current location"
   });
+
+
   
 }
 
