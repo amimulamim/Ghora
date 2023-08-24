@@ -48,7 +48,9 @@ async function getLoginInfoByEmail(email){
             USERNAME,
             NAME,
             PASSWORD,
-            EMAIL
+            EMAIL,
+            PHONE,
+            WALLET_ID
         FROM
             USERS
         WHERE

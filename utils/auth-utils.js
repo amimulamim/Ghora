@@ -15,7 +15,7 @@ async function loginUser(res, email){
     //await DB_auth.updateUserTokenById(userId, token);
     // set token in cookie
     let options = {
-        maxAge: 900000, 
+        maxAge: 1800000, 
         httpOnly: true
     }
     res.cookie('userSessionToken', token, options);
@@ -31,7 +31,7 @@ async function loginDriver(res, email){
     //await DB_auth.updateUserTokenById(userId, token);
     // set token in cookie
     let options = {
-        maxAge: 900000,
+        maxAge: 36000000,
         httpOnly: true
     }
     res.cookie('driverSessionToken', token, options);

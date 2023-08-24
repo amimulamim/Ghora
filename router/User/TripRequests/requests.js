@@ -3,6 +3,7 @@ const express=require('express');
 const DB_trips=require('../../../Database/DB-user-trips');
 const { json } = require('body-parser');
 const   mapCalc=require('../../Map/calculations');
+const address=require('../../Map/formattedAddress');
 
 //creating routers
 const router=express.Router({mergeParams:true});
@@ -59,6 +60,21 @@ router.post('/',async(req,res) =>{
     console.log("pickup=",reqpickup);
     console.log("dropoff=",reqdropoff);
 
+
+//     mapCalc.calculateDistance(reqpickup, reqdropoff)
+//   .then(result => {
+//     const { distance, duration } = result;
+//     console.log(`Distance checking: ${distance}`);
+//     console.log(`Duration checking: ${duration}`);
+//   })
+//   .catch(error => {
+//     console.error(error);
+//   });
+      
+
+
+
+
     const tripRequest={
         pickup:reqpickup,
         dropoff:reqdropoff,
@@ -77,7 +93,7 @@ router.post('/',async(req,res) =>{
     //await authUtils.loginUser(res, result2[0].EMAIL)
     // redirect to home page
     //res.redirect(`/profile/${user.handle}/settings`);
-    console.log("successful request");
+    console.log("successful request for ride");
     res.redirect('/user/');
     
     }
@@ -95,22 +111,7 @@ router.post('/',async(req,res) =>{
 
 
 
-    let distbetween ;
-    let durationbetween;
-
-    mapCalc.calculateDistance(reqpickup, reqdropoff)
-  .then(result => {
-    // const { distance, duration } = result;
-    // console.log(`Distance: ${distance}`);
-    // console.log(`Duration: ${duration}`);
-    distbetween=result.distance;
-    durationbetween=result.duration;
-    console.log("distbetween=",distbetween);
-    console.log("durationbetween=",durationbetween);
-  })
-  .catch(error => {
-    console.error(error);
-  });
+   
 
 
     

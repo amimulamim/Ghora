@@ -6,10 +6,18 @@ const database=require('./database');
 async function getAllTripRequests(){
     const sql= `
     SELECT 
-         *
+         ID, 
+         USERNAME,
+         TIME_REQUEST,
+         PLAT,
+         PLNG,
+        DLAT,
+        DLNG
+
     FROM 
         TRIP_REQUEST
-    `
+        WHERE TIME_REQUEST>=SYSTIMESTAMP-INTERVAL '30' MINUTE
+    `;
     const binds={
     }
     return (await database.execute(sql,binds,database.options)).rows;

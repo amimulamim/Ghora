@@ -63,7 +63,9 @@ async function getAllInfo(email){
         PHONE,
         SEX,
         WALLET_ID,
-        PLATE_NO
+        PLATE_NO,
+        LAT,
+        LNG
     FROM 
         DRIVER 
     WHERE 
