@@ -4,8 +4,8 @@ const DB_trips = require('../../../Database/DB-driver-trips');
 const { json } = require('body-parser');
 const DB_driver = require('../../../Database/DB-driver-api');
 
-const address = require('../../Map/formattedAddress');
-const mapCalc = require('../../Map/calculations');
+
+const processrequest = require('../../Map/processRequest');
 //creating routers
 const router = express.Router({ mergeParams: true });
 
@@ -15,81 +15,25 @@ router.get('/', async (req, res) => {
     }
 
     const requestsNearby = await DB_trips.getAllTripRequests();
-
+    const mylocation = { lat: req.driver.LAT, lng: req.driver.LNG };
+    console.log('req near=',requestsNearby);
+    const allTrips=await processrequest.processAllNearby(requestsNearby,mylocation);
 
     // const json=await requestsNearby.json();
-    console.log("trip infos=");
+   // console.log("trip infos=");
 
-    let allTrips = [];
+    //let allTrips = [];
 
 //    async function process(requestsNearby){ 
 //     return new Promise((resolve) => {
 //         setTimeout(()=>{
-    await requestsNearby.forEach(async row => {
-        console.log("printing row by row");
-        console.log(row.USERNAME);
-        console.log(row.PLAT);
-        console.log(row.PLNG);
-
-        let distbetween;
-        let durationbetween;
-        const reqpickup = { lat: row.PLAT, lng: row.PLNG };
-        const reqdropoff = { lat: row.DLAT, lng: row.DLNG };
-        const mylocation = { lat: req.driver.LAT, lng: req.driver.LNG };
-       // console.log("driver loc=", mylocation.lat, mylocation.lng);
-
-       const coord=await mapCalc.calculateDistance(reqpickup,mylocation);
-       console.log("coord=", coord);
-
-         await mapCalc.calculateDistance(reqpickup, mylocation)
-            .then(result => {
-                // const { distance, duration } = result;
-                // console.log(`Distance: ${distance}`);
-                // console.log(`Duration: ${duration}`);
-                distbetween = result.distance;
-                durationbetween = result.duration;
-               // console.log("distbetween=", distbetween);
-               // console.log("durationbetween=", durationbetween);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-        let pickupaddress;
-        await address.getPlaceName(reqpickup.lat, reqpickup.lng)
-            .then(placeName => {
-               // console.log('drop Place:', placeName);
-                pickupaddress = placeName;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-        let dropoffaddress;
-        await address.getPlaceName(reqdropoff.lat, reqdropoff.lng)
-            .then(placeName => {
-                //console.log('drop Place:', placeName);
-                dropoffaddress = placeName;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        const nearbyReq = {
-            USERNAME: row.USERNAME,
-            PICK_UP: pickupaddress,
-            DROP_OFF: dropoffaddress,
-            DISTANCE: distbetween,
-            DURATION: durationbetween,
-            ID: row.ID
+    
 
 
 
-        }
-        allTrips.push(nearbyReq);
-        //console.log("trip req obj =", nearbyReq);
-      // console.log("all trips now =", allTrips);
-    }
-    );
+
+
+
 //     resolve(allTrips);
 //     }, 1000);
 // });
@@ -158,6 +102,8 @@ console.log("all trips  ,length=", allTrips,allTrips.length);
 //         navbar: 1
 //     });
 // });
+
+
 
 
 module.exports = router;

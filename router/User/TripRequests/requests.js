@@ -4,7 +4,7 @@ const DB_trips=require('../../../Database/DB-user-trips');
 const { json } = require('body-parser');
 const   mapCalc=require('../../Map/calculations');
 const address=require('../../Map/formattedAddress');
-
+//const DB_users=require('../../Database/DB-user-api');
 //creating routers
 const router=express.Router({mergeParams:true});
 
@@ -16,7 +16,8 @@ router.get('/',async(req,res) =>{
     console.log('get e user ase');
 
    
-    console.log(req.body.data);
+    //console.log(req.body.data);
+    res.redirect('/user');
     
 });
 router.get('/current',async(req,res) =>{

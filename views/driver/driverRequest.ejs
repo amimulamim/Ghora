@@ -27,7 +27,10 @@
             padding: 5px 10px;
             cursor: pointer;
         }
-    </style>
+        p{
+            margin-left: 30%;
+        }
+        </style>
 </head>
 <body>
     <h1 style="margin-left: 50%;">Driver Requests</h1>
@@ -41,8 +44,8 @@
                     <p><strong>Username:</strong> <%= nearbyReq.USERNAME %></p>
                     <p><strong>Pick-up:</strong> <%= nearbyReq.PICK_UP %></p>
                     <p><strong>Drop-off:</strong> <%= nearbyReq.DROP_OFF %></p>
-                    <p><strong>Distance:</strong> <%= nearbyReq.DISTANCE %> km</p>
-                    <p><strong>Duration:</strong> <%= nearbyReq.DURATION %> mins</p>
+                    <p><strong>Pick-Up Distance:</strong> <%= nearbyReq.DISTANCE %> </p>
+                    <p><strong>Pick-Up within:</strong> <%= nearbyReq.DURATION %> </p>
                 </div>
                 <button class="accept-button" id=<!=n>Accept</button>
             </div>
