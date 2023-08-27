@@ -31,6 +31,6 @@ router.use('/signup',signupRouter);
 router.use('/info',driverInfoRouter);
 router.use('/wallet',driverWalletRouter);
 router.use('/logout',logoutRouter);
-router.use('/edit',editRouter);
+//router.use('/edit',editRouter);
 
 module.exports = router;

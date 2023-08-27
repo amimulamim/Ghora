@@ -12,29 +12,30 @@ router.get('/', async (req, res) => {
     if (req.driver == null) {
         res.redirect('/driver/login');
     }
-    console.log('etai driver', req.driver);
+    console.log('etai add veh driver', req.driver);
     let driverInfo, errors = [];
     driverInfo = await DB_auth_driver.getLoginInfoByEmail(req.driver.EMAIL);
     console.log('eta', driverInfo[0]);
     res.render('driverlayout.ejs', {
         title: 'Edit Profile - Ghora',
-        page: ['profileEdit'],
+        page: ['addVehicle'],
         driver: req.driver,
         errors: errors,
-        form: {
-            name: driverInfo[0].NAME,
-            email: req.driver.EMAIL,
-            // password: req.body.password,
-            // password2: req.body.password2,
-            phone: driverInfo[0].PHONE,
-            sex: driverInfo[0].SEX,
-            plate: driverInfo[0].PLATE_NO,
-            wallet: driverInfo[0].WALLET_ID
-            //sex:req.body.sex
-        }
+        // form: {
+        //     name: driverInfo[0].NAME,
+        //     email: req.driver.EMAIL,
+        //     // password: req.body.password,
+        //     // password2: req.body.password2,
+        //     phone: driverInfo[0].PHONE,
+        //     sex: driverInfo[0].SEX,
+        //     plate: driverInfo[0].PLATE_NO,
+        //     wallet: driverInfo[0].WALLET_ID
+        //     //sex:req.body.sex
+        // }
     });
 
 });
+
 router.post('/', async (req, res) => {
     if (req.driver == null) {
         return res.redirect('/driver/login');
@@ -102,6 +103,4 @@ router.post('/', async (req, res) => {
 
 });
 
-
-
-module.exports = router;
+module.exports=router;

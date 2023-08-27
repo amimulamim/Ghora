@@ -4,6 +4,11 @@ const bcrypt = require('bcrypt');
 
 // my modules
 const DB_driver=require('../../../Database/DB-driver-api');
+const DB_driver_edit=require('../../../Database/DB-driver-edit-api');
+const DB_vehicle_api=require('../../../Database/DB-vehicle-api');
+const vehicleEditRouter=require('./editvehicle');
+const infoEditRouter=require('./editinfo');
+const addVehicleRouter=require('./addVehicle');
 //const DB_auth_driver = require('../../../Database/DB-driver-auth-api');
 //const authUtils = require('../../../utils/auth-utils');
 
@@ -20,6 +25,9 @@ router.get('/', async (req, res) => {
         console.log("here psaisi "+req.driver.EMAIL);
         
         driverInfo=await DB_driver.getAllInfo(req.driver.EMAIL);
+        // let has=1;
+        // if(driverInfo[0].PLATE_NO===null)
+        // has=0
        // console.log(driverInfo[0].NAME);
        console.log(driverInfo[0].PHONE);
         res.render('driverLayout.ejs',{
@@ -34,12 +42,20 @@ router.get('/', async (req, res) => {
 });
 
 
-router.post('/', async (req, res) => {
-    if (req.driver == null) {
-        return res.redirect('/driver');
-    }
-    else{
-        res.redirect('/driver/edit');
-    }
-});
+// router.post('/', async (req, res) => {
+//     if (req.driver == null) {
+//         return res.redirect('/driver');
+//     }
+//     else{
+//         res.redirect('/driver/edit');
+//     }
+// });
+
+//subrouters
+
+router.use('/edit',infoEditRouter);
+router.use('/editvehicle',vehicleEditRouter);
+router.use('/addvehicle',addVehicleRouter);
+
+
 module.exports = router;

@@ -35,6 +35,7 @@ router.get('/', async (req, res) => {
     });
 
 });
+
 router.post('/', async (req, res) => {
     if (req.driver == null) {
         return res.redirect('/driver/login');
@@ -102,6 +103,4 @@ router.post('/', async (req, res) => {
 
 });
 
-
-
-module.exports = router;
+module.exports=router;
