@@ -25,13 +25,14 @@
         style="margin-left: 18%;"
       />
 
-      <div id="mode-selector" class="controls">
+      <div id="mode-selector" class="controls" style="display: none;">
         <input
           type="radio"
           name="type"
           id="changemode-walking"
           checked="checked"
           style="margin-left: 20%;"
+          
         />
         <label for="changemode-walking">Walking</label>
 
@@ -40,12 +41,14 @@
 
         <input type="radio" name="type" id="changemode-driving" />
         <label for="changemode-driving">Driving</label>
-      </div>
+      </div> 
     </div>
 
     <div id="map"></div>
     <div id="output" style="margin-bottom: 0%;margin-left: 40%;"></div>
-
+    <button id="Car" style="display: none; margin-left: 50%;">Car</button>
+    <button id="Bike" style="display: none; margin-left: 50%;">Bike</button>
+    <button id="CNG" style="display: none;margin-left: 50%;">CNG</button>
     <!-- 
       The `defer` attribute causes the callback to execute after the full HTML
       document has been parsed. For non-blocking uses, avoiding race conditions,

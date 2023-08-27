@@ -244,9 +244,56 @@ function initMap() {
     destination: 'https://maps.googleapis.com/maps/api/geocode/json?place_id='+this.destinationPlaceId+'&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
     travelMode: this.travelMode,
     distance: response.routes[0].legs[0].distance.text,
-    duration: response.routes[0].legs[0].duration.text
+    duration: response.routes[0].legs[0].duration.text,
+    type:'CAR',
+    fare:100
   
   };
+
+  const carbutton=document.getElementById("Car");
+  const bikebutton=document.getElementById("Bike");
+  const cngbutton=document.getElementById("CNG");
+   // Show the button
+   const distnce=parseFloat(response.routes[0].legs[0].distance.text);
+   const duratn=parseFloat(response.routes[0].legs[0].duration.text);
+  const carfare=Math.max(distnce*100,duratn*30);
+  var bikefare=Math.max(distnce*50,duratn*15);
+  var cngfare=Math.max(distnce*75,duratn*25);
+  console.log("carfare =",carfare);
+  console.log("bikefare =",bikefare);
+  console.log("cngfare =",cngfare);
+  carbutton.style.display = "block";
+  carbutton.textContent = "Car "+carfare+" Tk";
+  bikebutton.style.display = "block";
+  bikebutton.textContent = "Bike "+bikefare+" Tk";
+  cngbutton.style.display = "block";
+  cngbutton.textContent = "CNG "+cngfare+" Tk";
+
+
+  
+  carbutton.addEventListener("click", () => {
+    req_data.type='CAR';
+    req_data.fare=carfare;
+    sendingResponse();
+  });
+
+  bikebutton.addEventListener("click", () => {
+    req_data.type='BIKE';
+    req_data.fare=bikefare;
+    sendingResponse();
+  });
+
+  cngbutton.addEventListener("click", () => {
+    req_data.type='CNG';
+    req_data.fare=cngfare;
+    sendingResponse();
+  });
+
+
+
+
+
+  async function sendingResponse(){
   const sendresponse = await fetch("/user/requests", {
     method: "POST",
     headers: {
@@ -264,6 +311,7 @@ function initMap() {
   else{
     console.log("Data not saved");
   }
+}
               
               
               

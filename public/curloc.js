@@ -62,6 +62,18 @@ async function initMap() {
 
   trafficLayer.setMap(map);
 
+  const marker=new AdvancedMarkerElement({
+    map:map,
+    position:coords,
+    title:"Your current location"
+  });
+
+  const marker2=new AdvancedMarkerElement({
+    map:map,
+    position:{lat:23.7,lng: 90.3},
+    title:"Your test location"
+  });
+
   const sendresponse = await fetch("/driver", {
     method: "POST",
     headers: {
@@ -80,7 +92,7 @@ async function initMap() {
     console.log("live loc not sent");
   }
 
-
+  console.log("ekdom sheshe");
 
   /*{
     zoom: 13,
@@ -89,11 +101,7 @@ async function initMap() {
   });*/
 
   // The marker, positioned at Uluru
-  const marker=new AdvancedMarkerElement({
-    map:map,
-    position:coords,
-    title:"Your current location"
-  });
+  
 
 
   
