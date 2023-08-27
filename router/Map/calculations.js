@@ -25,8 +25,8 @@ async function calculateDistance(reqpickup, reqdropoff) {
   }
 }
 
-module.exports = { calculateDistance }
-
+module.exports = {calculateDistance}
+;
 // let distbetween ;
 // let durationbetween;
 

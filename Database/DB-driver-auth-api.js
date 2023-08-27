@@ -64,7 +64,6 @@ async function getLoginInfoByEmail(email){
             PASSWORD,
             PHONE,
             WALLET_ID,
-            SEX,
             LAT,
             LNG
         FROM

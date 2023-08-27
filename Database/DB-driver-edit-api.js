@@ -8,27 +8,19 @@ async function updateDriverInfo(driver)
     UPDATE 
         DRIVER
     SET 
-        --PASSWORD=:password,
-        --PLATE_NO=:plate,
+        PASSWORD=:password,
         PHONE=:phone,
-        SEX=:sex,
-        NAME=:name,
-        EMAIL=:email,
-        WALLET_ID=:wallet
+        --SEX=:sex,
+        NAME=:name
     WHERE
-        ID=:id
-        
+        EMAIL=:email
     `;
 const binds = {
     email:driver.email,
-    //password:driver.password,
-    //plate:driver.plate_no,
+    password:driver.password,
     phone:driver.phone,
-    sex:driver.sex,
-    name:driver.name,
-    id:driver.id,
-    wallet:driver.wallet
-
+    //sex:driver.SEX,
+    name:driver.name
 }
 return await database.execute(sql, binds, {});
 
@@ -53,10 +45,10 @@ async function editPassword(driver){
     WHERE ID=:id
         `;
     const binds = {
-        id:driver.id,
-        password:driver.password
+        id:driver.ID,
+        password:driver.PASSWORD
     }
-    return await database.execute(sql, binds, {});
+    return (await database.execute(sql, binds, database.options)).rows;
 }
 
 async function editPhone(driver){
@@ -72,35 +64,30 @@ async function editPhone(driver){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
-// async function addNewVehicle(vehicle){
-//     const sql = `
-//     INSERT INTO
-//         VEHICLE(PLATE_NO,MODELNAME,PLAN_ID)
-//     VALUES 
-//         (:plate,:model,:plan)
-//         `;
-//     const binds = {
-//         plate:vehicle.plate,
-//         model:vehicle.model,
-//         plan:vehicle.plan
-//     }
-//     return (await database.execute(sql, binds, database.options)).rows;
-// }
-
-async function editVehiclePlate(driver){
+async function editSex(driver){
     const sql = `
-    UPDATE 
-        DRIVER
-    SET 
-        PLATE_NO=:plate
-    WHERE 
-        ID=:id
+    UPDATE DRIVER
+    SET SEX=:sex
+    WHERE ID=:id
         `;
     const binds = {
-        id:driver.id,
-        plate:driver.plate
+        id:driver.ID,
+        sex:driver.SEX
     }
-    return await database.execute(sql, binds,{});
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
+async function editPlate(driver){
+    const sql = `
+    UPDATE DRIVER
+    SET PLATE_NO=:plate_no
+    WHERE ID=:id
+        `;
+    const binds = {
+        id:driver.ID,
+        plate_no:driver.PLATE_NO
+    }
+    return (await database.execute(sql, binds, database.options)).rows;
 }
 
 async function editWallet(driver){
@@ -121,8 +108,7 @@ async function editWallet(driver){
 module.exports = {
     // ediEmail,
     // editName,
-    editPassword,
-    editVehiclePlate,
+    // editPassword,
     // editPhone,
     // editPlate,
     // editSex,
