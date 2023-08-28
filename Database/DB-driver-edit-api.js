@@ -87,7 +87,7 @@ async function editPhone(driver){
 //     return (await database.execute(sql, binds, database.options)).rows;
 // }
 
-async function editVehiclePlate(driver){
+async function editVehiclePlate(id,plate){
     const sql = `
     UPDATE 
         DRIVER
@@ -97,8 +97,8 @@ async function editVehiclePlate(driver){
         ID=:id
         `;
     const binds = {
-        id:driver.id,
-        plate:driver.plate
+        id:id,
+        plate:plate
     }
     return await database.execute(sql, binds,{});
 }

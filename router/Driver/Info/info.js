@@ -8,7 +8,8 @@ const DB_driver_edit=require('../../../Database/DB-driver-edit-api');
 const DB_vehicle_api=require('../../../Database/DB-vehicle-api');
 const vehicleEditRouter=require('./editvehicle');
 const infoEditRouter=require('./editinfo');
-const addVehicleRouter=require('./addVehicle');
+// const addVehicleRouter=require('./addVehicle');
+const passwordEditRouter=require('./changePassword');
 //const DB_auth_driver = require('../../../Database/DB-driver-auth-api');
 //const authUtils = require('../../../utils/auth-utils');
 
@@ -55,7 +56,7 @@ router.get('/', async (req, res) => {
 
 router.use('/edit',infoEditRouter);
 router.use('/editvehicle',vehicleEditRouter);
-router.use('/addvehicle',addVehicleRouter);
+router.use('/changepassword',passwordEditRouter);
 
 
 module.exports = router;

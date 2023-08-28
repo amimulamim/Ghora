@@ -34,7 +34,7 @@ async function editVehicleInfo(vehicle){
     SET 
         PLATE_NO=:plate,
         MODELNAME=:model,
-        PLAN_ID=FLOOR(1+RAND()*200)
+        PLAN_ID=1
     WHERE ID=:id
         `;
     const binds = {
@@ -42,11 +42,34 @@ async function editVehicleInfo(vehicle){
         model:vehicle.model,
         plate:vehicle.plate
     }
+    console.log('success');
     return await database.execute(sql, binds,{});
+}
+
+async function vehicleInfo(plate){
+    const sql = `
+   SELECT 
+        V.ID AS VID,
+        V.PLATE_NO AS PNO,
+        V.MODELNAME AS MNAME,
+        V.PLAN_ID AS PID,
+        M.V_TYPE AS TYPE,
+        M.MANUFACTURER AS COMPANY
+    FROM 
+        VEHICLE V JOIN MODEL M
+        ON(V.MODELNAME=M.NAME)
+    WHERE
+        V.PLATE_NO=:plate
+        `;
+    const binds = {
+        plate:plate
+    }
+    return (await database.execute(sql, binds,database.options)).rows;
 }
 
 module.exports={
     addNewVehicle,
     deleteVehicle,
-    editVehicleInfo
+    editVehicleInfo,
+    vehicleInfo
 }
