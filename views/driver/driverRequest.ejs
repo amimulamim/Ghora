@@ -47,7 +47,7 @@
                     <p><strong>Pick-Up Distance:</strong> <%= nearbyReq.DISTANCE %> </p>
                     <p><strong>Pick-Up within:</strong> <%= nearbyReq.DURATION %> </p>
                 </div>
-                <button class="accept-button" id=<!=n>Accept</button>
+                <a href="accept/<%=nearbyReq.ID %>"><button>Accept</button></a>
             </div>
         <% }); %>
     <% } %>

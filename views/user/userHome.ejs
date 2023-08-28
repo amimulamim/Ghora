@@ -32,4 +32,17 @@ Welcome   <%= info[0].USERNAME %>
 <%  } %>
 
 
+<script>
+    var timer;
+    async function check() {
+      const data =  await fetch('user/request_status')
+      const text = await data.text();
+        if(text.includes('accepted')) {
+            alert('accepted')
+            clearInterval(timer);
+            window.location = '/user/running'
+        }
 
+    }
+    timer = setInterval(check, 500000)
+</script>

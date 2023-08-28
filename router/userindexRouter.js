@@ -29,5 +29,9 @@ router.use('/signup',signupRouter);
 router.use('/info',userInfoRouter);
 router.use('/wallet',userWalletRouter);
 router.use('/logout',logoutRouter);
+router.get('/request_status', async (req,res) => {
+    //
+    res.send('accepted')
+})
 //router.use('/riderequest',require('./User/userHome'));
 module.exports = router;

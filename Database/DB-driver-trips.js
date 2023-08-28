@@ -40,6 +40,8 @@ async function getAllTripsByID(ID){
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
+
+
 module.exports={
     getAllTripRequests,
     getAllTripsByID
