@@ -37,12 +37,14 @@ Welcome   <%= info[0].USERNAME %>
     async function check() {
       const data =  await fetch('user/request_status')
       const text = await data.text();
+      //alert("got text: " + text);
         if(text.includes('accepted')) {
-            alert('accepted')
+            alert('Your Ride Request Has Been Accepted')
             clearInterval(timer);
             window.location = '/user/running'
         }
 
     }
-    timer = setInterval(check, 500000)
+    
+    timer = setInterval(check, 5000);
 </script>
