@@ -245,7 +245,7 @@ function initMap() {
     travelMode: this.travelMode,
     distance: response.routes[0].legs[0].distance.text,
     duration: response.routes[0].legs[0].duration.text,
-    type:'CAR',
+    v_type:'CAR',
     fare:100
   
   };
@@ -272,19 +272,19 @@ function initMap() {
 
   
   carbutton.addEventListener("click", () => {
-    req_data.type='CAR';
+    req_data.v_type='CAR';
     req_data.fare=carfare;
     sendingResponse();
   });
 
   bikebutton.addEventListener("click", () => {
-    req_data.type='BIKE';
+    req_data.v_type='BIKE';
     req_data.fare=bikefare;
     sendingResponse();
   });
 
   cngbutton.addEventListener("click", () => {
-    req_data.type='CNG';
+    req_data.v_type='CNG';
     req_data.fare=cngfare;
     sendingResponse();
   });

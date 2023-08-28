@@ -2,6 +2,8 @@
 const express = require('express');
 //const DB_admin_stats = require('../../Database/DB-admin-stats-api');
 const DB_users=require('../../Database/DB-user-api');
+const DB_trips=require('../../Database/DB-user-trips');
+const Map=require('../Map/processRequest');
 
 // creating router
 const router = express.Router({mergeParams : true});
@@ -16,11 +18,41 @@ router.get('/', async (req, res) =>{
     console.log('tererere'+e_mail);
     const userInfo=await DB_users.getAllInfo(e_mail);
     //res.status(200).json(userInfo.data);
+    const pendingreq=await DB_trips.getPendingRequests(req.user.USERNAME);
+    let cur_req=0;
+     let pendingRequest;
+     //={
+    // USERNAME: req.user.USERNAME,
+    //         PICK_UP: "",
+    //         DROP_OFF: "",
+    //         V_TYPE:"",
+    //         ID: 0
+    // }
+    console.log("got pending,length= ",pendingreq," ",pendingreq.length);
+    if(pendingreq.length>0){
+        cur_req=pendingreq[0];
+        console.log("got pending id= ",cur_req);
+        pendingRequest=await Map.processOneReq(pendingreq[0]);
+    }
+    else{
+        pendingRequest={
+            USERNAME: req.user.USERNAME,
+            PICK_UP: "",
+            DROP_OFF: "",
+            V_TYPE:"",
+            ID: 0
+        }
+    }
+
+        
+    console.log("got pendingRequest = ",pendingRequest.PICK_UP,pendingRequest.DROP_OFF,pendingRequest.V_TYPE);
+    console.log('pendinf id= ',pendingRequest.ID);
     res.render('userLayout.ejs', {
         title:req.user.NAME,
         page:['userHome'],
         user:req.user,
-        info:userInfo
+        info:userInfo,
+        pending:pendingRequest
 
     });
 

@@ -11,6 +11,7 @@ async function getAllTripRequests(){
          TIME_REQUEST,
          PLAT,
          PLNG,
+         V_TYPE,
         DLAT,
         DLNG
 

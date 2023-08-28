@@ -68,6 +68,7 @@ async function processAllNearby(requestsNearby,mylocation){
         PICK_UP: pickupaddress,
         DROP_OFF: dropoffaddress,
         DISTANCE: distbetween,
+        
         DURATION: durationbetween,
         ID: row.ID
 
@@ -85,7 +86,43 @@ console.log("jaber boss");
 return allTrips;
 }
 
-module.exports = {processAllNearby
+async function processOneReq(row){
+    const reqpickup = { lat: row.PLAT, lng: row.PLNG };
+    const reqdropoff = { lat: row.DLAT, lng: row.DLNG };
+
+    let pickupaddress;
+    await address.getPlaceName(reqpickup.lat, reqpickup.lng)
+        .then(placeName => {
+           // console.log('drop Place:', placeName);
+            pickupaddress = placeName;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    let dropoffaddress;
+    await address.getPlaceName(reqdropoff.lat, reqdropoff.lng)
+        .then(placeName => {
+            //console.log('drop Place:', placeName);
+            dropoffaddress = placeName;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+        const pending={
+            USERNAME: row.USERNAME,
+            PICK_UP: pickupaddress,
+            DROP_OFF: dropoffaddress,
+            V_TYPE:row.V_TYPE,
+            ID: row.ID
+        }
+        return pending;
+
+}
+
+module.exports = {processAllNearby,
+    processOneReq
 }
 ;
 
