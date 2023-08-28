@@ -64,6 +64,8 @@ async function getLoginInfoByEmail(email){
             PASSWORD,
             PHONE,
             WALLET_ID,
+            SEX,
+            PLATE_NO,
             LAT,
             LNG
         FROM
@@ -80,14 +82,18 @@ async function getLoginInfoByEmail(email){
 
 async function getLoginInfoByID(id){
     const sql = `
-        SELECT 
-            ID,
-            NAME,
-            PASSWORD,
-            EMAIL,
-            --IMAGE
-        FROM
-            DRIVER
+    SELECT
+    ID,
+        NAME,
+    PASSWORD,
+    PHONE,
+    WALLET_ID,
+    SEX,
+    PLATE_NO,
+    LAT,
+    LNG
+FROM
+    DRIVER
         WHERE
             ID = :id
     `;
@@ -98,6 +104,23 @@ async function getLoginInfoByID(id){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function changePassword(id,pass){
+    const sql = `
+    UPDATE DRIVER
+    SET 
+        PASSWORD=:pass
+    WHERE
+        ID = :id
+    `;
+    const binds = {
+        id: id,
+        pass:pass
+    }
+
+    return await database.execute(sql, binds, {});
+
+}
+
 
 
 module.exports = {
@@ -105,7 +128,8 @@ module.exports = {
     createNewDriver,
     getLoginInfoByEmail,
     getLoginInfoByID,
-    getDriverIDByPhone
+    getDriverIDByPhone,
+    changePassword
   // updateUserTokenById,
    // getUserPromptById,
    // updateLoginTimeById

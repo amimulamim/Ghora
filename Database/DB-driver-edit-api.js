@@ -77,15 +77,15 @@ async function editSex(driver){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
-async function editPlate(driver){
+async function editVehiclePlate(id,plate){
     const sql = `
     UPDATE DRIVER
     SET PLATE_NO=:plate_no
     WHERE ID=:id
         `;
     const binds = {
-        id:driver.ID,
-        plate_no:driver.PLATE_NO
+        id:id,
+        plate:plate
     }
     return (await database.execute(sql, binds, database.options)).rows;
 }
