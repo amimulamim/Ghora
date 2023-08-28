@@ -8,20 +8,26 @@ const database=require('./database');
 async function makeTripRequests(tripRequest){
     const sql= `
     INSERT INTO
-    TRIP_REQUEST(USERNAME,PLAT,PLNG,DLAT,DLNG)
-    VALUES(:username,:plat,:plng,:dlat,:dlng)
+    TRIP_REQUEST(USERNAME,PLAT,PLNG,DLAT,DLNG,V_TYPE)
+    VALUES(:username,:plat,:plng,:dlat,:dlng,:v_type)
     `
     const binds={
         username:tripRequest.user.USERNAME,
         plat:tripRequest.pickup.lat,
         plng:tripRequest.pickup.lng,
         dlat:tripRequest.dropoff.lat,
-        dlng:tripRequest.dropoff.lng
+        dlng:tripRequest.dropoff.lng,
+        v_type:tripRequest.v_type
+
         
     }
     return (await database.execute(sql,binds,database.options)).rows;
     
 }
+
+
+
+
 
 async function getAllInfoRequest(tripRequest){
     const sql= `
@@ -31,11 +37,12 @@ async function getAllInfoRequest(tripRequest){
     PLAT,
     PLNG,
     DLAT,
-    DLNG
+    DLNG,
+    V_TYPE
     FROM   TRIP_REQUEST
     WHERE
 
-    USERNAME=:username  AND PLAT=:plat AND PLNG=:plng AND DLAT=:dlat AND DLNG=:dlng
+    USERNAME=:username  AND PLAT=:plat AND PLNG=:plng AND DLAT=:dlat AND DLNG=:dlng AND V_TYPE=:v_type
 
     `
     const binds={
@@ -43,7 +50,8 @@ async function getAllInfoRequest(tripRequest){
         plat:tripRequest.pickup.lat,
         plng:tripRequest.pickup.lng,
         dlat:tripRequest.dropoff.lat,
-        dlng:tripRequest.dropoff.lng
+        dlng:tripRequest.dropoff.lng,
+        v_type:tripRequest.v_type
         
     }
     return (await database.execute(sql,binds,database.options)).rows;
@@ -67,8 +75,46 @@ async function getAllTripsByID(ID){
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
+async function getPendingRequests(username){
+    const sql= `
+    SELECT 
+         ID, 
+         USERNAME,
+         TIME_REQUEST,
+         PLAT,
+         PLNG,
+        DLAT,
+        DLNG,
+        V_TYPE
+
+    FROM 
+        TRIP_REQUEST
+        WHERE USERNAME=:username 
+        AND TIME_REQUEST>=SYSTIMESTAMP-INTERVAL '30' MINUTE
+    `;
+    const binds={
+        username:username,
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
+
+async function cancelRequest(username)  {
+    const sql= `
+    DELETE FROM TRIP_REQUEST WHERE USERNAME=:username
+    `;
+    const binds={
+        username:username
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
+
+
+
+
 module.exports={
     makeTripRequests,
     getAllTripsByID,
-    getAllInfoRequest
+    getAllInfoRequest,
+    getPendingRequests,
+    cancelRequest
 }

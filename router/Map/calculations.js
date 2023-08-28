@@ -16,6 +16,7 @@ async function calculateDistance(reqpickup, reqdropoff) {
     if (data.status === 'OK') {
       const distance = data.rows[0].elements[0].distance.text;
       const duration = data.rows[0].elements[0].duration.text;
+      console.log(`distance: ${distance}, duration: ${duration}`)
       return { distance, duration };
     } else {
       throw new Error('Unable to calculate distance');
@@ -25,8 +26,8 @@ async function calculateDistance(reqpickup, reqdropoff) {
   }
 }
 
-module.exports = { calculateDistance }
-
+module.exports = {calculateDistance}
+;
 // let distbetween ;
 // let durationbetween;
 

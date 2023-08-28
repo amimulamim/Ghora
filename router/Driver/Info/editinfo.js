@@ -7,33 +7,30 @@ const DB_auth_driver = require('../../../Database/DB-driver-auth-api');
 
 const authUtils = require('../../../utils/auth-utils');
 
-router.get('/', async (req, res) => {
+router.get('/', async(req, res) => {
     // check if already logged in
-    if (req.driver == null) {
+    if(req.driver == null){
         res.redirect('/driver/login');
     }
-    console.log('etai driver', req.driver);
-    let driverInfo, errors = [];
-    driverInfo = await DB_auth_driver.getLoginInfoByEmail(req.driver.EMAIL);
-    console.log('eta', driverInfo[0]);
-    res.render('driverlayout.ejs', {
-        title: 'Edit Profile - Ghora',
-        page: ['profileEdit'],
-        driver: req.driver,
-        errors: errors,
-        form: {
-            name: driverInfo[0].NAME,
-            email: req.driver.EMAIL,
-            // password: req.body.password,
-            // password2: req.body.password2,
-            phone: driverInfo[0].PHONE,
-            sex: driverInfo[0].SEX,
-            plate: driverInfo[0].PLATE_NO,
-            wallet: driverInfo[0].WALLET_ID
-            //sex:req.body.sex
-        }
-    });
-
+    console.log('etai driver',req.driver);
+        let driverInfo,errors = [];
+        driverInfo=await DB_auth_driver.getLoginInfoByEmail(req.driver.EMAIL);
+        console.log('eta',driverInfo[0]);
+        res.render('driverlayout.ejs', {
+            title : 'Edit Profile - Ghora',
+            page : ['profileEdit'],
+            driver : req.driver,
+            errors : errors,
+            form : {
+                name : driverInfo[0].NAME,
+                email : req.driver.email,
+                password : '',
+                password2 : '',
+                phone:driverInfo[0].PHONE,
+                //sex:req.body.sex
+            }
+        });
+    
 });
 router.post('/', async (req, res) => {
     if (req.driver == null) {
@@ -45,10 +42,10 @@ router.post('/', async (req, res) => {
     // results = DB_auth_driver.getDriverIDByEmail(req.body.email);
     // if (results.length > 0)
     //     errors.push('You can,t change email');
-    // if(req.body.password!=req.body.password2)
-    //     errors.push('PASSWORDS MUST MATCH');
-    // if(req.body.phone.length!=13)
-    //     errors.push('Phone no must start with 8801');
+    if(req.body.password!=req.body.password2)
+        errors.push('PASSWORDS MUST MATCH');
+    if(req.body.phone.length!=13)
+        errors.push('Phone no must start with 8801');
     if (errors.length > 0) {
         res.render('driverlayout.ejs', {
             title: 'Sign Up - Ghora',
@@ -58,50 +55,42 @@ router.post('/', async (req, res) => {
             form: {
                 name: req.body.name,
                 email: req.body.email,
-                // password: req.body.password,
-                // password2: req.body.password2,
+                password: req.body.password,
+                password2: req.body.password2,
                 phone: req.body.phone,
-                sex: req.body.sex,
-                plate: req.body.plate,
-                wallet: req.body.wallet
+                sex: req.body.sex
             }
         });
     } else {
         let driver = {
-            id: req.driver.ID,
             name: req.body.name,
-            //password: req.body.password,
+            password: req.body.password,
             email: req.driver.EMAIL,
             phone: req.body.phone,
-            sex: req.body.sex,
-            plate: req.body.plate,
-            wallet: req.body.wallet
-
+            sex: req.body.sex
         }
+        
+        await bcrypt.hash(driver.password, 8, async (err, hash) => {
+            if (err) {
+                console.log("ERROR hashing password");
+            } else {
+                driver.password = hash;
+                console.log('kkkkkkk',req.driver.EMAIL);
+                console.log(driver);
+                let result = await DB_driver_edit.updateDriverInfo(driver);
 
-        // await bcrypt.hash(driver.password, 8, async (err, hash) => {
-        //     if (err) {
-        //         console.log("ERROR hashing password");
-        //     } else {
-        //         driver.password = hash;
-        console.log('kkkkkkk', req.driver.EMAIL);
-        console.log(driver);
-        let result = await DB_driver_edit.updateDriverInfo(driver);
+                //let result2 = await DB_auth_driver.getLoginInfoByEmail(driver.email);
+                // login the user too
+                //await DB_cart.addNewCart(result2[0].ID);
+                //await authUtils.loginDriver(res, result2[0].EMAIL)
+                // redirect to home page
+                //res.redirect(`/profile/${user.handle}/settings`);
+                res.redirect('/driver/info');
 
-        //let result2 = await DB_auth_driver.getLoginInfoByEmail(driver.email);
-        // login the user too
-        //await DB_cart.addNewCart(result2[0].ID);
-        //await authUtils.loginDriver(res, result2[0].EMAIL)
-        // redirect to home page
-        //res.redirect(`/profile/${user.handle}/settings`);
-        res.redirect('/driver/info');
-
-        //     }
-        // });
+            }
+        });
     }
 
 });
-
-
 
 module.exports = router;

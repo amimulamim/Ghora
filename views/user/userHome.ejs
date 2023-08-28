@@ -5,4 +5,31 @@
 Welcome   <%= info[0].USERNAME %>
 </h3>
 
-<iframe src="dir.html" style="height: 80vh"></iframe>
+<% if(pending.ID==0){%>
+    <iframe src="dir.html" style="height: 80vh"></iframe>
+<%  } %>
+
+<% if(pending.ID!=0){%>
+    <div class="request-container",style="margin-left:60%">
+        <div class="request-details",style="margin-left:60%">
+            <h3 style="margin-left: 40%;"> YOU ALREADY HAVE A PENDING REQUEST</h3>
+        </div>
+        
+        <div class="request-details",style="margin:left:60%">
+            
+            <p style="margin-left: 40%;"><strong>Pick-up:</strong> <%= pending.PICK_UP %></p>
+            <p style="margin-left: 40%;"><strong>Drop-off:</strong> <%= pending.DROP_OFF %></p>
+            <p style="margin-left: 40%;"><strong>Vehicle Type:</strong> <%= pending.V_TYPE %></p>
+        </div> 
+
+
+        <button class="cancel-button" name="Cancel" style="margin-left: 60%;">Cancel Request</button> 
+    </div>
+
+
+
+    
+<%  } %>
+
+
+

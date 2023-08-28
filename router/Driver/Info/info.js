@@ -26,9 +26,6 @@ router.get('/', async (req, res) => {
         console.log("here psaisi "+req.driver.EMAIL);
         
         driverInfo=await DB_driver.getAllInfo(req.driver.EMAIL);
-        // let has=1;
-        // if(driverInfo[0].PLATE_NO===null)
-        // has=0
        // console.log(driverInfo[0].NAME);
        console.log(driverInfo[0].PHONE);
         res.render('driverLayout.ejs',{

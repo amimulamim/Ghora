@@ -79,7 +79,8 @@ router.post('/',async(req,res) =>{
     const tripRequest={
         pickup:reqpickup,
         dropoff:reqdropoff,
-        user:req.user
+        user:req.user,
+        v_type:req.body.v_type
     }
     console.log('tripreq ready=',tripRequest);
 
