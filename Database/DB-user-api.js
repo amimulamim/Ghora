@@ -64,11 +64,34 @@ async function getWalletId(email){
     return (await database.execute(sql,binds,database.options)).rows;
 
 }
+async function getAllInfoByUsername(username){
+    const sql=`
+    SELECT 
+        USERNAME,
+        NAME,
+        EMAIL,
+        PHONE,
+        SEX,
+        WALLET_ID,
+      
+        LAT,
+        LNG
+    FROM 
+        USERS
+    WHERE 
+        USERNAME=:username
+    `;
+    const binds={
+        username:username
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
 
 
 module.exports = {
     getAllUsers,
     getUsersByEmail,
     getAllInfo,
-    getWalletId
+    getWalletId,
+    getAllInfoByUsername
 }

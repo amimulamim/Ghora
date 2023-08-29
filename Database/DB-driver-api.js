@@ -76,6 +76,28 @@ async function getAllInfo(email){
     }
     return (await database.execute(sql,binds,database.options)).rows;
 }
+async function getAllInfoByID(id){
+    const sql=`
+    SELECT 
+        ID,
+        NAME,
+        EMAIL,
+        PHONE,
+        SEX,
+        WALLET_ID,
+        PLATE_NO,
+        LAT,
+        LNG
+    FROM 
+        DRIVER 
+    WHERE 
+        ID= :id
+    `;
+    const binds={
+        id:id
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
 
 async function getWalletId(email){
     const sql=
@@ -99,5 +121,6 @@ module.exports = {
     getDriverByEmail,
     getAllInfo,
     getWalletId,
-    updateDriverLocation
+    updateDriverLocation,
+    getAllInfoByID
 }

@@ -17,8 +17,8 @@ function authUser(req, res, next){
                 next();
             } else {
                 // get user prompt (id, handle, message count) from id
-                const decodedEmail = decoded.email;
-                let results = await DB_auth_user.getLoginInfoByEmail(decodedEmail);
+                const decodedUsername = decoded.superUsername;
+                let results = await DB_auth_user.getLoginInfoByUsername(decodedUsername);
 
                 // if no such user or token doesn't match, do nothing
                if(results.length == 0){
@@ -31,19 +31,21 @@ function authUser(req, res, next){
                   //  await DB_auth.updateLoginTimeById(decodedId, time);
 
                     req.user = {
-                        USERNAME:results[0].USERNAME,
-                        EMAIL: decodedEmail,
+                        USERNAME:decodedUsername,
+                        EMAIL: results[0].EMAIL,
                         NAME: results[0].NAME,
                         PHONE:results[0].PHONE,
                         WALLET_ID:results[0].WALLET_ID
 
                         //IMAGE:results[0].IMAGE
                     }
+                    console.log('auth hocche ',req.user)
                 }
                 next();
             }
         });
     } else {
+        console.log('kamne user');
         next();
     }   
 }
@@ -60,8 +62,8 @@ function authDriver(req, res, next){
                 next();
             } else {
                 // get user prompt (id, handle, message count) from id
-                const decodedEmail = decoded.superEmail;
-                let results = await DB_auth_driver.getLoginInfoByEmail(decodedEmail);
+                const decodedID = decoded.superID;
+                let results = await DB_auth_driver.getLoginInfoByID(decodedID);
                // console.log(decodedEmail);
                 // if no such user or token doesn't match, do nothing
                if(results.length == 0){
@@ -74,8 +76,8 @@ function authDriver(req, res, next){
                   //  await DB_auth.updateLoginTimeById(decodedId, time);
                     console.log('peye gesi');
                     req.driver = {
-                        ID:results[0].ID,
-                        EMAIL: decodedEmail,
+                        ID:decodedID,
+                        EMAIL: results[0].EMAIL,
                         NAME: results[0].NAME,
                         PHONE:results[0].PHONE,
                         WALLET_ID:results[0].WALLET_ID,
@@ -88,7 +90,7 @@ function authDriver(req, res, next){
             }
         });
     } else {
-        console.log('kamne');
+        console.log('kamne driver');
         next();
     }   
 }

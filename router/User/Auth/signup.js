@@ -98,7 +98,6 @@ router.post('/', async (req, res) => {
             // if no error, create user object to be sent to database api
             let user = {
                 username:req.body.username,
-
                 name: req.body.name,
                 password: req.body.password,
                 email: req.body.email,
@@ -121,7 +120,7 @@ router.post('/', async (req, res) => {
                         console.log("ERROR at creating user");
                     }
                     else{
-                    await authUtils.loginUser(res, result2[0].EMAIL)
+                    await authUtils.loginUser(res, result2[0].USERNAME);
                     // redirect to home page
                     //res.redirect(`/profile/${user.handle}/settings`);
                     res.redirect('/user');

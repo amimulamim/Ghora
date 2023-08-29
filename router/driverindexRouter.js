@@ -13,6 +13,7 @@ const signupRouter=require('./Driver/Auth/signup');
 const logoutRouter = require('./Driver/Auth/logout');
 const editRouter=require('./Driver/Info/editinfo');
 const dvhomeRouter=require('./Driver/driverhome');
+const driverHistoryRouter=require('./Driver/TripRequests/triphistory');
 const runningRouter = require('./Driver/runningTrip');
 const routepathRouter=require('./Driver/sendingRoute');
 
@@ -34,7 +35,8 @@ router.use('/signup',signupRouter);
 router.use('/info',driverInfoRouter);
 router.use('/wallet',driverWalletRouter);
 router.use('/logout',logoutRouter);
-router.use('/edit',editRouter);
+router.use('/history',driverHistoryRouter);
+
 router.use('/accept',runningRouter);
 //router.use('/routepath',routepathRouter);
 // router.get('/accept/:id',async(req,res)=>{

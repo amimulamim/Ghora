@@ -5,33 +5,33 @@ const jwt = require('jsonwebtoken');
 //const DB_auth = require('../Database/DB-auth-api');
 
 // function to login user into a session
-async function loginUser(res, email){
+async function loginUser(res, username){
     // create token
     const payload = {
-        email: email
+        superUsername:username
     };
     let token = jwt.sign(payload, process.env.JWT_SECRET);
     // put token in db
     //await DB_auth.updateUserTokenById(userId, token);
     // set token in cookie
     let options = {
-        maxAge: 1800000, 
+        maxAge: 180000, 
         httpOnly: true
     }
     res.cookie('userSessionToken', token, options);
 }
 
-async function loginDriver(res, email){
+async function loginDriver(res, id){
     // create token
     const payload = {
-        superEmail: email
+        superID: id
     };
     let token = jwt.sign(payload, process.env.JWT_SECRET);
     // put token in db
     //await DB_auth.updateUserTokenById(userId, token);
     // set token in cookie
     let options = {
-        maxAge: 36000000,
+        maxAge: 360000,
         httpOnly: true
     }
     res.cookie('driverSessionToken', token, options);

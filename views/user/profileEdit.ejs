@@ -1,18 +1,8 @@
 <div class=" row p-5 ms-5 me-5 g-0">
     <div class="shadow mt-2 mb-2 col-7 p-3 rounded-2 align-middle">
-        <ul class="mt-3 nav nav-tabs justify-content-center">
-            <li class="nav-item active">
-                <a href="/user/login" class="nav-link">Login</a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link active">Sign Up</a>
-            </li>
-
-        </ul>
-
         <!--    start-->
 
-        <form action="/user/signup" method="POST" class="card-body">
+        <form action="/user/info/edit" method="POST" class="card-body" style="margin-left: 30%;">
             <!-- handle -->
             <div class="form-floating mb-3">
 
@@ -21,27 +11,34 @@
                 <label for="handle">Name</label>
 
             </div>
-            
+            <!-- email -->
+            <div class="form-floating mb-3">
+
+                <input type="email" class="form-control" name="email" required
+                       value="<%= (typeof form != 'undefined') ? form.email : '' %>">
+                <label for="email">Email</label>
+
+            </div>
             <!-- phone no -->
             <div class="form-floating mb-3">
                 <input type="tel" class="form-control" name="phone" required
-                       value="<%= (typeof form != 'undefined') ? form.phone : '' %>">
+                       value="<%= (typeof form != 'undefined') ? form.phone : '' %>" maxlength="13" minlength="11">
                 <label for="phone">Phone Number</label>
             </div>
-            <!-- password -->
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" name="password" required
-                       value="<%= (typeof form != 'undefined') ? form.password : '' %>">
-                <label for="password">Password</label>
+
+                <input type="text" class="form-control" name="sex" required
+                       value="<%= (typeof form != 'undefined') ? form.sex : '' %>" pattern="M|F">
+                <label for="sex">GENDER</label>
 
             </div>
-            <!-- confirm password -->
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" name="password2" required
-                       value="<%= (typeof form != 'undefined') ? form.password2 : '' %>">
-                <label for="password2">Confirm Password</label>
-            </div>
 
+                <input type="text" class="form-control" name="wallet" required
+                       value="<%= (typeof form != 'undefined') ? form.wallet : '' %>" >
+                <label for="wallet">WALLET_ID</label>
+
+            </div>
             <!-- Date of Birth -->
             <!--        <div class="form-group row m-2">-->
             <!--            <label for="birthdate" class="col-4 col-form-label">Date of Birth</label>-->
@@ -62,17 +59,13 @@
             <% } %>
             <!-- submit -->
             <div class="d-grid gap-2 mt-3">
-                <button type="submit" class="btn btn-lg btn-primary" style="background-color: #33c24d;border: 0">Create
-                    Account
+                <button type="submit" class="btn btn-lg btn-primary" style="background-color: #33c24d;border: 0">
+                    confirm edit
                 </button>
             </div>
 
         </form>
 
-        <!--    end-->
-        <div class="d-flex justify-content-around">
-            <p>Already have an account?<a class="js--registration-form-btn" href="/user/login"><b>Login Now!</b></a>
-            </p>
         </div>
     </div>
 </div>

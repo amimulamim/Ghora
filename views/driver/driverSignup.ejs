@@ -31,8 +31,8 @@
             </div>
             <!-- phone no -->
             <div class="form-floating mb-3">
-                <input type="tel" class="form-control" name="phone" required
-                       value="<%= (typeof form != 'undefined') ? form.phone : '' %>">
+                <input type="number" class="form-control" name="phone" required
+                       value="<%= (typeof form != 'undefined') ? form.phone : '' %>" maxlength="13" minlength="11">
                 <label for="phone">Phone Number</label>
             </div>
             <!-- password -->

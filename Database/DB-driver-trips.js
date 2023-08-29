@@ -24,18 +24,23 @@ async function getAllTripRequests(){
     return (await database.execute(sql,binds,database.options)).rows;
 }
 //function to get trip history of driver
-async function getAllTripsByID(ID){
+async function getAllTripsByPlate(plate){
     const sql= `
     SELECT 
-         *
+         T.TR_ID TID,
+         T.START_TIME ST,
+         T.FINISH_TIME FT,
+         T.USERNAME RIDER,
+         R.RATING RATE,
+         R.DESCRIPTION DES
     FROM 
-        TRIP_HISTORY T
+        TRIP_HISTORY T JOIN REVIEW R
+        ON(T.REVIEW_ID=R.ID)
     WHERE
-        T.ID=:id
-
-    `
+        T.PLATE_NO=:plate
+    `;
     const binds={
-        id:ID
+        plate:plate
     }
     return (await database.execute(sql,binds,database.options)).rows;
 }
@@ -44,5 +49,5 @@ async function getAllTripsByID(ID){
 
 module.exports={
     getAllTripRequests,
-    getAllTripsByID
+    getAllTripsByPlate
 }

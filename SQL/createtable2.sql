@@ -343,6 +343,9 @@ ALTER TABLE DRIVER
 add (lat NUMBER,
 lng NUMBER);
 
+ALTER TABLE TRIP_REQUEST
+add(v_type VARCHAR(50) );
+
 
 
 
