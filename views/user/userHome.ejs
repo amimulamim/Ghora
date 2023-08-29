@@ -27,6 +27,8 @@ Welcome   <%= info[0].USERNAME %>
     </div>
 
 
+    
+
 
     
 <%  } %>
@@ -38,10 +40,15 @@ Welcome   <%= info[0].USERNAME %>
       const data =  await fetch('user/request_status')
       const text = await data.text();
       //alert("got text: " + text);
-        if(text.includes('accepted')) {
+        if(text.includes('accepted') ) {
             alert('Your Ride Request Has Been Accepted')
             clearInterval(timer);
             window.location = '/user/running'
+        }
+        else if(text.includes('already done') ) {
+           // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
+            clearInterval(timer);
+            //window.location = '/user/running'
         }
 
     }
