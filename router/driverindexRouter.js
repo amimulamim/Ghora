@@ -14,6 +14,7 @@ const logoutRouter = require('./Driver/Auth/logout');
 const editRouter=require('./Driver/Info/editinfo');
 const dvhomeRouter=require('./Driver/driverhome');
 const runningRouter = require('./Driver/runningTrip');
+const routepathRouter=require('./Driver/sendingRoute');
 
 // ROUTE: home page
 //router.use(driverAuth);
@@ -35,6 +36,7 @@ router.use('/wallet',driverWalletRouter);
 router.use('/logout',logoutRouter);
 router.use('/edit',editRouter);
 router.use('/accept',runningRouter);
+//router.use('/routepath',routepathRouter);
 // router.get('/accept/:id',async(req,res)=>{
 
 //     res.send(req.params.id)

@@ -47,6 +47,28 @@ async function getTripRequestsOfUser(username){
     return (await database.execute(sql,binds,database.options)).rows;
 }  
 
+async function getTripUnnotifiedOfUser(username){
+    const sql= `
+    SELECT 
+         TR_ID, 
+         D_ID, 
+         USERNAME,
+         TIME_REQUEST,
+         PLAT,
+         PLNG,
+        DLAT,
+        DLNG
+
+    FROM 
+        RUNNING_TRIP
+        WHERE  USERNAME=:username AND NOTIFIED=:notified
+    `;
+    const binds={
+        username:username,
+        notified:0
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
 
 async function getTripRunningsOfUser(username){
     const sql= `
@@ -151,6 +173,18 @@ async function cancelRequest(username)  {
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
+async function Notified(username) {
+    const sql = `
+    UPDATE RUNNING_TRIP
+    SET NOTIFIED=:notified
+    WHERE USERNAME=:username
+        `;
+    const binds = {
+        username:username,
+        notified:1
+    }
+    return (await database.execute(sql, binds, database.options)).rows;
+}
 
 
 
@@ -162,5 +196,7 @@ module.exports={
     cancelRequest,
     getTripRequestsOfUser,
 
-    getTripRunningsOfUser
+    getTripRunningsOfUser,
+    getTripUnnotifiedOfUser,
+    Notified
 }

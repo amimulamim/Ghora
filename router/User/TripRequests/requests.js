@@ -96,7 +96,7 @@ router.post('/',async(req,res) =>{
     // redirect to home page
     //res.redirect(`/profile/${user.handle}/settings`);
     console.log("successful request for ride");
-    res.redirect('/user/');
+    res.redirect('/user');
     
     }
 

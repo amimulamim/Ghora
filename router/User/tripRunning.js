@@ -7,6 +7,8 @@ const { json } = require('body-parser');
 //creating routers
 const router=express.Router({mergeParams:true});
 
+
+
 router.get('/',async(req,res) =>{
     if(req.user==null){
         console.log('get e user nai');

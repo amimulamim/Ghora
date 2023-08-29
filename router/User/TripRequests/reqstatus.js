@@ -15,12 +15,22 @@ router.get('/',async(req,res) =>{
     console.log('get e user ase');
     const reqexist=await DB_trips.getTripRequestsOfUser(req.user.USERNAME);
     
-    const curr=await DB_trips.getTripRunningsOfUser(req.user.USERNAME);
+    const curr=await DB_trips.getTripUnnotifiedOfUser(req.user.USERNAME);
     console.log("reqexist= " , reqexist);
-    console.log("curr= " , curr);
+    console.log("curr= ,length =" , curr,curr.length);
     if(reqexist.length==0 && curr.length>0){
+
+        await DB_trips.Notified(req.user.USERNAME);
+        console.log('notified');
         res.send('accepted');
-    }else{
+    }
+    else if(reqexist.length>0 && curr.length==0){
+        res.send('not yet');
+    }
+    else if(reqexist.length==0 && curr.length==0){
+        res.send('already done');
+    }
+    else{
         res.send('rejected');
     }
 
