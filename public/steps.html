@@ -4,17 +4,20 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <link rel="stylesheet" type="text/css" href="./style.css" />
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./steps.js"></script>
   </head>
   <body>
     <div id="container">
-      <div id="map"></div>
-      <div id="sidebar">
+      <div id="map" ></div>
+      <div id="sidebar" >
         <p>Total Distance: <span id="total"></span></p>
         <div id="panel"></div>
       </div>
+      
     </div>
-
+    <div id="output" style="margin-bottom: 0%;margin-left: 40%;"></div>
+    <button id="completed" style=" margin-left: 50%;">Completed</button>
+    <button id="cancel" style=" margin-left: 50%;">Cancel</button>
     <!-- 
       The `defer` attribute causes the callback to execute after the full HTML
       document has been parsed. For non-blocking uses, avoiding race conditions,

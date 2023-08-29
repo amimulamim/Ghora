@@ -18,6 +18,7 @@ router.get('/',async(req,res) =>{
    // const reqexist=await DB_trips.getTripRequestsOfUser(req.user.USERNAME);
     
     const curr=await DB_trips.getTripRunningsOfUser(req.user.USERNAME);
+    console.log("got cur trip",curr[0]);
     
 
     res.render('userLayout.ejs',{

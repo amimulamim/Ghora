@@ -62,6 +62,7 @@ async function getTripUnnotifiedOfUser(username){
     FROM 
         RUNNING_TRIP
         WHERE  USERNAME=:username AND NOTIFIED=:notified
+        ORDER BY TIME_REQUEST DESC
     `;
     const binds={
         username:username,
@@ -85,6 +86,7 @@ async function getTripRunningsOfUser(username){
     FROM 
         RUNNING_TRIP
         WHERE  USERNAME=:username
+        ORDER BY TIME_REQUEST DESC
     `;
     const binds={
         username:username

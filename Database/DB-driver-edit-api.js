@@ -117,5 +117,6 @@ module.exports = {
     // editPlate,
     // editSex,
     // editWallet
-    updateDriverInfo
+    updateDriverInfo,
+    editVehiclePlate
 }

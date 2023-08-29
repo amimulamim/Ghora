@@ -23,7 +23,12 @@ Welcome   <%= info[0].USERNAME %>
         </div> 
 
 
-        <button class="cancel-button" name="Cancel" style="margin-left: 60%;">Cancel Request</button> 
+        <!-- <button class="cancel-button" name="Cancel" style="margin-left: 60%;">Cancel Request</button>  -->
+        <form  action="/user/cancel" method="POST" >
+            
+            <input type="submit" value="Cancel" class="btn  btn-secondary" style="margin-left: 60%;">
+            
+        </form>
     </div>
 
 

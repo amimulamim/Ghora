@@ -14,7 +14,7 @@ const logoutRouter = require('./User/Auth/logout');
 const reqstatusRouter=require('./User/TripRequests/reqstatus.js');
 const runningRouter = require('./User/tripRunning.js');
 const userHistoryRouter=require('./User/TripRequests/triphistory');
-
+const cancelRouter=require('./User/TripRequests/cancel');
 // ROUTE: home page
 //router.use(userAuth);
 router.get('/',require('./User/userHome'));
@@ -35,6 +35,7 @@ router.use('/logout',logoutRouter);
 router.use('/request_status', reqstatusRouter);
 router.use('/running', runningRouter);
 router.use('/history',userHistoryRouter);
+router.use('/cancel',cancelRouter);
 // async (req,res) => {
 //     //
 //     res.send('accepted')

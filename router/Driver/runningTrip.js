@@ -158,7 +158,7 @@ router.get('/:tid', async (req, res) => {
             if(already.length == 0){
                 console.log("already not found");
             await DB_trips.createRunningTrip(tripreq[0],req.driver.ID);
-            console.log("create done");
+            console.log("create done for d_id=",req.driver.ID);
             await DB_trips.deleteReq(tripreq[0].ID);
             console.log("delete done");
             console.log("create ,del done");
