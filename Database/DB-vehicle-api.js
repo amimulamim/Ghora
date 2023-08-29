@@ -49,12 +49,12 @@ async function editVehicleInfo(vehicle){
 async function vehicleInfo(plate){
     const sql = `
    SELECT 
-        V.ID AS VID,
-        V.PLATE_NO AS PNO,
-        V.MODELNAME AS MNAME,
-        V.PLAN_ID AS PID,
-        M.V_TYPE AS TYPE,
-        M.MANUFACTURER AS COMPANY
+        V.ID VID,
+        V.PLATE_NO PNO,
+        V.MODELNAME MNAME,
+        V.PLAN_ID PID,
+        M.V_TYPE TYPE,
+        M.MANUFACTURER COMPANY
     FROM 
         VEHICLE V JOIN MODEL M
         ON(V.MODELNAME=M.NAME)

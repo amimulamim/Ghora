@@ -13,6 +13,7 @@ const signupRouter=require('./Driver/Auth/signup');
 const logoutRouter = require('./Driver/Auth/logout');
 const editRouter=require('./Driver/Info/editinfo');
 const dvhomeRouter=require('./Driver/driverhome');
+const driverHistoryRouter=require('./Driver/TripRequests/triphistory');
 // ROUTE: home page
 //router.use(driverAuth);
 router.get('/',dvhomeRouter);
@@ -31,6 +32,7 @@ router.use('/signup',signupRouter);
 router.use('/info',driverInfoRouter);
 router.use('/wallet',driverWalletRouter);
 router.use('/logout',logoutRouter);
-router.use('/edit',editRouter);
+router.use('/history',driverHistoryRouter);
+
 
 module.exports = router;

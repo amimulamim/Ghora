@@ -2,29 +2,25 @@ const database = require('./database');
 
 
 // function to get id from email
-async function updateDriverInfo(driver)
+async function updateUserInfo(driver)
 {
     const sql = `
     UPDATE 
-        DRIVER
+        USERS
     SET 
-        
+        PASSWORD=:password,
         PHONE=:phone,
-        SEX=:sex,
-        NAME=:name,
-        EMAIL=:email,
-        WALLET_ID=:wallet
+        --SEX=:sex,
+        NAME=:name
     WHERE
-    ID=:id
-        
+        EMAIL=:email
     `;
 const binds = {
     email:driver.email,
-    wallet:driver.wallet,
+    password:driver.password,
     phone:driver.phone,
-    sex:driver.sex,
-    name:driver.name,
-    id:driver.id
+    //sex:driver.SEX,
+    name:driver.name
 }
 return await database.execute(sql, binds, {});
 

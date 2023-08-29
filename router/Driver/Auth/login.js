@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
             if(!match){
                 // if successful login the driver
                 console.log('dhukse');
-                await authUtils.loginDriver(res, req.body.email);
+                await authUtils.loginDriver(res, results[0].ID);
             }
             else{
                 errors.push('wrong password');

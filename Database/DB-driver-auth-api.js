@@ -83,19 +83,20 @@ async function getLoginInfoByEmail(email){
 async function getLoginInfoByID(id){
     const sql = `
     SELECT
-    ID,
+        ID,
         NAME,
-    PASSWORD,
-    PHONE,
-    WALLET_ID,
-    SEX,
-    PLATE_NO,
-    LAT,
-    LNG
-FROM
-    DRIVER
-        WHERE
-            ID = :id
+        EMAIL,
+        PASSWORD,
+        PHONE,
+        WALLET_ID,
+        SEX,
+        PLATE_NO,
+        LAT,
+        LNG
+    FROM
+        DRIVER
+    WHERE
+        ID = :id
     `;
     const binds = {
         id: id

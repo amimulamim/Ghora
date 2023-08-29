@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
             if (!match) {
                 // if successful login the user
                 console.log('dhukse');
-                await authUtils.loginUser(res, req.body.email);
+                await authUtils.loginUser(res, results[0].USERNAME);
             }
             else {
                 errors.push('wrong password');

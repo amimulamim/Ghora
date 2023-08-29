@@ -50,7 +50,10 @@ async function getLoginInfoByEmail(email){
             PASSWORD,
             EMAIL,
             PHONE,
-            WALLET_ID
+            WALLET_ID,
+            SEX,
+            LAT,
+            LNG
         FROM
             USERS
         WHERE
@@ -69,7 +72,13 @@ async function getLoginInfoByUsername(username){
             USERNAME,
             NAME,
             PASSWORD,
-            EMAIL
+            EMAIL,
+            PHONE,
+            WALLET_ID,
+            SEX,
+            LAT,
+            LNG
+
             --IMAGE
         FROM
             USERS
@@ -98,6 +107,22 @@ async function getUsernameByPhone(phone){
 
     return (await database.execute(sql, binds, database.options)).rows;
 }
+async function changePassword(username,pass){
+    const sql = `
+    UPDATE USERS
+    SET 
+        PASSWORD=:pass
+    WHERE
+        USERNAME = :username
+    `;
+    const binds = {
+        username:username,
+        pass:pass
+    }
+
+    return await database.execute(sql, binds, {});
+
+}
 
 
 
@@ -106,7 +131,8 @@ module.exports = {
     createNewUser,
     getLoginInfoByEmail,
     getLoginInfoByUsername,
-    getUsernameByPhone
+    getUsernameByPhone,
+    changePassword
   // updateUserTokenById,
    // getUserPromptById,
    // updateLoginTimeById

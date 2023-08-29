@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
         errors: errors,
         form: {
             name: driverInfo[0].NAME,
-            email: req.driver.EMAIL,
+            email: req.driver.email,
             phone: driverInfo[0].PHONE,
             sex: driverInfo[0].SEX,
             wallet: driverInfo[0].WALLET_ID
