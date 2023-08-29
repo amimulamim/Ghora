@@ -151,7 +151,26 @@ async function cancelRequest(username)  {
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
-
+async function getAllTripsByUsername(username){
+    const sql= `
+    SELECT 
+         T.TR_ID TID,
+         T.START_TIME ST,
+         T.FINISH_TIME FT,
+         T.PLATE_NO VEH,
+         R.RATING RATE,
+         R.DESCRIPTION DES
+    FROM 
+        TRIP_HISTORY T JOIN REVIEW R
+        ON(T.REVIEW_ID=R.ID)
+    WHERE
+        T.USERNAME=:username
+    `;
+    const binds={
+        username:username
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
 
 
 module.exports={
@@ -161,6 +180,6 @@ module.exports={
     getPendingRequests,
     cancelRequest,
     getTripRequestsOfUser,
-
+    getAllTripsByUsername,
     getTripRunningsOfUser
 }

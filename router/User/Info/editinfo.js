@@ -2,54 +2,54 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router({ mergeParams: true });
 //my modules
-const DB_driver_edit = require('../../../Database/DB-driver-edit-api');
-const DB_auth_driver = require('../../../Database/DB-driver-auth-api');
+const DB_user_edit = require('../../../Database/DB-user-edit-api');
+const DB_auth_user = require('../../../Database/DB-user-auth-api');
 
 const authUtils = require('../../../utils/auth-utils');
 
 router.get('/', async (req, res) => {
     // check if already logged in
-    if (req.driver == null) {
-        res.redirect('/driver/login');
+    if (req.user == null) {
+       return  res.redirect('/user/login');
     }
-    console.log('etai driver', req.driver);
-    let driverInfo, errors = [];
-    driverInfo = await DB_auth_driver.getLoginInfoByEmail(req.driver.EMAIL);
-    console.log('eta', driverInfo[0]);
-    res.render('driverlayout.ejs', {
+    console.log('etai user', req.user);
+    let userInfo, errors = [];
+    userInfo = await DB_auth_user.getLoginInfoByEmail(req.user.EMAIL);
+    console.log('eta', userInfo[0]);
+    res.render('userlayout.ejs', {
         title: 'Edit Profile - Ghora',
         page: ['profileEdit'],
-        driver: req.driver,
+        user:req.user,
         errors: errors,
         form: {
-            name: driverInfo[0].NAME,
-            email: req.driver.email,
-            phone: driverInfo[0].PHONE,
-            sex: driverInfo[0].SEX,
-            wallet: driverInfo[0].WALLET_ID
+            name: userInfo[0].NAME,
+            email: req.user.EMAIL,
+            phone: userInfo[0].PHONE,
+            sex: userInfo[0].SEX,
+            wallet: userInfo[0].WALLET_ID
         }
     });
 
 });
 router.post('/', async (req, res) => {
-    if (req.driver == null) {
-        return res.redirect('/driver/login');
+    if (req.user == null) {
+        return res.redirect('/user/login');
     }
 
     console.log(req.body);
     let results, errors = [];
-    // results = DB_auth_driver.getDriverIDByEmail(req.body.email);
+    // results = DB_auth_user.getuserIDByEmail(req.body.email);
     // if (results.length > 0)
     //     errors.push('You can,t change email');
-    if (req.body.password != req.body.password2)
-        errors.push('PASSWORDS MUST MATCH');
+    // if (req.body.password != req.body.password2)
+    //     errors.push('PASSWORDS MUST MATCH');
     if (req.body.phone.length != 13)
         errors.push('Phone no must start with 8801');
     if (errors.length > 0) {
-        res.render('driverlayout.ejs', {
+        res.render('userlayout.ejs', {
             title: 'Sign Up - Ghora',
             page: ['profileEdit'],
-            driver: req.driver,
+            user: req.user,
             errors: errors,
             form: {
                 name: req.body.name,
@@ -60,8 +60,8 @@ router.post('/', async (req, res) => {
             }
         });
     } else {
-        let driver = {
-            id:req.driver.ID,
+        let user = {
+            username:req.user.USERNAME,
             name: req.body.name,
             email: req.body.email,
             phone: req.body.phone,
@@ -69,22 +69,22 @@ router.post('/', async (req, res) => {
             wallet: req.body.wallet
         }
 
-        // await bcrypt.hash(driver.password, 8, async (err, hash) => {
+        // await bcrypt.hash(user.password, 8, async (err, hash) => {
         //     if (err) {
         //         console.log("ERROR hashing password");
         //     } else {
-        //driver.password = hash;
-        console.log('kkkkkkk', req.driver.EMAIL);
-        console.log(driver);
-        let result = await DB_driver_edit.updateDriverInfo(driver);
+        //user.password = hash;
+        console.log('kkkkkkk', req.user.EMAIL);
+        console.log(user);
+        let result = await DB_user_edit.updateUserInfo(user);
 
-        //let result2 = await DB_auth_driver.getLoginInfoByEmail(driver.email);
+        //let result2 = await DB_auth_user.getLoginInfoByEmail(user.email);
         // login the user too
         //await DB_cart.addNewCart(result2[0].ID);
-        //await authUtils.loginDriver(res, result2[0].EMAIL)
+        //await authUtils.loginuser(res, result2[0].EMAIL)
         // redirect to home page
         //res.redirect(`/profile/${user.handle}/settings`);
-        res.redirect('/driver/info');
+        res.redirect('/user/info');
 
         //     }
         // });

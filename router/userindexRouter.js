@@ -13,6 +13,7 @@ const signupRouter=require('./User/Auth/signup');
 const logoutRouter = require('./User/Auth/logout');
 const reqstatusRouter=require('./User/TripRequests/reqstatus.js');
 const runningRouter = require('./User/tripRunning.js');
+const userHistoryRouter=require('./User/TripRequests/triphistory');
 
 // ROUTE: home page
 //router.use(userAuth);
@@ -33,6 +34,7 @@ router.use('/wallet',userWalletRouter);
 router.use('/logout',logoutRouter);
 router.use('/request_status', reqstatusRouter);
 router.use('/running', runningRouter);
+router.use('/history',userHistoryRouter);
 // async (req,res) => {
 //     //
 //     res.send('accepted')

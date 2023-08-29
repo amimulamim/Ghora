@@ -39,11 +39,13 @@ function authUser(req, res, next){
 
                         //IMAGE:results[0].IMAGE
                     }
+                    console.log('auth hocche ',req.user)
                 }
                 next();
             }
         });
     } else {
+        console.log('kamne user');
         next();
     }   
 }
@@ -88,7 +90,7 @@ function authDriver(req, res, next){
             }
         });
     } else {
-        console.log('kamne');
+        console.log('kamne driver');
         next();
     }   
 }

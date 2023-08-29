@@ -12,7 +12,7 @@ const router = express.Router({ mergeParams: true });
 // ROUTE: login (get)
 router.get('/', (req, res) => {
     // if not logged in take to login page
-    if (req.user == null) {
+    if (req.user === null) {
         const errors = [];
 
         return res.render('userLayout.ejs', {
@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
 // Launches when submit button is pressed on form
 router.post('/', async (req, res) => {
     // if not logged in take perform the post
-    if (req.user == null) {
+    if (req.user === null) {
         let results, errors = [];
         // get login info for handle (id, handle, password)
         results = await DB_auth_user.getLoginInfoByEmail(req.body.email);

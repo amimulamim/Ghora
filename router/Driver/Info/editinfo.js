@@ -10,7 +10,7 @@ const authUtils = require('../../../utils/auth-utils');
 router.get('/', async (req, res) => {
     // check if already logged in
     if (req.driver == null) {
-        res.redirect('/driver/login');
+       return res.redirect('/driver/login');
     }
     console.log('etai driver', req.driver);
     let driverInfo, errors = [];
