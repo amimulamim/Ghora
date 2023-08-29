@@ -76,7 +76,7 @@ async function processAllNearby(requestsNearby,mylocation){
 
     }
     allTrips.push(nearbyReq);
-    console.log("trip req obj =", nearbyReq);
+    //console.log("trip req obj =", nearbyReq);
     
 }
   // console.log("all trips now =", allTrips);

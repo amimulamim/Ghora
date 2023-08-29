@@ -25,7 +25,50 @@ async function makeTripRequests(tripRequest){
     
 }
 
+async function getTripRequestsOfUser(username){
+    const sql= `
+    SELECT 
+         ID, 
+         USERNAME,
+         TIME_REQUEST,
+         PLAT,
+         PLNG,
+         V_TYPE,
+        DLAT,
+        DLNG
 
+    FROM 
+        TRIP_REQUEST
+        WHERE TIME_REQUEST>=SYSTIMESTAMP-INTERVAL '30' MINUTE AND USERNAME=:username
+    `;
+    const binds={
+        username:username
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}  
+
+
+async function getTripRunningsOfUser(username){
+    const sql= `
+    SELECT 
+         TR_ID, 
+         D_ID, 
+         USERNAME,
+         TIME_REQUEST,
+         PLAT,
+         PLNG,
+        DLAT,
+        DLNG
+
+    FROM 
+        RUNNING_TRIP
+        WHERE  USERNAME=:username
+    `;
+    const binds={
+        username:username
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+} 
 
 
 
@@ -116,5 +159,8 @@ module.exports={
     getAllTripsByID,
     getAllInfoRequest,
     getPendingRequests,
-    cancelRequest
+    cancelRequest,
+    getTripRequestsOfUser,
+
+    getTripRunningsOfUser
 }

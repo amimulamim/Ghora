@@ -45,6 +45,8 @@ async function getAllTripsByPlate(plate){
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
+
+
 module.exports={
     getAllTripRequests,
     getAllTripsByPlate
