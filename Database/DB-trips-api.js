@@ -3,7 +3,7 @@ const database=require('./database');
 async function tripReqDetails(id){
     const sql= `
     SELECT 
-         ID, 
+         ID AS TR_ID, 
          USERNAME,
          TIME_REQUEST,
          PLAT,
@@ -41,6 +41,7 @@ async function runningTripDetails(tr_id){
     FROM 
         RUNNING_TRIP
         WHERE TR_ID=:id
+ORDER BY TIME_REQUEST DESC
     `;
     const binds={
         id:tr_id
@@ -80,7 +81,7 @@ async function createRunningTrip(tripRequest,did){
         dlat:tripRequest.DLAT,
         dlng:tripRequest.DLNG,
         time_request:tripRequest.TIME_REQUEST,
-        tr_id:tripRequest.ID
+        tr_id:tripRequest.TR_ID
 
         
     }
