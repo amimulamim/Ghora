@@ -111,11 +111,12 @@ router.post('/', async (req, res) => {
         let driverInfo = await DB_auth_driver.getLoginInfoByID(req.driver.ID);
         let vehicleInfo = await DB_vehicle_api.vehicleInfo(driverInfo[0].PLATE_NO);
        
-        if (driverInfo[0].PLATE_NO=== null) {
+        if (driverInfo[0].PLATE_NO== null) {
             
             let vehicle = {
                 plate: req.body.plate,
                 model: req.body.model,
+                plan: 1
                 // company: req.body.company,
                 // type: req.body.type
 

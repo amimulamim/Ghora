@@ -12,7 +12,7 @@ async function addNewVehicle(vehicle){
         model:vehicle.model,
         plan:vehicle.plan
     }
-    return (await database.execute(sql, binds, database.options)).rows;
+    return await database.execute(sql, binds, {});
 }
 async function deleteVehicle(plate){
     const sql = `
