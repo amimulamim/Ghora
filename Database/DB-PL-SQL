@@ -1,0 +1,38 @@
+const database=require('./database');
+
+
+
+//function to get all trip requests
+
+// async function getModelDetailsByPlate(plate){
+//     const sql=`
+//     DECLARE 
+//     formatted_name VARCHAR2(50);
+//     BEGIN
+
+
+    
+//     `
+// }
+
+
+
+async function makeTripRequests(tripRequest){
+    const sql= `
+    INSERT INTO
+    TRIP_REQUEST(USERNAME,PLAT,PLNG,DLAT,DLNG,V_TYPE)
+    VALUES(:username,:plat,:plng,:dlat,:dlng,:v_type)
+    `
+    const binds={
+        username:tripRequest.user.USERNAME,
+        plat:tripRequest.pickup.lat,
+        plng:tripRequest.pickup.lng,
+        dlat:tripRequest.dropoff.lat,
+        dlng:tripRequest.dropoff.lng,
+        v_type:tripRequest.v_type
+
+        
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+    
+}

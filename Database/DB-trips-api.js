@@ -24,6 +24,25 @@ async function tripReqDetails(id){
 
 }
 
+async function runningOfDriver(did){
+    const sql= `
+    SELECT 
+         TR_ID,
+         D_ID, 
+         USERNAME,
+         TIME_REQUEST,
+         PLAT,
+         PLNG,
+        DLAT,
+        DLNG
+        FROM RUNNING_TRIP
+        WHERE D_ID=:did`;
+        const binds={
+            did:did
+        }
+        return (await database.execute(sql,binds,database.options)).rows;
+}
+
 
 
 async function runningTripDetails(tr_id){
@@ -96,6 +115,7 @@ module.exports=
 {tripReqDetails,
     deleteReq,
     createRunningTrip,
-    runningTripDetails
+    runningTripDetails,
+    runningOfDriver
     
 };

@@ -23,6 +23,35 @@ async function getAllTripRequests(){
     }
     return (await database.execute(sql,binds,database.options)).rows;
 }
+
+
+
+async function getNearByTripRequestsOfDriver(did){
+    const sql= `
+    SELECT 
+         ID, 
+         USERNAME,
+         TIME_REQUEST,
+         PLAT,
+         PLNG,
+         V_TYPE,
+        DLAT,
+        DLNG
+
+    FROM 
+        TRIP_REQUEST
+        WHERE TIME_REQUEST>=SYSTIMESTAMP-INTERVAL '30' MINUTE AND V_TYPE=GETVTYPEBYID(:id)
+    `;
+    const binds={
+        id:did
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
+
+
+
+
+
 //function to get trip history of driver
 async function getAllTripsByPlate(plate){
     const sql= `
@@ -49,5 +78,6 @@ async function getAllTripsByPlate(plate){
 
 module.exports={
     getAllTripRequests,
-    getAllTripsByPlate
+    getAllTripsByPlate,
+    getNearByTripRequestsOfDriver
 }

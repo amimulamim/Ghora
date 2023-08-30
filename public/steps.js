@@ -19,8 +19,8 @@ function initMap() {
     });
     displayRoute(
         
-        {lat:parseFloat(localStorage.getItem('plt')),lng:parseFloat(localStorage.getItem('plg')) },
-     { lat:parseFloat(localStorage.getItem('dlt')),lng:parseFloat(localStorage.getItem('dlg')) },
+        {lat:parseFloat(localStorage.getItem('dplt')),lng:parseFloat(localStorage.getItem('dplg')) },
+     { lat:parseFloat(localStorage.getItem('ddlt')),lng:parseFloat(localStorage.getItem('ddlg')) },
         directionsService,
         directionsRenderer,
     );

@@ -84,7 +84,8 @@ router.post('/',async(req,res) =>{
     }
     console.log('tripreq ready=',tripRequest);
 
-    let madeRequest =await DB_trips.makeTripRequests(tripRequest);
+   // let madeRequest =
+    await DB_trips.makeTripRequests(tripRequest);
     let checkedRequest =await DB_trips.getAllInfoRequest(tripRequest);
 
     if(checkedRequest[0]===undefined){
@@ -96,6 +97,7 @@ router.post('/',async(req,res) =>{
     // redirect to home page
     //res.redirect(`/profile/${user.handle}/settings`);
     console.log("successful request for ride");
+    console.log("refreshing user");
     res.redirect('/user');
     
     }

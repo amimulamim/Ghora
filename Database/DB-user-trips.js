@@ -5,6 +5,8 @@ const database=require('./database');
 //function to get all trip requests
 
 
+
+
 async function makeTripRequests(tripRequest){
     const sql= `
     INSERT INTO

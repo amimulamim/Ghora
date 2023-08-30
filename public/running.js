@@ -142,8 +142,8 @@ function initMap() {
   
       this.directionsService.route(
         {
-          origin: {lat:parseFloat(localStorage.getItem('plt')),lng:parseFloat(localStorage.getItem('plg')) },
-          destination: { lat:parseFloat(localStorage.getItem('dlt')),lng:parseFloat(localStorage.getItem('dlg')) },
+          origin: {lat:parseFloat(localStorage.getItem('uplt')),lng:parseFloat(localStorage.getItem('uplg')) },
+          destination: { lat:parseFloat(localStorage.getItem('udlt')),lng:parseFloat(localStorage.getItem('udlg')) },
           travelMode: this.travelMode,
         },
         (response, status) => {

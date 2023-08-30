@@ -34,6 +34,17 @@
 </head>
 <body>
     <h1 style="margin-left: 50%;">Driver Requests</h1>
+    <% if (errors.length> 0) { %>
+        <div class="row mx-0 pb-0 alert alert-danger",style="margin-left:30%">
+            <ul>
+                <% for (e of errors) { %>
+                    <li>
+                        <%= e %>
+                    </li>
+                    <% } %>
+            </ul>
+        </div>
+        <% }else{%>
 
     <% if (allRequests.length == 0) { %>
         <p style="margin-left: 50%;">No requests available.</p>
@@ -50,6 +61,7 @@
                 <a href="accept/<%=nearbyReq.ID %>"><button>Accept</button></a>
             </div>
         <% }); %>
+    <% } %>
     <% } %>
 </body>
 </html>

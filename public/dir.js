@@ -275,22 +275,22 @@ function initMap() {
 
 
   
-  carbutton.addEventListener("click", () => {
+  carbutton.addEventListener("click", async () => {
     req_data.v_type='CAR';
     req_data.fare=carfare;
-    sendingResponse();
+    await sendingResponse();
   });
 
-  bikebutton.addEventListener("click", () => {
+  bikebutton.addEventListener("click",async () => {
     req_data.v_type='BIKE';
     req_data.fare=bikefare;
-    sendingResponse();
+    await sendingResponse();
   });
 
-  cngbutton.addEventListener("click", () => {
+  cngbutton.addEventListener("click",async () => {
     req_data.v_type='CNG';
     req_data.fare=cngfare;
-    sendingResponse();
+    await sendingResponse();
   });
 
 
