@@ -13,7 +13,8 @@ async function getAllTripRequests(){
          PLNG,
          V_TYPE,
         DLAT,
-        DLNG
+        DLNG,
+        FARE
 
     FROM 
         TRIP_REQUEST
@@ -36,7 +37,8 @@ async function getNearByTripRequestsOfDriver(did){
          PLNG,
          V_TYPE,
         DLAT,
-        DLNG
+        DLNG,
+        FARE
 
     FROM 
         TRIP_REQUEST

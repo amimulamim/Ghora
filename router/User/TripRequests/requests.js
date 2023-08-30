@@ -80,7 +80,8 @@ router.post('/',async(req,res) =>{
         pickup:reqpickup,
         dropoff:reqdropoff,
         user:req.user,
-        v_type:req.body.v_type
+        v_type:req.body.v_type,
+        fare:req.body.fare
     }
     console.log('tripreq ready=',tripRequest);
 

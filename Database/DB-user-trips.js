@@ -10,8 +10,8 @@ const database=require('./database');
 async function makeTripRequests(tripRequest){
     const sql= `
     INSERT INTO
-    TRIP_REQUEST(USERNAME,PLAT,PLNG,DLAT,DLNG,V_TYPE)
-    VALUES(:username,:plat,:plng,:dlat,:dlng,:v_type)
+    TRIP_REQUEST(USERNAME,PLAT,PLNG,DLAT,DLNG,V_TYPE,FARE)
+    VALUES(:username,:plat,:plng,:dlat,:dlng,:v_type,:fare)
     `
     const binds={
         username:tripRequest.user.USERNAME,
@@ -19,7 +19,8 @@ async function makeTripRequests(tripRequest){
         plng:tripRequest.pickup.lng,
         dlat:tripRequest.dropoff.lat,
         dlng:tripRequest.dropoff.lng,
-        v_type:tripRequest.v_type
+        v_type:tripRequest.v_type,
+        fare:tripRequest.fare
 
         
     }
@@ -37,7 +38,8 @@ async function getTripRequestsOfUser(username){
          PLNG,
          V_TYPE,
         DLAT,
-        DLNG
+        DLNG,
+        FARE
 
     FROM 
         TRIP_REQUEST
@@ -59,7 +61,8 @@ async function getTripUnnotifiedOfUser(username){
          PLAT,
          PLNG,
         DLAT,
-        DLNG
+        DLNG,
+        FARE
 
     FROM 
         RUNNING_TRIP
@@ -83,7 +86,8 @@ async function getTripRunningsOfUser(username){
          PLAT,
          PLNG,
         DLAT,
-        DLNG
+        DLNG,
+        FARE
 
     FROM 
         RUNNING_TRIP
@@ -107,7 +111,8 @@ async function getAllInfoRequest(tripRequest){
     PLNG,
     DLAT,
     DLNG,
-    V_TYPE
+    V_TYPE,
+    FARE
     FROM   TRIP_REQUEST
     WHERE
 
@@ -154,7 +159,8 @@ async function getPendingRequests(username){
          PLNG,
         DLAT,
         DLNG,
-        V_TYPE
+        V_TYPE,
+        FARE
 
     FROM 
         TRIP_REQUEST

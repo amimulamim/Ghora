@@ -9,7 +9,8 @@ async function tripReqDetails(id){
          PLAT,
          PLNG,
         DLAT,
-        DLNG
+        DLNG,
+        FARE
 
     FROM 
         TRIP_REQUEST
@@ -34,7 +35,8 @@ async function runningOfDriver(did){
          PLAT,
          PLNG,
         DLAT,
-        DLNG
+        DLNG,
+        FARE
         FROM RUNNING_TRIP
         WHERE D_ID=:did`;
         const binds={
@@ -54,7 +56,8 @@ async function runningOfUser(username){
          PLAT,
          PLNG,
         DLAT,
-        DLNG
+        DLNG,
+        FARE
         FROM RUNNING_TRIP
         WHERE USERNAME=:username
         `;
@@ -75,7 +78,8 @@ async function runningTripDetails(tr_id){
          PLAT,
          PLNG,
         DLAT,
-        DLNG
+        DLNG,
+        FARE
 
     FROM 
         RUNNING_TRIP
@@ -106,11 +110,28 @@ async function deleteReq(id){
 
 }
 
+async function deleteRunning(tid,did){
+
+    const sql= `
+    DELETE
+     FROM
+        RUNNING_TRIP
+        WHERE D_ID=:d_id AND TR_ID=:tr_id
+    `;
+    const binds={
+        d_id:did,
+        tr_id:tid
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+
+}
+
+
 async function createRunningTrip(tripRequest,did){
     const sql= `
     INSERT INTO
-    RUNNING_TRIP(TR_ID,D_ID,USERNAME,TIME_REQUEST,PLAT,PLNG,DLAT,DLNG)
-    VALUES(:tr_id,:d_id,:username,:time_request,:plat,:plng,:dlat,:dlng)
+    RUNNING_TRIP(TR_ID,D_ID,USERNAME,TIME_REQUEST,PLAT,PLNG,DLAT,DLNG,FARE)
+    VALUES(:tr_id,:d_id,:username,:time_request,:plat,:plng,:dlat,:dlng,:fare)
     `
     const binds={
         d_id:did,
@@ -120,7 +141,8 @@ async function createRunningTrip(tripRequest,did){
         dlat:tripRequest.DLAT,
         dlng:tripRequest.DLNG,
         time_request:tripRequest.TIME_REQUEST,
-        tr_id:tripRequest.TR_ID
+        tr_id:tripRequest.TR_ID,
+        fare:tripRequest.FARE
 
         
     }
@@ -128,6 +150,31 @@ async function createRunningTrip(tripRequest,did){
 
 
 }
+
+async function createTripHistory(trip){
+    const sql= `
+    INSERT INTO
+    TRIP_HISTORY(TR_ID,USERNAME,START_TIME,FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE)
+    VALUES(:tr_id,:username,:time_request,CURRENT_TIMESTAMP,getPlate(:d_id),:plat,:plng,:dlat,:dlng,:fare)
+    `;
+    const binds={
+        tr_id:trip.TR_ID,
+        username:trip.USERNAME,
+        d_id:trip.D_ID,
+        plat:trip.PLAT,
+        plng:trip.PLNG,
+        dlat:trip.DLAT,
+        dlng:trip.DLNG,
+        time_request:trip.TIME_REQUEST,
+        fare:trip.FARE
+    
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+
+
+}
+
+
 
 
 
@@ -137,5 +184,7 @@ module.exports=
     createRunningTrip,
     runningTripDetails,
     runningOfDriver ,
-    runningOfUser
+    runningOfUser,
+    deleteRunning,
+    createTripHistory
 };

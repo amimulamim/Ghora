@@ -24,6 +24,10 @@ router.get('/',async(req,res) =>{
     // if(curr.length>0){
     //     res.redirect('/user');
     // }
+    if(curr.length==0){
+        res.redirect('/user');
+    }
+    else{
     
     let pickupaddress;
     await address.getPlaceName(curr[0].PLAT, curr[0].PLNG)
@@ -72,7 +76,7 @@ router.get('/',async(req,res) =>{
         navbar:1
     });
 
-   
+}
     //console.log(req.body.data);
     
     
