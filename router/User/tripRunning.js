@@ -21,6 +21,9 @@ router.get('/',async(req,res) =>{
     
     const curr=await DB_trips.getTripRunningsOfUser(req.user.USERNAME);
     console.log("got cur trip",curr[0]);
+    // if(curr.length>0){
+    //     res.redirect('/user');
+    // }
     
     let pickupaddress;
     await address.getPlaceName(curr[0].PLAT, curr[0].PLNG)

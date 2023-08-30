@@ -44,6 +44,26 @@ async function runningOfDriver(did){
 }
 
 
+async function runningOfUser(username){
+    const sql= `
+    SELECT 
+         TR_ID,
+         D_ID, 
+         USERNAME,
+         TIME_REQUEST,
+         PLAT,
+         PLNG,
+        DLAT,
+        DLNG
+        FROM RUNNING_TRIP
+        WHERE USERNAME=:username
+        `;
+        const binds={
+            username:username
+        }
+        return (await database.execute(sql,binds,database.options)).rows;
+}
+
 
 async function runningTripDetails(tr_id){
     const sql= `
@@ -116,6 +136,6 @@ module.exports=
     deleteReq,
     createRunningTrip,
     runningTripDetails,
-    runningOfDriver
-    
+    runningOfDriver ,
+    runningOfUser
 };
