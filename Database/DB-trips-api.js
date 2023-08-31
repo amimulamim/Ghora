@@ -95,6 +95,7 @@ ORDER BY TIME_REQUEST DESC
 
 }
 
+
 async function deleteReq(id){
 
     const sql= `
@@ -154,8 +155,8 @@ async function createRunningTrip(tripRequest,did){
 async function createTripHistory(trip){
     const sql= `
     INSERT INTO
-    TRIP_HISTORY(TR_ID,USERNAME,START_TIME,FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE)
-    VALUES(:tr_id,:username,:time_request,CURRENT_TIMESTAMP,getPlate(:d_id),:plat,:plng,:dlat,:dlng,:fare)
+    TRIP_HISTORY(TR_ID,USERNAME,START_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE)
+    VALUES(:tr_id,:username,:time_request,getPlate(:d_id),:plat,:plng,:dlat,:dlng,:fare)
     `;
     const binds={
         tr_id:trip.TR_ID,
@@ -176,6 +177,65 @@ async function createTripHistory(trip){
 
 
 
+async function completedTripDetailsofDriver(did){
+    const sql= `
+    SELECT 
+    TR_ID,USERNAME,START_TIME,FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
+
+    FROM 
+        TRIP_HISTORY
+        WHERE PLATE_NO=getPlate(:d_id)
+    ORDER BY FINISH_TIME DESC
+    `;
+    const binds={
+        d_id:did
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+
+
+
+}
+
+async function completedTripDetailsofUser(username){
+    const sql= `
+    SELECT 
+    TR_ID,USERNAME,START_TIME,FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
+    FROM TRIP_HISTORY
+    WHERE USERNAME=:username
+    ORDER BY FINISH_TIME DESC
+    `;
+    const binds={
+        username:username
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+
+}
+
+async function unNotifiedCompletedTripofUser(username){
+    const sql= `
+    SELECT 
+    TR_ID,USERNAME,START_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
+    FROM TRIP_HISTORY
+    WHERE USERNAME=:username AND FINISH_TIME IS NULL
+    ORDER BY FINISH_TIME DESC
+    `;
+    const binds={
+        username:username
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+
+}
+
+async function makeNotifiedTripHistory(tr_id){
+    const sql= `
+    UPDATE TRIP_HISTORY SET FINISH_TIME=CURRENT_TIMESTAMP WHERE TR_ID=:tr_id
+    `;
+    const binds={
+        tr_id:tr_id
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
+
 
 
 module.exports=
@@ -186,5 +246,9 @@ module.exports=
     runningOfDriver ,
     runningOfUser,
     deleteRunning,
-    createTripHistory
+    createTripHistory,
+    completedTripDetailsofDriver,
+    completedTripDetailsofUser,
+    unNotifiedCompletedTripofUser,
+    makeNotifiedTripHistory
 };

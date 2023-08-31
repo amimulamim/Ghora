@@ -22,7 +22,7 @@ function authUser(req, res, next){
 
                 // if no such user or token doesn't match, do nothing
                if(results.length == 0){
-                    //console.log('auth: invalid cookie');
+                    console.log('auth: invalid cookie');
                 }/* else if(results[0].LOGIN_TOKEN != token){
                     //console.log('auth: invalid token');
                 } */else{

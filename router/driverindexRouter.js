@@ -16,6 +16,7 @@ const dvhomeRouter=require('./Driver/driverhome');
 const driverHistoryRouter=require('./Driver/TripRequests/triphistory');
 const runningRouter = require('./Driver/runningTrip');
 const completedRouter=require('./Driver/completed');
+//const finishedRouter = require('./Driver/finished');
 
 // ROUTE: home page
 //router.use(driverAuth);
@@ -39,6 +40,10 @@ router.use('/history',driverHistoryRouter);
 
 router.use('/accept',runningRouter);
 router.use('/completed',completedRouter);
+//router.use('/finished',finishedRouter);
+
+
+
 //router.use('/routepath',routepathRouter);
 // router.get('/accept/:id',async(req,res)=>{
 

@@ -82,7 +82,7 @@ router.get('/:tid', async (req, res) => {
        // console.log("tripreq checking ,d_id=",tripreq[0],' ',req.driver.ID);
               //          console.log('trip id=',tripreq[0].ID);
             const already=await DB_trips.runningTripDetails(trip_id);
-
+            if(already.length>0){
             console.log("already=",already);
             
         
@@ -96,7 +96,11 @@ router.get('/:tid', async (req, res) => {
                         navbar: 1
                     });
 
-
+                }
+                else{
+                    console.log("already not found");
+                    res.redirect('/driver/requests');
+                }
 
 
 

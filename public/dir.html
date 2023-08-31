@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Place Autocomplete and Directions</title>
+    <title>Continue to request a ride</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <link rel="stylesheet" type="text/css" href="./dirstyle.css" />
@@ -46,7 +46,7 @@
 
     <div id="map"></div>
     <div id="output" style="margin-bottom: 0%;margin-left: 40%;"></div>
-   <a href="/user"><button id="Car"  style="display: none; margin-left: 50%;">Car</button> </a>
+   <a href="/user?reload="+new Date().getTime()><button id="Car"  style="display: none; margin-left: 50%;">Car</button> </a>
     <button id="Bike" style="display: none; margin-left: 50%;">Bike</button>
     <button id="CNG" style="display: none;margin-left: 50%;">CNG</button>
     

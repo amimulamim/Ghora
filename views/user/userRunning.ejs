@@ -22,3 +22,25 @@
 </script>
 
 <iframe src="/running.html" style="height: 80vh"></iframe> 
+
+<script>
+    var timer;
+    async function check() {
+      const data =  await fetch('user/trip_status')
+      const text = await data.text();
+      //alert("got text from trip_status: " + text);
+        if(text.includes('completed') ) {
+            alert('Your Trip has been completed')
+            clearInterval(timer);
+            window.location = '/user/completed';
+        }
+        else if(text.includes('already done') ) {
+           // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
+            clearInterval(timer);
+            //window.location = '/user/running'
+        }
+
+    }
+    
+    timer = setInterval(check, 5000);
+</script>
