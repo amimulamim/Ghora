@@ -48,6 +48,13 @@
                     <p><strong>START TIME:</strong> <%= element.START_TIME %></p>
                     <p><strong>FINISH TIME:</strong> <%= element.FINISH_TIME %> </p>
                     <p><strong>FARE:</strong> <%= element.FARE.toFixed(2) %></p>
+                    <% if(element.PAYMENT.length>0) { %>
+                        <p><strong>TRANSACTION_NO:</strong> <%= element.PAYMENT[0].TRANSACTION_NO %></p>
+                    <% } %>
+                    <% if(element.REVIEW.length>0) { %>
+                        <p><strong>Review:</strong> <%= element.REVIEW[0].RATING %></p>
+                    <% } %>
+                         
                     
                 </div>
             </div>

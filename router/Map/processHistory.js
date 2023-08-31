@@ -55,10 +55,13 @@ async function processOneTrip(row){
         });  
 
         const pay_info=await payments.getPaymentDetails(row.TR_ID);
-        console.log('Payment Details:', pay_info);
+        console.log('Payment Details of ',row.TR_ID,' ', pay_info);
         const rating = await review.getRatingOfTrip(row.TR_ID);
+        console.log('payment rating length: ',pay_info.length, ' ',rating.length);
 
-        
+        if(pay_info.length>0) { 
+            console.log('transaction no: ',pay_info[0].TRANSACTION_NO );
+         } 
         const trip={
             TR_ID: row.TR_ID,
             USERNAME: row.USERNAME,
@@ -68,8 +71,8 @@ async function processOneTrip(row){
             FINISH_TIME: row.FINISH_TIME,
             PLATE_NO: row.PLATE_NO,
             FARE: row.FARE,
-            //TRANSACTION_NO:pay_info[0].TRANSACTION_NO,
-            //RATING:rating[0].RATING
+            PAYMENT:pay_info,
+            REVIEW:rating
             
             
         }

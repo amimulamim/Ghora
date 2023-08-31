@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
    triphistory=await DB_user_trips.CompletedTripofUser(req.user.USERNAME);
    
     const processAllHistory = await processing.processAllHistory(triphistory);
-
+    console.log("all history : " , processAllHistory)
    
     res.render('userLayout.ejs', {
         user: req.user,

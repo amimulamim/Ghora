@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Driver Trip History</title>
+    <title>DRIVER Trip History</title>
     <style>
         /* Add your CSS styling here */
         body {
@@ -33,7 +33,7 @@
         </style>
 </head>
 <body>
-    <h1 style="margin-left: 50%;">Driver Trip History</h1>
+    <h1 style="margin-left: 50%;">DRIVER Trip History</h1>
 
     <% if (history.length == 0) { %>
         <p style="margin-left: 50%;">No recent history available.</p>
@@ -41,12 +41,21 @@
         <% history.forEach(element => { %>
             <div class="request-container",style="margin-left:60%">
                 <div class="request-details",style="margin:left:60%">
-                    <p><strong>TRIP ID:</strong> <%= element.TID %></p>
-                    <p><strong>USERNAME:</strong> <%= element.RIDER %></p>
-                    <p><strong>START TIME:</strong> <%= element.ST %></p>
-                    <p><strong>FINISH TIME:</strong> <%= element.FT %> </p>
-                    <p><strong>RATING:</strong> <%= element.RATE %> </p>
-                    <p><strong>REVIEW:</strong> <%= element.DES %> </p>
+                    <p><strong>TRIP ID:</strong> <%= element.TR_ID %></p>
+                    <p><strong>VEHICLE:</strong> <%= element.PLATE_NO %></p>
+                    <p><strong>Pick Up:</strong> <%= element.PICK_UP %> </p>
+                    <p><strong>Drop Off:</strong> <%= element.DROP_OFF %> </p>
+                    <p><strong>START TIME:</strong> <%= element.START_TIME %></p>
+                    <p><strong>FINISH TIME:</strong> <%= element.FINISH_TIME %> </p>
+                    <p><strong>FARE:</strong> <%= element.FARE.toFixed(2) %></p>
+                    <% if(element.PAYMENT.length>0) { %>
+                        <p><strong>TRANSACTION_NO:</strong> <%= element.PAYMENT[0].TRANSACTION_NO %></p>
+                    <% } %>
+                    <% if(element.REVIEW.length>0) { %>
+                        <p><strong>Review:</strong> <%= element.REVIEW[0].RATING %></p>
+                    <% } %>
+                         
+                    
                 </div>
             </div>
         <% }); %>
