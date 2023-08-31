@@ -10,6 +10,13 @@
     <p style="margin-left:70%"><strong>email:</strong> <%= trip_info.DRIVER.EMAIL %></p>
     <p style="margin-left:70%"><strong>Phone:</strong> <%= trip_info.DRIVER.PHONE %></p>
     <p style="margin-left:70%"><strong>Vehicle:</strong> <%= trip_info.DRIVER.PLATE_NO %></p>
+    <% if (rating==0){%>
+    <p style="margin-left:70%"><strong>Average Rating:</strong>Unrated</p>
+<% } else {%>
+    <p style="margin-left:70%"><strong>Average Rating:</strong> <%= rating %></p>
+    <% } %>
+    <p style="margin-left:70%"><strong>Vehicle:</strong> <%= trip_info.DRIVER.PLATE_NO %></p>
+
     <p style="margin-left:70%"><strong>Vehicle details:</strong> <%= trip_info.V_DETAILS.V_DETAILS %></p>
 </div>
 

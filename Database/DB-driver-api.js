@@ -21,6 +21,28 @@ return (await database.execute(sql, binds, database.options)).rows;
 
 }
 
+async function getDriverByPlate(plate)
+{
+    const sql = `
+    SELECT 
+        ID,
+        EMAIL,
+        NAME,
+        MODEL_DETAILS(:plate) AS VNAME
+    FROM 
+        DRIVER
+    WHERE
+        PLATE_NO= :plate
+    `;
+const binds = {
+    plate: plate
+}
+return (await database.execute(sql, binds, database.options)).rows;
+
+}
+
+
+
 async function updateDriverLocation(dvloc){
     
     const sql = `
@@ -122,5 +144,6 @@ module.exports = {
     getAllInfo,
     getWalletId,
     updateDriverLocation,
-    getAllInfoByID
+    getAllInfoByID,
+    getDriverByPlate
 }

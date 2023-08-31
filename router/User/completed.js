@@ -2,9 +2,10 @@
 const express = require('express');
 //const DB_trips = require('../../../Database/DB-driver-trips');
 const { json } = require('body-parser');
-//const DB_driver = require('../../../Database/DB-driver-api');
+const DB_driver = require('../../Database/DB-driver-api');
 const DB_trips=require('../../Database/DB-trips-api');
 const payment=require('../../Database/DB-payment-api');
+const address = require('../Map/formattedAddress');
 
 
 //const processrequest = require('../../Map/processRequest');
@@ -54,12 +55,40 @@ router.get('/',async(req,res)=>
         console.log('user history: ' , completed[0]);
         const payment_details=await payment.getPaymentDetails(completed[0].TR_ID);
         console.log('payment details: ' , payment_details[0]);
+        let pickupaddress;
+    await address.getPlaceName(completed[0].PLAT, completed[0].PLNG)
+        .then(placeName => {
+           // console.log('drop Place:', placeName);
+            pickupaddress = placeName;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    let dropoffaddress;
+    await address.getPlaceName(completed[0].DLAT, completed[0].DLNG)
+        .then(placeName => {
+            //console.log('drop Place:', placeName);
+            dropoffaddress = placeName;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+        const dv=await DB_driver.getDriverByPlate(completed[0].PLATE_NO);
+        console.log('dv: ',dv[0]);
+
+
+
         res.render('userLayout.ejs',{
             title:'completed',
             page:['userCompleted'],
             trip_info:completed[0],
             user:req.user,
-            payment:payment_details
+            payment:payment_details,
+            pickup:pickupaddress,
+            dropoff:dropoffaddress,
+            driver_details:dv[0]
 
 
 

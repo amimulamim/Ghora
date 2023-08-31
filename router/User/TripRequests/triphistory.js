@@ -3,6 +3,7 @@ const express = require('express');
 const DB_user_trips = require('../../../Database/DB-user-trips');
 const { json } = require('body-parser');
 const DB_user = require('../../../Database/DB-user-api');
+const processing= require('../../Map/processHistory');
 
 
 const processrequest = require('../../Map/processRequest');
@@ -18,7 +19,7 @@ router.get('/', async (req, res) => {
    // triphistory=await DB_user_trips.getAllTripsByUsername(req.user.USERNAME);
    triphistory=await DB_user_trips.CompletedTripofUser(req.user.USERNAME);
    
-    console.log('kaha fas gaya',triphistory);
+    const processAllHistory = await processing.processAllHistory(triphistory);
 
    
     res.render('userLayout.ejs', {
@@ -26,7 +27,7 @@ router.get('/', async (req, res) => {
         page: ['userTripHistory'],
         title: req.user.NAME,
         info: userInfo,
-        history: triphistory,
+        history: processAllHistory,
         navbar: 1
     });
 });
