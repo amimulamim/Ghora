@@ -41,12 +41,11 @@
         <% history.forEach(element => { %>
             <div class="request-container",style="margin-left:60%">
                 <div class="request-details",style="margin:left:60%">
-                    <p><strong>TRIP ID:</strong> <%= element.TID %></p>
-                    <p><strong>VEHICLE:</strong> <%= element.VEH %></p>
-                    <p><strong>START TIME:</strong> <%= element.ST %></p>
-                    <p><strong>FINISH TIME:</strong> <%= element.FT %> </p>
-                    <p><strong>RATING:</strong> <%= element.RATE %> </p>
-                    <p><strong>REVIEW:</strong> <%= element.DES %> </p>
+                    <p><strong>TRIP ID:</strong> <%= element.TR_ID %></p>
+                    <p><strong>VEHICLE:</strong> <%= element.PLATE_NO %></p>
+                    <p><strong>START TIME:</strong> <%= element.START_TIME %></p>
+                    <p><strong>FINISH TIME:</strong> <%= element.FINISH_TIME %> </p>
+                    
                 </div>
             </div>
         <% }); %>

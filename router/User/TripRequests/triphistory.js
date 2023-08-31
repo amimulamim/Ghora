@@ -15,9 +15,10 @@ router.get('/', async (req, res) => {
     }
     let userInfo,triphistory=[];
     userInfo=await DB_user.getAllInfoByUsername(req.user.USERNAME);
-    triphistory=await DB_user_trips.getAllTripsByUsername(req.user.USERNAME);
-
-    console.log('kaha fas gaya');
+   // triphistory=await DB_user_trips.getAllTripsByUsername(req.user.USERNAME);
+   triphistory=await DB_user_trips.CompletedTripofUser(req.user.USERNAME);
+   
+    console.log('kaha fas gaya',triphistory);
 
    
     res.render('userLayout.ejs', {

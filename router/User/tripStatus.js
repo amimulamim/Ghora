@@ -21,7 +21,7 @@ router.get('/',async(req,res) =>{
     if(running.length==0 && comp.length>0){
 
         await DB_trips.makeNotifiedTripHistory(comp[0].TR_ID);
-        console.log('notified completion');
+        console.log('notified completion doneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',comp[0].TR_ID);
         res.send('completed');
     }
     else if(running.length>0 && comp.length==0){

@@ -217,7 +217,7 @@ async function unNotifiedCompletedTripofUser(username){
     TR_ID,USERNAME,START_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
     FROM TRIP_HISTORY
     WHERE USERNAME=:username AND FINISH_TIME IS NULL
-    ORDER BY FINISH_TIME DESC
+    ORDER BY START_TIME DESC
     `;
     const binds={
         username:username
