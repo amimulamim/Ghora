@@ -4,6 +4,7 @@ const DB_trips=require('../../../Database/DB-user-trips');
 const { json } = require('body-parser');
 const   mapCalc=require('../../Map/calculations');
 const address=require('../../Map/formattedAddress');
+const wallet=require('../../../Database/DB-wallet-api');
 //const DB_users=require('../../Database/DB-user-api');
 //creating routers
 const router=express.Router({mergeParams:true});
@@ -20,15 +21,27 @@ router.get('/',async(req,res) =>{
     res.redirect('/user');
     
 });
-router.get('/current',async(req,res) =>{
+router.get('/allowed',async(req,res) =>{
     if(req.user==null){
         console.log('get e user nai');
         return res.redirect('/user/login');
     }
     console.log('get e user ase');
+    if(req.user.WALLET_ID==null){
+        console.log('get e user  wallet nai');
+        res.send('You must have a wallet in your profile to make a request');
+    }
+    else{
+        console.log('get e user  wallet ase');
+        const wallet_info = await wallet.getWalletInfo(req.user.WALLET_ID);
+        console.log("wallet info: ",wallet_info);
+        const bal='BALANCE: '+wallet_info[0].BALANCE;
+        res.send(bal);
+        //res.status(202).json(wallet_info[0]);
+    }
 
     
-    console.log(req.body.data);
+    //console.log(req.body.data);
     
 });
 

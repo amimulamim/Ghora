@@ -16,7 +16,16 @@ async function getUsernameByEmail(email){
         email : email
     }
 
-    return (await database.execute(sql, binds, database.options)).rows;
+    //return (await database.execute(sql, binds, database.options)).rows;
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
 }
 
 // function to creat new user
@@ -38,7 +47,16 @@ async function createNewUser(user){
         username: user.username,
         is_admin:0
     }
-    return await database.execute(sql, binds, {});
+   // return await database.execute(sql, binds, {});
+   try {
+    const result = await database.execute(sql, binds, database.options);
+    const rows = result.rows;
+    console.log('pool er jonno database theke  : ',rows);
+    return rows;
+    // Process the result rows
+} catch (error) {
+    console.error('Error executing SQL while login info newa:', error);
+}
 }
 
 // return login info (id, handle, password) from handle
@@ -63,7 +81,16 @@ async function getLoginInfoByEmail(email){
         email: email
     }
 
-    return (await database.execute(sql, binds, database.options)).rows;
+   // return (await database.execute(sql, binds, database.options)).rows;
+   try {
+    const result = await database.execute(sql, binds, database.options);
+    const rows = result.rows;
+    console.log('pool er jonno database theke  : ',rows);
+    return rows;
+    // Process the result rows
+} catch (error) {
+    console.error('Error executing SQL while login info newa:', error);
+}
 }
 
 async function getLoginInfoByUsername(username){
@@ -89,7 +116,16 @@ async function getLoginInfoByUsername(username){
         username :username
     }
 
-    return (await database.execute(sql, binds, database.options)).rows;
+    //return (await database.execute(sql, binds, database.options)).rows;
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
 }
 async function getUsernameByPhone(phone){
     const sql = `
@@ -105,7 +141,16 @@ async function getUsernameByPhone(phone){
         phone : phone
     }
 
-    return (await database.execute(sql, binds, database.options)).rows;
+    //return (await database.execute(sql, binds, database.options)).rows;
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
 }
 async function changePassword(username,pass){
     const sql = `
@@ -120,7 +165,16 @@ async function changePassword(username,pass){
         pass:pass
     }
 
-    return await database.execute(sql, binds, {});
+    //return await database.execute(sql, binds, {});
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
 
 }
 

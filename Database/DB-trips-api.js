@@ -202,7 +202,7 @@ async function completedTripDetailsofUser(username){
     TR_ID,USERNAME,START_TIME,FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
     FROM TRIP_HISTORY
     WHERE USERNAME=:username
-    ORDER BY FINISH_TIME DESC
+    ORDER BY TR_ID DESC
     `;
     const binds={
         username:username

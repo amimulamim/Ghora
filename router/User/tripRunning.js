@@ -57,7 +57,7 @@ router.get('/',async(req,res) =>{
         console.log("did rating=", curr[0].D_ID);
         console.log("got rating=",rating);
         let ratingValue=0;
-        if(rating!=undefined || ratingValue.length>0){
+        if( rating.length>0){
             ratingValue=rating[0].AVG_RATING;
         }
         console.log('rating value=', ratingValue);

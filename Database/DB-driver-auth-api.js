@@ -16,7 +16,16 @@ async function getDriverIDByEmail(email){
         email : email
     }
 
-    return (await database.execute(sql, binds, database.options)).rows;
+   // return (await database.execute(sql, binds, database.options)).rows;
+   try {
+    const result = await database.execute(sql, binds, database.options);
+    const rows = result.rows;
+    console.log('pool er jonno database theke  : ',rows);
+    return rows;
+    // Process the result rows
+} catch (error) {
+    console.error('Error executing SQL while login info newa:', error);
+}
 }
 
 async function getDriverIDByPhone(phone){
@@ -32,7 +41,16 @@ async function getDriverIDByPhone(phone){
         phone : phone
     }
 
-    return (await database.execute(sql, binds, database.options)).rows;
+    //return (await database.execute(sql, binds, database.options)).rows;
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
 }
 
 // function to creat new user
@@ -52,7 +70,16 @@ async function createNewDriver(driver){
         phone: driver.phone,
         sex : driver.sex
     }
-    return await database.execute(sql, binds, {});
+    //return await database.execute(sql, binds, {});
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
 }
 
 // return login info (id, handle, password) from handle
@@ -77,7 +104,16 @@ async function getLoginInfoByEmail(email){
         email: email
     }
 
-    return (await database.execute(sql, binds, database.options)).rows;
+   // return (await database.execute(sql, binds, database.options)).rows;
+   try {
+    const result = await database.execute(sql, binds, database.options);
+    const rows = result.rows;
+    console.log('pool er jonno database theke  : ',rows);
+    return rows;
+    // Process the result rows
+} catch (error) {
+    console.error('Error executing SQL while login info newa:', error);
+}
 }
 
 async function getLoginInfoByID(id){
@@ -102,7 +138,21 @@ async function getLoginInfoByID(id){
         id: id
     }
 
-    return (await database.execute(sql, binds, database.options)).rows;
+   // return (await database.execute(sql, binds, database.options)).rows;
+
+   try {
+    const result = await database.execute(sql, binds, database.options);
+    const rows = result.rows;
+    console.log('pool er jonno database theke  : ',rows);
+    return rows;
+    // Process the result rows
+} catch (error) {
+    console.error('Error executing SQL while login info newa:', error);
+}
+
+
+
+
 }
 
 async function changePassword(id,pass){
@@ -118,7 +168,16 @@ async function changePassword(id,pass){
         pass:pass
     }
 
-    return await database.execute(sql, binds, {});
+   // return await database.execute(sql, binds, {});
+   try {
+    const result = await database.execute(sql, binds, database.options);
+    const rows = result.rows;
+    console.log('pool er jonno database theke  : ',rows);
+    return rows;
+    // Process the result rows
+} catch (error) {
+    console.error('Error executing SQL while login info newa:', error);
+}
 
 }
 

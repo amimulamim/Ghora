@@ -44,6 +44,9 @@ router.get('/', async (req, res) => {
     const mylocation = { lat: req.driver.LAT, lng: req.driver.LNG };
     console.log('req near=',requestsNearby);
      allTrips=await processrequest.processAllNearby(requestsNearby,mylocation);
+     if(req.driver.WALLET_ID==null) {
+        errors.push('Please add a WALLET_ID to receive payments');
+     }
 
     // const json=await requestsNearby.json();
    // console.log("trip infos=");
