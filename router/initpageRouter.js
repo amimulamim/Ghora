@@ -8,6 +8,7 @@ const driverAuth=require('../middlewares/authmid').authDriver;
 const userAuth=require('../middlewares/authmid').authUser;
 const driverRouter = require('./driverindexRouter');
 const usersRouter=require('./userindexRouter');
+const hRouter=require('./hello');
 // setting up sub-routers
 router.use(userAuth);
 router.use(driverAuth);
@@ -20,6 +21,7 @@ router.get('/', async (req, res) => {
 //setting up sub routers
 
 router.use('/driver',driverRouter);
-router.use('/user',usersRouter)
+router.use('/user',usersRouter);
+router.use('/hello',hRouter);
 
 module.exports = router;

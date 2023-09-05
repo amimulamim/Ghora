@@ -30,6 +30,7 @@ app.use(morgan('tiny'));
 
 // setting ejs to be view engine
 app.set('view engine', 'ejs');
+app.set('views',path.join(__dirname,'/views'));
 
 // allow public directory
 //app.use(express.static('public'))

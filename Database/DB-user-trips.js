@@ -243,7 +243,6 @@ module.exports={
     getPendingRequests,
     cancelRequest,
     getTripRequestsOfUser,
-    getAllTripsByUsername,
 
     getTripRunningsOfUser,
     getTripUnnotifiedOfUser,Notified,

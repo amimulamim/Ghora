@@ -93,7 +93,7 @@ async function editVehiclePlate(id, plate) {
         id: id,
         plate: plate
     }
-    return (await database.execute(sql, binds, database.options)).rows;
+    return await database.execute(sql, binds, {});
 }
 
 async function editWallet(driver) {
