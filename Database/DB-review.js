@@ -100,6 +100,101 @@ async function getRatingOfTrip(tr_id){
     
     }
 
+    async function getReviewsOfDriver(d_id) {
+
+        const sql = `
+        SELECT R_ID,RATING,DESCRIPTION,USERNAME,D_ID,D_NAME
+FROM
+(SELECT R.ID AS R_ID,R.RATING AS RATING,R.DESCRIPTION AS DESCRIPTION,TR.USERNAME AS USERNAME ,TR.PLATE_NO AS PLATE_NO,D.ID AS D_ID,D.NAME AS D_NAME
+ FROM REVIEW R NATURAL JOIN TRIP_HISTORY TR 
+JOIN DRIVER D
+ON D.PLATE_NO=TR.PLATE_NO)
+WHERE D_ID=:did
+ORDER BY R_ID DESC
+    `;
+    const binds={
+        did:d_id
+    }
+
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        console.log('db func hote: ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
+
+
+    }
+
+async function getReviewCountsofDriver(d_id){
+    const sql=`SELECT
+    RATING,
+    COUNT(*) AS RATING_COUNT
+FROM
+    (SELECT R.ID AS R_ID, R.RATING AS RATING, R.DESCRIPTION AS DESCRIPTION, TR.USERNAME AS USERNAME, TR.PLATE_NO AS PLATE_NO, D.ID AS D_ID, D.NAME AS D_NAME
+    FROM REVIEW R
+    JOIN TRIP_HISTORY TR ON R.TR_ID = TR.TR_ID
+    JOIN DRIVER D ON D.PLATE_NO = TR.PLATE_NO
+    WHERE D.ID = :did) 
+GROUP BY
+    RATING
+ORDER BY RATING`;
+
+const binds={
+    did:d_id
+}
+
+try {
+    const result = await database.execute(sql, binds, database.options);
+    const rows = result.rows;
+    console.log('db func hote: ',rows);
+    return rows;
+    // Process the result rows
+} catch (error) {
+    console.error('Error executing SQL:', error);
+}
+
+
+}
+
+async function getMaximumRatingofDriver(d_id) {
+    const sql =`
+    SELECT MAX(R.RATING) AS MAX_RATING 
+    FROM
+    REVIEW R
+        JOIN TRIP_HISTORY TR ON R.TR_ID = TR.TR_ID
+        JOIN DRIVER D ON D.PLATE_NO = TR.PLATE_NO
+        WHERE D.ID = :did`;
+
+
+        const binds={
+            did:d_id
+        }
+        
+        try {
+            const result = await database.execute(sql, binds, database.options);
+            const rows = result.rows;
+            console.log('db func hote: ',rows);
+            return rows;
+            // Process the result rows
+        } catch (error) {
+            console.error('Error executing SQL:', error);
+        }
+
+    
+    }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -107,5 +202,8 @@ module.exports = {
     
     makeReview,
     getAverageRating,
-    getRatingOfTrip
+    getRatingOfTrip,
+    getReviewsOfDriver,
+    getReviewCountsofDriver,
+    getMaximumRatingofDriver
 };

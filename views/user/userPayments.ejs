@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            margin-left: 20%;
+            height: 90%;
+            overflow-y: auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #5b1350;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dc71dc;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+   <% if(payments.length>0){ %>
+    <h1 style="margin-left: 40%;">FARE PAID:</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Transaction No</th>
+                <th>Trip_id</th>
+                <th>Driver Name</th>
+                <th>Amount</th>
+                <th>Payment Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% payments.forEach(function(payment) { %>
+                <tr>
+                    <td><%= payment.TRANSACTION_NO %></td>
+                    <td><%= payment.TR_ID %></td>
+                    <td><%= payment.DRIVER_NAME %></td>
+                    <td><%= payment.AMOUNT %></td>
+                    <td><%= payment.PAYMENT_TIME %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <% } else {%>
+        <h1 style="margin-left: 40%;">You have not received any payment</h1>
+        <% } %>
+</body>
+</html>

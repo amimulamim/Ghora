@@ -1,7 +1,10 @@
-function initMap() {
+async function initMap() {
+    const dirdata=await getPoints();   
+    console.log("dirdata  =", dirdata);
+
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 4,
-        center: { lat: 23.726, lng: 90.38 }, // Dhaka.
+        center: { lat: dirdata.PLAT, lng: dirdata.PLNG }, // Dhaka.
     });
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer({
@@ -19,18 +22,27 @@ function initMap() {
     });
     displayRoute(
         
-        {lat:parseFloat(localStorage.getItem('dplt')),lng:parseFloat(localStorage.getItem('dplg')) },
-     { lat:parseFloat(localStorage.getItem('ddlt')),lng:parseFloat(localStorage.getItem('ddlg')) },
+        
+        dirdata,
         directionsService,
         directionsRenderer,
     );
 }
+async function getPoints(){
+    const data = await fetch('driver/accept/location');
+      const locbe=await data.json();
+      console.log('got location at front end steps is: ',locbe);
+    return locbe;
 
-function displayRoute(origin, destination, service, display) {
+
+}
+
+function displayRoute(dirdata, service, display) {
     service
         .route({
-            origin: origin,
-            destination: destination,
+            origin:  {lat:dirdata.PLAT,lng:dirdata.PLNG},
+    
+            destination:  { lat:dirdata.DLAT,lng:dirdata.DLNG },
             // waypoints: [
             //     { location: "Adelaide, SA" },
             //     { location: "Broken Hill, NSW" },

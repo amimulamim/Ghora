@@ -65,7 +65,7 @@ async function getAllTripsByPlate(plate){
          R.RATING RATE,
          R.DESCRIPTION DES
     FROM 
-        TRIP_HISTORY T JOIN REVIEW R
+        TRIP_HISTORY T LEFT JOIN REVIEW R
         ON(T.REVIEW_ID=R.ID)
     WHERE
         T.PLATE_NO=:plate

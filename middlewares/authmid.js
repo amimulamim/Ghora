@@ -18,10 +18,11 @@ function authUser(req, res, next){
             } else {
                 // get user prompt (id, handle, message count) from id
                 const decodedUsername = decoded.superUsername;
-                let results = await DB_auth_user.getLoginInfoByUsername(decodedUsername);
+                let results = [];
+                results = await DB_auth_user.getLoginInfoByUsername(decodedUsername);
 
                 // if no such user or token doesn't match, do nothing
-               if(results.length == 0){
+               if( results==undefined || results.length==0 ){
                     console.log('auth: invalid cookie');
                 }/* else if(results[0].LOGIN_TOKEN != token){
                     //console.log('auth: invalid token');
@@ -63,10 +64,12 @@ function authDriver(req, res, next){
             } else {
                 // get user prompt (id, handle, message count) from id
                 const decodedID = decoded.superID;
-                let results = await DB_auth_driver.getLoginInfoByID(decodedID);
+                let results=[];
+                
+                 results = await DB_auth_driver.getLoginInfoByID(decodedID);
                // console.log(decodedEmail);
                 // if no such user or token doesn't match, do nothing
-               if(results.length == 0){
+               if( results==undefined || results.length==0){
                     console.log('auth: invalid cookie');
                 }/* else if(results[0].LOGIN_TOKEN != token){
                     //console.log('auth: invalid token');

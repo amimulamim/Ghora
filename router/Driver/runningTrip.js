@@ -11,6 +11,40 @@ const DB_driver=require('../../Database/DB-driver-api');
 //creating routers
 const router = express.Router({ mergeParams: true });
 
+router.get('/location', async (req, res) => {
+
+    if(req.driver==null){
+        console.log('get e user nai');
+        return res.redirect('/driver/login');
+    }
+    console.log('get e user ase');
+   // const reqexist=await DB_trips.getTripRequestsOfUser(req.user.USERNAME);
+    
+    const curr=await DB_trips.runningOfDriver(req.driver.ID);
+    console.log("got cur trip",curr[0]);
+    // if(curr.length>0){
+    //     res.redirect('/user');
+    // }
+    if(curr.length==0){
+        res.redirect('/driver');
+    }
+    else{
+    const loc={
+        PLAT:curr[0].PLAT,
+            PLNG:curr[0].PLNG,
+            DLAT:curr[0].DLAT,
+            DLNG:curr[0].DLNG
+    };
+    const str='PLAT:'+loc.PLAT+',PLNG:'+loc.PLNG+',DLAT:'+loc.DLAT+',DLNG:'+loc.DLNG;
+    console.log('sending location  from dv ac to frontend',str);
+    res.json(loc);
+//res.send(str);
+    
+}
+
+
+});
+
 
 
 router.get('/:tid', async (req, res) => {
@@ -117,36 +151,7 @@ router.get('/:tid', async (req, res) => {
 
 
 
-//     const requestsNearby = await DB_trips.getAllTripRequests();
-//     const mylocation = { lat: req.driver.LAT, lng: req.driver.LNG };
-//     console.log('req near=',requestsNearby);
-//     const allTrips=await processrequest.processAllNearby(requestsNearby,mylocation);
 
-
-// console.log("all trips  ,length=", allTrips,allTrips.length);
-// //console.log("trip req all =", tripsall);
-//     //});
-
-
-
-
-
-
-//     let driverInfo = [];
-//     console.log("here driverReq e paisi " + req.driver.EMAIL);
-
-//     driverInfo = await DB_driver.getAllInfo(req.driver.EMAIL);
-//      console.log(driverInfo[0].NAME);
-//     console.log("driver req er phone=", driverInfo[0].PHONE);
-//    // console.log("checking user ",allTrips[0].USERNAME);
-//     res.render('driverLayout.ejs', {
-//         driver: req.driver,
-//         page: ['driverRequest'],
-//         title: req.driver.NAME,
-//         info: driverInfo,
-//         allRequests: allTrips,
-//         navbar: 1
-//     });
 });
 
 

@@ -133,17 +133,24 @@ function initMap() {
     //     this.route();
     //   });
     // }
-    route() {
+    async route() {
     //   if (!this.originPlaceId || !this.destinationPlaceId) {
     //     return;
     //   }
   
       const me = this;
+
+      const data = await fetch('user/running/location');
+      const locbe=await data.json();
+      console.log('got location at front end running is: ',locbe);
+
+
+
   
       this.directionsService.route(
         {
-          origin: {lat:parseFloat(localStorage.getItem('uplt')),lng:parseFloat(localStorage.getItem('uplg')) },
-          destination: { lat:parseFloat(localStorage.getItem('udlt')),lng:parseFloat(localStorage.getItem('udlg')) },
+          origin: {lat:locbe.PLAT,lng:locbe.PLNG },
+          destination: { lat:locbe.DLAT,lng: locbe.DLNG },
           travelMode: this.travelMode,
         },
         (response, status) => {

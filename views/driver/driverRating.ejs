@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Reviews</title>
+    <style>
+        /* Define CSS styles for the stars */
+        .card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px;
+            margin-left: 20%;
+            width: 60%;
+            background-color: transparent;
+        }
+
+        .star-rating {
+            font-size: 24px;
+        }
+
+        .star {
+            display: inline-block;
+            color: orange;
+            margin-right: 5px;
+        }
+
+        .ratings{
+    margin-right:10px;
+}
+
+.ratings i{
+    
+    color:#0a0202;
+    font-size:32px;
+}
+
+.rating-color{
+    color:#fbc634 !important;
+}
+
+.bar {
+            height: 20px;
+            background-color: blue;
+            align-content: left;
+        }
+    </style>
+</head>
+
+<body>
+    <% if (allreviews.length > 0) { %>
+    <% if(max_rating>0){ %>
+    <% counts.forEach(review=> { %>
+        <div class="card" >
+            <div class="d-flex justify-content-between align-items-center">
+                
+                    <% let leng=150/max_rating; %>  
+                        <div class="ratings" style="margin-left: 20%;">
+                            <% for (let i=1; i <=5; i++) { %>
+                                <% if(i<=review.RATING) { %>
+                                    <i class="fa fa-star rating-color"></i>
+                                    <% } else { %>
+                                        <i class="fa fa-star "></i>
+                                        <% } %>
+                                            <% } %>
+                        </div>
+                        
+                        <div class="bar" style="width: <%= review.RATING_COUNT *leng  %>px; "></div>
+                        <div class="count"><%= review.RATING_COUNT %></div>
+                        
+                        
+
+
+
+            </div>
+            
+            
+            
+        </div>
+        <% }) %>
+        <% } %>
+
+    <% allreviews.forEach(function(review) { %>
+        <div class="card" >
+            
+            <h3>
+                <%= review.USERNAME %>
+            </h3>
+            <div class="d-flex justify-content-between align-items-center">
+                <% if (review.RATING===0) { %>
+                    <h3 style="margin-left: 60%;">Rating: Unrated</h3>
+                    <% } else { %>
+                        <div class="ratings" style="margin-left: 50%;">
+                            <% for (let i=1; i <=5; i++) { %>
+                                <% if(i<=review.RATING) { %>
+                                    <i class="fa fa-star rating-color"></i>
+                                    <% } else { %>
+                                        <i class="fa fa-star "></i>
+                                        <% } %>
+                                            <% } %>
+                        </div>
+                        <% } %>
+
+
+
+
+            </div>
+            <h3>DESCRIPTION:</h3>
+            <h1>
+                <%= review.DESCRIPTION %>
+            </h1>
+            
+        </div>
+        <% }) %>
+        <% } else{ %>
+            <h3 style="margin-left: 40%;">No review so far</h3>
+            <% } %>
+
+</body>
+
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Reviews</title>
+    <style>
+        /* Define CSS styles for the stars */
+        .star-rating {
+            font-size: 24px;
+        }
+        .star {
+            display: inline-block;
+            color: orange;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reviews</h1>
+    <% allreviews.forEach(review=> { %>
+        <div class="review" style="margin-left: 50%;">
+            <h3><%= review.USERNAME %></h3>
+            <div class="star-rating">
+                <% for (let i = 1; i <= 5; i++) { %>
+                    <span class="star"><%= i <= review.RATING ? '☆' : '☆☆☆☆☆'.slice(i) %></span>
+                <% } %>
+            </div>
+            <p><%= review.DESCRIPTION %></p>
+        </div>
+    <% }) %>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Reviews</title>
+    <style>
+        /* Define CSS styles for the stars (same as previous example) */
+        .star-rating {
+            font-size: 24px;
+        }
+        .star {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+            background-color: transparent;
+            background-image: url('star.png'); /* Replace 'star.png' with your star image URL */
+            background-size: cover;
+        }
+        .filled-star {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="margin-left: 60%;">Reviews</h1>
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>Reviews</title>
+    <style>
+        /* Define CSS styles for the stars (same as previous example) */
+        .star-rating {
+            font-size: 24px;
+        }
+        .star {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+            background-color: transparent;
+            background-image: url('star.png'); /* Replace 'star.png' with your star image URL */
+            background-size: cover;
+        }
+        .filled-star {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reviews</h1>
+    <% allreviews.forEach(review=> { %>
+        <div class="review" style="margin-left: 60%;">
+            <h3><%= review.USERNAME %></h3>
+            <div class="star-rating">
+                <% for (let i = 1; i <= 5; i++) { %>
+                    <div class="star <%= i <= review.RATING ? 'filled-star' : '' %>"></div>
+                <% } %>
+            </div>
+            <p><%= review.DESCRIPTION %></p>
+        </div>
+    <% }) %>
+</body>
+</html>
+
+    
+</body>
+</html> -->

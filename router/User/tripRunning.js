@@ -11,6 +11,39 @@ const DB_driver=require('../../Database/DB-driver-api');
 const DB_model=require('../../Database/DB-model-api');
 const DB_reviews=require('../../Database/DB-review');
 
+router.get('/location', async (req, res) => {
+
+    if(req.user==null){
+        console.log('get e user nai');
+        return res.redirect('/user/login');
+    }
+    console.log('get e user ase');
+   // const reqexist=await DB_trips.getTripRequestsOfUser(req.user.USERNAME);
+    
+    const curr=await DB_trips.getTripRunningsOfUser(req.user.USERNAME);
+    console.log("got cur trip",curr[0]);
+    // if(curr.length>0){
+    //     res.redirect('/user');
+    // }
+    if(curr.length==0){
+        res.redirect('/user');
+    }
+    else{
+    const loc={
+        PLAT:curr[0].PLAT,
+            PLNG:curr[0].PLNG,
+            DLAT:curr[0].DLAT,
+            DLNG:curr[0].DLNG
+    };
+    const str='PLAT:'+loc.PLAT+',PLNG:'+loc.PLNG+',DLAT:'+loc.DLAT+',DLNG:'+loc.DLNG;
+    console.log('sending location to frontend',str);
+    res.json(loc);
+//res.send(str);
+    
+}
+
+
+});
 
 router.get('/',async(req,res) =>{
     if(req.user==null){
@@ -70,7 +103,7 @@ router.get('/',async(req,res) =>{
             PLAT:curr[0].PLAT,
             PLNG:curr[0].PLNG,
             DLAT:curr[0].DLAT,
-            DLONG:curr[0].DLNG,
+            DLNG:curr[0].DLNG,
             DRIVER:drv[0],
             V_DETAILS:V_DETAILS[0],
             TIME_REQUEST:curr[0].TIME_REQUEST,

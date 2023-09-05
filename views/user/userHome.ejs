@@ -1,62 +1,77 @@
-
-
 <h3 style="margin-left: 50%;">
 
-Welcome   <%= info[0].USERNAME %>
+    Welcome <%= info[0].USERNAME %>
 </h3>
 
 <% if(pending.ID==0){%>
     <iframe src="dir.html" style="height: 80vh"></iframe>
-<%  } %>
+    <% } %>
 
-<% if(pending.ID!=0){%>
-    <div class="request-container",style="margin-left:60%">
-        <div class="request-details",style="margin-left:60%">
-            <h3 style="margin-left: 40%;"> YOU ALREADY HAVE A PENDING REQUEST</h3>
-        </div>
-        
-        <div class="request-details",style="margin:left:60%">
-            
-            <p style="margin-left: 40%;"><strong>Pick-up:</strong> <%= pending.PICK_UP %></p>
-            <p style="margin-left: 40%;"><strong>Drop-off:</strong> <%= pending.DROP_OFF %></p>
-            <p style="margin-left: 40%;"><strong>Vehicle Type:</strong> <%= pending.V_TYPE %></p>
-        </div> 
+        <% if(pending.ID!=0){%>
+            <div class="request-container" ,style="margin-left:60%">
+                <div class="request-details" ,style="margin-left:60%">
+                    <h3 style="margin-left: 40%;"> YOU ALREADY HAVE A PENDING REQUEST</h3>
+                </div>
 
+                <div class="request-details" ,style="margin:left:60%">
 
-        <!-- <button class="cancel-button" name="Cancel" style="margin-left: 60%;">Cancel Request</button>  -->
-        <form  action="/user/cancel" method="POST" >
-            
-            <input type="submit" value="Cancel" class="btn  btn-secondary" style="margin-left: 60%;">
-            
-        </form>
-    </div>
+                    <p style="margin-left: 40%;"><strong>Pick-up:</strong>
+                        <%= pending.PICK_UP %>
+                    </p>
+                    <p style="margin-left: 40%;"><strong>Drop-off:</strong>
+                        <%= pending.DROP_OFF %>
+                    </p>
+                    <p style="margin-left: 40%;"><strong>Vehicle Type:</strong>
+                        <%= pending.V_TYPE %>
+                    </p>
+                </div>
 
 
-    
+                <!-- <button class="cancel-button" name="Cancel" style="margin-left: 60%;">Cancel Request</button>  -->
+                <form action="/user/cancel" method="POST">
+
+                    <input type="submit" value="Cancel" class="btn  btn-secondary" style="margin-left: 60%;">
+
+                </form>
+            </div>
 
 
-    
-<%  } %>
 
 
-<script>
-    var timer;
-    async function check() {
-      const data =  await fetch('user/request_status')
-      const text = await data.text();
-      //alert("got text: " + text);
-        if(text.includes('accepted') ) {
-            alert('Your Ride Request Has Been Accepted')
-            clearInterval(timer);
-            window.location = '/user/running'
-        }
-        else if(text.includes('already done') ) {
-           // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
-            clearInterval(timer);
-            //window.location = '/user/running'
-        }
 
-    }
-    
-    timer = setInterval(check, 5000);
-</script>
+
+            <% } %>
+
+
+                <script>
+                    var timer, timer2;
+                    async function check2() {
+                        const stat=await fetch('/user/pending_status');
+                        const info=await stat.text();
+                        //alert(info);
+                        if (localStorage.getItem('reloadUser') === 'true') {
+                           localStorage.removeItem('reloadUser');
+                        //if(info.includes('already')){
+                            location.reload()
+                            clearInterval(timer2);
+                        }
+                    }
+                    async function check() {
+                        const data = await fetch('user/request_status')
+                        const text = await data.text();
+                        //alert("got text: " + text);
+                        if (text.includes('accepted')) {
+                            alert('Your Ride Request Has Been Accepted')
+                            clearInterval(timer);
+                            window.location = '/user/running'
+                        }
+                        else if (text.includes('already done')) {
+                            // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
+                            clearInterval(timer);
+                            //window.location = '/user/running'
+                        }
+
+                    }
+                    timer2 = setInterval(check2, 2000);
+                    timer = setInterval(check, 5000);
+                </script>

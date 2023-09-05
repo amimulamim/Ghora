@@ -16,6 +16,9 @@ const dvhomeRouter=require('./Driver/driverhome');
 const driverHistoryRouter=require('./Driver/TripRequests/triphistory');
 const runningRouter = require('./Driver/runningTrip');
 const completedRouter=require('./Driver/completed');
+const alllocationsRouter=require('./Driver/alllocations.js');
+const reviewRouter=require('./Driver/reviews');
+const paymentsRouter=require('./Driver/payments.js');
 //const finishedRouter = require('./Driver/finished');
 
 // ROUTE: home page
@@ -38,8 +41,12 @@ router.use('/wallet',driverWalletRouter);
 router.use('/logout',logoutRouter);
 router.use('/history',driverHistoryRouter);
 
+router.use('/location',alllocationsRouter);
 router.use('/accept',runningRouter);
 router.use('/completed',completedRouter);
+router.use('/reviews',reviewRouter);
+router.use('/payments',paymentsRouter);
+//route.use('/payments',paymentsRouter);
 //router.use('/finished',finishedRouter);
 
 

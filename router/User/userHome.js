@@ -10,6 +10,24 @@ const Map=require('../Map/processRequest');
 const router = express.Router({mergeParams : true});
 
 //HOME page
+
+router.get('/already',async (req, res) => {
+    if( req.user == null ){
+        console.log('user nai');
+        return res.redirect('/user/login');
+    }
+    let pendingreq=[];
+    pendingreq=await DB_trips.getPendingRequests(req.user.USERNAME);
+    console.log("got pending to send to thread,length= ",pendingreq," ",pendingreq.length);
+    if(pendingreq.length > 0){
+        res.send('already');
+    }
+    else{
+        res.send('not');
+    }
+
+});
+
 router.get('/', async (req, res) =>{
     if( req.user == null ){
         console.log('user nai');
@@ -57,13 +75,16 @@ router.get('/', async (req, res) =>{
         
     console.log("got pendingRequest = ",pendingRequest.PICK_UP,pendingRequest.DROP_OFF,pendingRequest.V_TYPE);
     console.log('pendinf id= ',pendingRequest.ID);
+    const oldPending=await DB_trips.getOldPendingRequests(req.user.USERNAME);
+    await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
     res.render('userLayout.ejs', {
         title:req.user.NAME,
         page:['userHome'],
         user:req.user,
         info:userInfo,
         pending:pendingRequest,
-        running:runningtrip
+        running:runningtrip,
+        oldPending:oldPending
 
     });
 }

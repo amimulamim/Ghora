@@ -18,6 +18,8 @@ const cancelRouter=require('./User/TripRequests/cancel');
 const tripStatusRouter=require('./User/tripStatus');
 const completedRouter = require('./User/completed');
 const reviewRouter = require('./User/review');
+const pendingStatusRouter = require('./User/TripRequests/pendingstatus');
+const paymentsRouter = require('./User/payments.js');
 // ROUTE: home page
 //router.use(userAuth);
 router.get('/',require('./User/userHome'));
@@ -42,6 +44,8 @@ router.use('/cancel',cancelRouter);
 router.use('/user/trip_status',tripStatusRouter);
 router.use('/completed',completedRouter);
 router.use('/review',reviewRouter);
+router.use('/pending_status', pendingStatusRouter);
+router.use('/payments', paymentsRouter);
 // async (req,res) => {
 //     //
 //     res.send('accepted')

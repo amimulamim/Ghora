@@ -173,6 +173,58 @@ async function getPendingRequests(username){
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
+async function getOldPendingRequests(username){
+    const sql= `
+    SELECT 
+         ID, 
+         USERNAME,
+         TIME_REQUEST,
+         PLAT,
+         PLNG,
+        DLAT,
+        DLNG,
+        V_TYPE,
+        FARE
+
+    FROM 
+        TRIP_REQUEST
+        WHERE USERNAME=:username 
+        AND TIME_REQUEST<SYSTIMESTAMP-INTERVAL '30' MINUTE
+    `;
+    const binds={
+        username:username,
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
+
+
+async function deleteOldPendingRequests(username){
+    const sql= `
+    DELETE 
+
+    FROM 
+        TRIP_REQUEST
+        WHERE USERNAME=:username 
+        AND TIME_REQUEST<SYSTIMESTAMP-INTERVAL '30' MINUTE
+    `;
+    const binds={
+        username:username,
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 async function cancelRequest(username)  {
     const sql= `
     DELETE FROM TRIP_REQUEST WHERE USERNAME=:username
@@ -246,5 +298,7 @@ module.exports={
 
     getTripRunningsOfUser,
     getTripUnnotifiedOfUser,Notified,
-    CompletedTripofUser
+    CompletedTripofUser,
+    getOldPendingRequests,
+    deleteOldPendingRequests
 }

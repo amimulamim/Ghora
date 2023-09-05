@@ -210,7 +210,7 @@ class AutocompleteDirectionsHandler {
 
 
 
-  route() {
+  async route() {
     if (!this.originPlaceId || !this.destinationPlaceId) {
       return;
     }
@@ -278,7 +278,7 @@ class AutocompleteDirectionsHandler {
           carbutton.addEventListener("click", async () => {
             req_data.v_type = 'CAR';
             req_data.fare = carfare;
-            const data = await fetch('user/requests/allowed')
+            const data = await fetch('user/requests/allowed');
             const text = await data.text();
             //alert("got text: " + text);
             if (text.includes('must')) {
@@ -314,13 +314,15 @@ class AutocompleteDirectionsHandler {
               if (BALANCE >= carfare) {
                 console.log('req sent successfully');
                 await sendingResponse();
+                localStorage.setItem('reloadUser', 'true');
+                // setTimeout(() => location.reload(), 2000)
               }
               else {
                 alert('You Do not have enough balance in your wallet to request for this ride');
                 window.location = '/user/wallet';
 
               }
-            }
+            } 
 
           });
 
@@ -363,6 +365,9 @@ class AutocompleteDirectionsHandler {
               if (BALANCE >= bikefare) {
                 console.log('req sent successfully');
                 await sendingResponse();
+                localStorage.setItem('reloadUser', 'true');
+                //setTimeout(() => location.reload(), 2000)
+              
               }
               else {
                 alert('You Do not have enough balance in your wallet to request for this ride');
@@ -413,6 +418,10 @@ class AutocompleteDirectionsHandler {
              if (BALANCE >= cngfare) {
                console.log('req sent successfully');
                await sendingResponse();
+               localStorage.setItem('reloadUser', 'true');
+              // setTimeout(() => location.reload(), 2000)
+               
+
              }
              else {
                alert('You Do not have enough balance in your wallet to request for this ride');

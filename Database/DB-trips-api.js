@@ -38,7 +38,9 @@ async function runningOfDriver(did){
         DLNG,
         FARE
         FROM RUNNING_TRIP
-        WHERE D_ID=:did`;
+        WHERE D_ID=:did
+        ORDER BY TR_ID
+        `;
         const binds={
             did:did
         }
@@ -185,7 +187,7 @@ async function completedTripDetailsofDriver(did){
     FROM 
         TRIP_HISTORY
         WHERE PLATE_NO=getPlate(:d_id)
-    ORDER BY FINISH_TIME DESC
+    ORDER BY TR_ID DESC
     `;
     const binds={
         d_id:did

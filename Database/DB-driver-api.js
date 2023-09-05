@@ -136,6 +136,13 @@ async function getWalletId(email){
     return (await database.execute(sql,binds,database.options)).rows;
 
 }
+async function getallDriverLocations(){
+    const sql=
+   `SELECT COUNT(DISTINCT CONCAT(ROUND(LAT, 1), ROUND(LNG, 1))) FROM DRIVER
+   `;
+   const binds={};
+   return (await database.execute(sql,binds,database.options)).rows;
+}
 
 
 module.exports = {
@@ -145,5 +152,6 @@ module.exports = {
     getWalletId,
     updateDriverLocation,
     getAllInfoByID,
-    getDriverByPlate
+    getDriverByPlate,
+    getallDriverLocations
 }
