@@ -1,65 +1,52 @@
-<div class=" row p-5 ms-5 me-5 g-0">
-    <div class="shadow mt-2 mb-2 col-7 p-3 rounded-2 align-middle ">
-        <!--    start-->
 
-        <form action="/driver/info/editvehicle" method="POST" class="card-body" style="margin-left: 30%;">
-            <!-- handle -->
-            <div class="form-floating mb-3">
+<head>
+    <title>
+        <%=title%>
+    </title>
+    <link rel="stylesheet" href="/css/signup.css">
 
-                <input type="text" class="form-control" name="plate" required
-                       value="<%= (typeof form != 'undefined') ? form.plate : '' %>" maxlength="20">
-                <label for="handle">Plate</label>
 
-            </div>
-            <!-- email -->
-            <div class="form-floating mb-3">
+</head>
 
-                <input type="text" class="form-control" name="model" required
-                       value="<%= (typeof form != 'undefined') ? form.model : '' %>">
-                <label for="model">Model</label>
+<body style="background:url('../../images/background.jpg');">
+    <div >
+        <div class="loginBox">
 
-            </div>
-            <div class="form-floating mb-3">
+            <h2>Vehicle Information</h2>
+            <form action="/driver/info/editvehicle" method="POST">
+                <p>Plate</p>
+                <input type="text" name="plate" required value="<%= (typeof form != 'undefined') ? form.plate : '' %>">
+                <p>Model</p>
+                <input type="text" name="model" required value="<%= (typeof form != 'undefined') ? form.model : '' %>">
 
-                <input type="text" class="form-control" name="company" required
-                       value="<%= (typeof form != 'undefined') ? form.company : '' %>">
-                <label for="company">Company</label>
 
-            </div>
-            <!-- phone no -->
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" name="type" required
-                       value="<%= (typeof form != 'undefined') ? form.type : '' %>" >
-                <label for="type">Type</label>
-            </div>
-            
-            <!-- Date of Birth -->
-            <!--        <div class="form-group row m-2">-->
-            <!--            <label for="birthdate" class="col-4 col-form-label">Date of Birth</label>-->
-            <!--            <div class="pl-3">-->
-            <!--                <input type="date" class="form-control" name="birthdate" required-->
-            <!--                value="<%= (typeof form != 'undefined') ? form.birthdate : '' %>" >-->
-            <!--            </div>-->
-            <!--        </div>-->
-            <!-- error list -->
-            <% if (errors.length > 0) { %>
-                <div class="row m-2 mx-0 pb-0 alert alert-danger">
-                    <ul>
-                        <% for (e of errors) { %>
-                            <li> <%= e %> </li>
-                        <% } %>
-                    </ul>
-                </div>
-            <% } %>
-            <!-- submit -->
-            <div class="d-grid gap-2 mt-3">
-                <button type="submit" class="btn btn-lg btn-primary" style="background-color: #33c24d;border: 0">
-                    Submit
-                </button>
-            </div>
+                <p>Company</p>
+                <input type="text" name="company" required
+                    value="<%= (typeof form != 'undefined') ? form.company : '' %>">
 
-        </form>
+                <p>Type</p>
+                <input type="text" name="type" required
+                    value="<%= (typeof form != 'undefined') ? form.type : '' %>">
 
+               
+
+                <input type="submit" name="" value="Submit">
+
+                <% if (errors.length> 0) { %>
+                    <div class="row m-2 mx-0 pb-0 alert alert-danger">
+                        <ul>
+                            <% for (e of errors) { %>
+                                <li>
+                                    <%= e %>
+                                </li>
+                                <% } %>
+                        </ul>
+                    </div>
+                    <% } %>
+
+            </form>
         </div>
     </div>
-</div>
+</body>
+
+</html>

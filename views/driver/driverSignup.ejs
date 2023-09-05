@@ -22,7 +22,7 @@
 
                 <p>Phone</p>
                 <input type="number" name="phone" required
-                    value="<%= (typeof form != 'undefined') ? form.phone : '' %>">
+                    value="<%= (typeof form != 'undefined') ? form.phone : '' %>" minlength="11" maxlength="11">
 
                 <p>Password</p>
                 <input type="password" name="password" required
