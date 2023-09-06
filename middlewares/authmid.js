@@ -40,7 +40,7 @@ function authUser(req, res, next){
 
                         //IMAGE:results[0].IMAGE
                     }
-                    console.log('auth hocche ',req.user)
+                    //console.log('auth hocche ',req.user)
                 }
                 next();
             }
@@ -77,7 +77,7 @@ function authDriver(req, res, next){
                     // set prompt in reqest object
                     let time = new Date();
                   //  await DB_auth.updateLoginTimeById(decodedId, time);
-                    console.log('peye gesi');
+                   // console.log('peye gesi');
                     req.driver = {
                         ID:decodedID,
                         EMAIL: results[0].EMAIL,

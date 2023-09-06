@@ -20,7 +20,7 @@ async function getUsernameByEmail(email){
     try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;
-        console.log('pool er jonno database theke  : ',rows);
+       // console.log('pool er jonno database theke  : ',rows);
         return rows;
         // Process the result rows
     } catch (error) {
@@ -51,7 +51,7 @@ async function createNewUser(user){
    try {
     const result = await database.execute(sql, binds, database.options);
     const rows = result.rows;
-    console.log('pool er jonno database theke  : ',rows);
+   // console.log('pool er jonno database theke  : ',rows);
     return rows;
     // Process the result rows
 } catch (error) {
@@ -85,7 +85,7 @@ async function getLoginInfoByEmail(email){
    try {
     const result = await database.execute(sql, binds, database.options);
     const rows = result.rows;
-    console.log('pool er jonno database theke  : ',rows);
+    //console.log('pool er jonno database theke  : ',rows);
     return rows;
     // Process the result rows
 } catch (error) {
@@ -120,7 +120,7 @@ async function getLoginInfoByUsername(username){
     try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;
-        console.log('pool er jonno database theke  : ',rows);
+       // console.log('pool er jonno database theke  : ',rows);
         return rows;
         // Process the result rows
     } catch (error) {
@@ -145,7 +145,7 @@ async function getUsernameByPhone(phone){
     try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;
-        console.log('pool er jonno database theke  : ',rows);
+       // console.log('pool er jonno database theke  : ',rows);
         return rows;
         // Process the result rows
     } catch (error) {
@@ -169,7 +169,7 @@ async function changePassword(username,pass){
     try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;
-        console.log('pool er jonno database theke  : ',rows);
+      //  console.log('pool er jonno database theke  : ',rows);
         return rows;
         // Process the result rows
     } catch (error) {

@@ -5,6 +5,7 @@ const { json } = require('body-parser');
 const   mapCalc=require('../../Map/calculations');
 const address=require('../../Map/formattedAddress');
 const wallet=require('../../../Database/DB-wallet-api');
+
 //const DB_users=require('../../Database/DB-user-api');
 //creating routers
 const router=express.Router({mergeParams:true});
@@ -99,6 +100,7 @@ router.post('/',async(req,res) =>{
     console.log('tripreq ready=',tripRequest);
 
    // let madeRequest =
+    // await DB_trips.cancelRequest(req.user.USERNAME);
     await DB_trips.makeTripRequests(tripRequest);
     let checkedRequest =await DB_trips.getAllInfoRequest(tripRequest);
 

@@ -15,7 +15,7 @@ router.get('/',async (req, res) => {
     }
     let pendingreq=[];
     pendingreq=await DB_trips.getPendingRequests(req.user.USERNAME);
-    console.log("got pending to send to thread,length= ",pendingreq," ",pendingreq.length);
+    //console.log("got pending to send to thread,length= ",pendingreq," ",pendingreq.length);
     if(pendingreq.length > 0){
         res.send('already');
     }

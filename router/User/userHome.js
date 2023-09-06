@@ -18,7 +18,7 @@ router.get('/already',async (req, res) => {
     }
     let pendingreq=[];
     pendingreq=await DB_trips.getPendingRequests(req.user.USERNAME);
-    console.log("got pending to send to thread,length= ",pendingreq," ",pendingreq.length);
+   // console.log("got pending to send to thread,length= ",pendingreq," ",pendingreq.length);
     if(pendingreq.length > 0){
         res.send('already');
     }
@@ -50,7 +50,7 @@ router.get('/', async (req, res) =>{
     //         V_TYPE:"",
     //         ID: 0
     // }
-    console.log("got pending,length= ",pendingreq," ",pendingreq.length);
+   // console.log("got pending,length= ",pendingreq," ",pendingreq.length);
     if(currunning.length>0){
         console.log("already in a trip");
         res.redirect("/user/running");
@@ -58,7 +58,7 @@ router.get('/', async (req, res) =>{
     else{
     if(pendingreq.length>0){
         cur_req=pendingreq[0];
-        console.log("got pending id= ",cur_req);
+      //  console.log("got pending id= ",cur_req);
         pendingRequest=await Map.processOneReq(pendingreq[0]);
     }
     
@@ -73,7 +73,7 @@ router.get('/', async (req, res) =>{
     }
 
         
-    console.log("got pendingRequest = ",pendingRequest.PICK_UP,pendingRequest.DROP_OFF,pendingRequest.V_TYPE);
+   // console.log("got pendingRequest = ",pendingRequest.PICK_UP,pendingRequest.DROP_OFF,pendingRequest.V_TYPE);
     console.log('pendinf id= ',pendingRequest.ID);
     const oldPending=await DB_trips.getOldPendingRequests(req.user.USERNAME);
     await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
