@@ -182,7 +182,7 @@ async function createTripHistory(trip){
 async function completedTripDetailsofDriver(did){
     const sql= `
     SELECT 
-    TR_ID,USERNAME,START_TIME,FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
+    TR_ID,USERNAME,START_TIME,NVL(FINISH_TIME,GET_PAYMENT_TIME(TR_ID)) AS FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
 
     FROM 
         TRIP_HISTORY
@@ -201,7 +201,7 @@ async function completedTripDetailsofDriver(did){
 async function completedTripDetailsofUser(username){
     const sql= `
     SELECT 
-    TR_ID,USERNAME,START_TIME,FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
+    TR_ID,USERNAME,START_TIME,NVL(FINISH_TIME,GET_PAYMENT_TIME(TR_ID)) AS FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
     FROM TRIP_HISTORY
     WHERE USERNAME=:username
     ORDER BY TR_ID DESC

@@ -19,6 +19,7 @@ async function getAllTripRequests(){
     FROM 
         TRIP_REQUEST
         WHERE TIME_REQUEST>=SYSTIMESTAMP-INTERVAL '30' MINUTE
+        ORDER BY ID DESC
     `;
     const binds={
     }
@@ -43,6 +44,7 @@ async function getNearByTripRequestsOfDriver(did){
     FROM 
         TRIP_REQUEST
         WHERE TIME_REQUEST>=SYSTIMESTAMP-INTERVAL '30' MINUTE AND V_TYPE=GETVTYPEBYID(:id)
+        ORDER BY ID DESC
     `;
     const binds={
         id:did
@@ -78,7 +80,7 @@ async function getAllTripsByPlate(plate){
 async function CompletedTripofPlate(plate){
     const sql= `
     SELECT 
-    TR_ID,USERNAME,START_TIME,FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
+    TR_ID,USERNAME,START_TIME,NVL(FINISH_TIME,GET_PAYMENT_TIME(TR_ID)) AS FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
     FROM TRIP_HISTORY
     WHERE PLATE_NO=:plate 
     ORDER BY TR_ID DESC

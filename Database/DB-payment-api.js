@@ -6,10 +6,13 @@ async function getPaymentDetails(tid){
         TR_ID,
         TRANSACTION_NO,
         AMOUNT,
-        CONVERT_TO_GMT6(PAYMENT_TIME) AS WHEN
-
+        CONVERT_TO_GMT6(PAYMENT_TIME) AS WHEN,
+		W.ID AS WALLET_ID
+				
     FROM 
-        payments
+        PAYMENTS P NATURAL JOIN TRIP_HISTORY T
+				JOIN WALLET W 
+				ON W.ID=(SELECT WALLET_ID FROM USERS WHERE USERNAME=T.USERNAME)
         WHERE TR_ID=:id
     `;
     const binds={
