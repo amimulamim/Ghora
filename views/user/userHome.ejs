@@ -44,10 +44,37 @@
 
 
                 <script>
-                    var timer, timer2;
+                    var timer, timer2,timerw,timeri;
+                    async function loadInfo() {
+                        // const stat=await fetch('/user/pending_status');
+                        // const info=await stat.text();
+                        //alert(info);
+                        if (localStorage.getItem('loadInfo') === 'true') {
+                           localStorage.removeItem('loadInfo');
+                        //if(info.includes('already')){
+                            
+                            clearInterval(timeri);
+                            window.location='/user/info';
+                            
+                        }
+                    }
+                    async function loadWallet() {
+                        // const stat=await fetch('/user/pending_status');
+                        // const info=await stat.text();
+                        //alert(info);
+                        if (localStorage.getItem('loadWallet') === 'true') {
+                           localStorage.removeItem('loadWallet');
+                        //if(info.includes('already')){
+                            
+                            
+                            window.location='/user/wallet';
+                            clearInterval(timerw);
+                            
+                        }
+                    }
                     async function check2() {
-                        const stat=await fetch('/user/pending_status');
-                        const info=await stat.text();
+                        // const stat=await fetch('/user/pending_status');
+                        // const info=await stat.text();
                         //alert(info);
                         if (localStorage.getItem('reloadUser') === 'true') {
                            localStorage.removeItem('reloadUser');
@@ -74,4 +101,7 @@
                     }
                     timer2 = setInterval(check2, 500);
                     timer = setInterval(check, 5000);
+                    timeri=setInterval(loadInfo,1000);
+                    timerw=setInterval(loadWallet,1000);
+                    
                 </script>
