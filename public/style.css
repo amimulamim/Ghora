@@ -21,7 +21,7 @@ body {
   box-sizing: border-box;
   overflow: auto;
   margin-left: 10%;
-  margin-top: 5%;
+ 
 }
 
 #map {
@@ -29,12 +29,16 @@ body {
   flex-grow: 3;
   height: 100%;
   width: 100%;
-  margin-left:0;
-  margin-top: 0;
-  
+  margin-left:10px;
+  margin-top: 10px;
+
 }
 
 .h3{
   margin-left: 50%;
   margin-top: 10%;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Three equal columns */
 }

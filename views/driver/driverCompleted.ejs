@@ -1,4 +1,4 @@
-<div class="request-details",style="margin-left:60%">
+<!-- <div class="request-details",style="margin-left:60%">
     <h3 style="margin-left: 30%;">Your Service has been completed</h3>
     <% if(payment.length>0) { %>
         <% const payment_details=payment[0]; %>
@@ -10,4 +10,93 @@
     <% } %>
 
 </div>
-<a href="/driver"><button style="margin-left: 40%;">Back to Home</button></a> 
+<a href="/driver"><button style="margin-left: 40%;">Back to Home</button></a>  -->
+<head>
+    <link rel="stylesheet" href="/css/ridecompleted.css">
+
+</head>
+<body>
+    <%if(payment.length>0){%>
+        <% const payment_details=payment[0]; %>
+
+    <div class="page-content container ">
+        <div class="container px-0">
+            <div class="row mt-4">
+                <div class="col-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center text-150">
+                                <i class="fa fa-book fa-2x text-success-m2 mr-1"></i>
+                                <span class="text-default-d3">Ghora</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .row -->
+    
+                    <hr class="row brc-default-l1 mx-n1 mb-4" />
+    
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div>
+                                <span class="text-sm text-grey-m2 align-middle">To:</span>
+                                <span class="text-600 text-110 text-blue align-middle">Alex Doe</span>
+                            </div>
+                            <div class="text-grey-m2">
+                                <div class="my-1">
+                                    ID:
+                                </div>
+    
+                            </div>
+                        </div>
+                        <!-- /.col -->
+    
+                        <div class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
+                            <hr class="d-sm-none" />
+                            <div class="text-grey-m2">
+    
+                                <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
+                                        class="text-600 text-90">Date:</span>
+                                    <%= payment_details.WHEN %>
+                                </div>
+    
+                                <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span
+                                        class="text-600 text-90">Status:</span> <span
+                                        class="badge badge-warning badge-pill px-25">PAID</span></div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+    
+                    <div class="mt-4">
+                        <div class="row text-600 text-white bgc-default-tp1 py-25">
+                            <div class="d-none d-sm-block col-1">#</div>
+                            <div class="col-9 col-sm-5">Transaction No</div>
+                            <div class="col-2">
+                                <%= payment_details.TRANSACTION_NO %>
+                            </div>
+                        </div>
+                        <div class="row text-600 text-white bgc-default-tp1 py-25">
+                            <div class="d-none d-sm-block col-1">#</div>
+                            <div class="col-9 col-sm-5">Amount</div>
+                            <div class="col-2">
+                                <%= payment_details.AMOUNT %>
+                            </div>
+                        </div>
+    
+    
+                    </div>
+    
+                    <div class="row border-b-2 brc-default-l2"></div>
+                    <hr />
+    
+                    <div>
+                        <span class="text-secondary-d1 text-105">Thank you for your service</span>
+                        <a href="/driver" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Go To Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%}%>
+    
+</body>

@@ -24,8 +24,6 @@ router.get('/', async (req, res) => {
 
     const counts=await review.getReviewCountsofDriver(req.driver.ID);
     const max_ratings=await review.getMaximumRatingofDriver(req.driver.ID);
-    
-
 
    res.render('driverLayout.ejs', {
     driver: req.driver,
