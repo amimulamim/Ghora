@@ -28,7 +28,9 @@ async function getPaymentsOfUser(username){
     ON P.TR_ID=T.TR_ID
 		JOIN DRIVER D
 		ON D.PLATE_NO=T.PLATE_NO
-    WHERE USERNAME=:username`;
+    WHERE USERNAME=:username
+    ORDER BY T.TR_ID DESC
+    `;
 
 
     const binds={
@@ -55,7 +57,9 @@ async function getPaymentsOfDriver(did) {
     on P.TR_ID=T.TR_ID
     JOIN DRIVER D 
     ON D.PLATE_NO=T.PLATE_NO
-    WHERE D.ID=:did`;
+    WHERE D.ID=:did
+    ORDER BY T.TR_ID DESC
+    `;
 
     const binds={
         did:did
