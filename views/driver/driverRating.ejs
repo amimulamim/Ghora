@@ -134,6 +134,8 @@
     <title>ratings</title>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />            
+            
     <style>
         body {
             background-image: linear-gradient(#14768c, #6d084d);
@@ -153,7 +155,7 @@
 
         .card {
             border-radius: 5px;
-            background-color:#455A64;
+            background-color: #455A64;
             padding-left: 60px;
             padding-right: 60px;
             margin-top: 10px;
@@ -242,8 +244,10 @@
         .vote {
             cursor: pointer
         }
-
-    
+        .orangecolor{
+            color: #F9A825;
+        
+        }
     </style>
 </head>
 
@@ -254,145 +258,173 @@
                 <div class="col-xl-14 col-lg-8 col-md-10 col-12 text-center mb-1">
                     <% if(max_rating>0){ %>
                         <% let leng=150/max_rating; %>
-                        <div class="card">
-                            <div class="row justify-content-left d-flex">
-                                <!--first col  -->
-                                <div class="col-md-4 d-flex flex-column">
-                                    <div class="rating-box">
-                                        <h1 class="pt-4">4.0</h1>
-                                        <p class="">out of 5</p>
+                            <div class="card">
+                                <div class="row justify-content-left d-flex">
+                                    <!--first col  -->
+                                    <div class="col-md-4 d-flex flex-column">
+                                        <div class="rating-box">
+                                            <h1 class="pt-4">
+                                                <%= avg_rating %>
+                                            </h1>
+                                            <p class="">out of 5</p>
+                                        </div>
+                                        <div>
+                                            <% for (let i=1; i <=5; i++) { %>
+                                                <% if(i<=avg_rating) { %>
+                                            <span class="fa fa-star star-active mx-1"></span>
+                                            <%} else if( (i-1 )< avg_rating && i > avg_rating) { %>
+                                                
+                                                <span class="fa-solid fa-star-half-stroke orangecolor"></span>
+                                            <% }else{ %>
+                                                <span class="fa fa-star star-inactive mx-1"></span>
+                                           <% } }%>
+                                            
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span class="fa fa-star star-active mx-1"></span> <span
-                                            class="fa fa-star star-active mx-1"></span> <span
-                                            class="fa fa-star star-active mx-1"></span> <span
-                                            class="fa fa-star star-active mx-1"></span> <span
-                                            class="fa fa-star star-inactive mx-1"></span>
+                                    <!-- second col -->
+                                    <div class="col-md-8">
+                                        <div class="rating-bar0 justify-content-center">
+                                            <table class="text-left mx-auto">
+                                                <tr>
+                                                    <td class="rating-label">5<span
+                                                            class="fa fa-star star-active mx-1"></span></td>
+                                                    <td class="rating-bar">
+                                                        <div class="bar-container">
+                                                            <div class="bar"
+                                                                style="width: <%= counts[4].RATING_COUNT *leng  %>px; ">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <b>
+                                                            <%= counts[4].RATING_COUNT %>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="rating-label">4<span
+                                                            class="fa fa-star star-active mx-1"></span></td>
+                                                    <td class="rating-bar">
+                                                        <div class="bar-container">
+                                                            <div class="bar"
+                                                                style="width: <%= counts[3].RATING_COUNT *leng  %>px; ">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <b>
+                                                            <%= counts[3].RATING_COUNT %>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="rating-label">3<span
+                                                            class="fa fa-star star-active mx-1"></span></td>
+                                                    <td class="rating-bar">
+                                                        <div class="bar-container">
+                                                            <div class="bar"
+                                                                style="width: <%= counts[2].RATING_COUNT *leng  %>px; ">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <b>
+                                                            <%= counts[2].RATING_COUNT %>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="rating-label">2<span
+                                                            class="fa fa-star star-active mx-1"></span></td>
+                                                    <td class="rating-bar">
+                                                        <div class="bar-container">
+                                                            <div class="bar"
+                                                                style="width: <%= counts[1].RATING_COUNT *leng  %>px; ">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <b>
+                                                            <%= counts[1].RATING_COUNT %>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="rating-label">1<span
+                                                            class="fa fa-star star-active mx-1"></span></td>
+                                                    <td class="rating-bar">
+                                                        <div class="bar-container">
+                                                            <div class="bar"
+                                                                style="width: <%= counts[0].RATING_COUNT *leng  %>px; ">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right"><b>
+                                                            <%= counts[0].RATING_COUNT %>
+                                                        </b>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
+                                    <!--  -->
                                 </div>
-                                <!-- second col -->
-                                <div class="col-md-8">
-                                    <div class="rating-bar0 justify-content-center">
-                                        <table class="text-left mx-auto">
-                                            <tr>
-                                                <td class="rating-label">5<span
-                                                        class="fa fa-star star-active mx-1"></span></td>
-                                                <td class="rating-bar">
-                                                    <div class="bar-container">
-                                                        <div class="bar" style="width: <%= counts[4].RATING_COUNT *leng  %>px; "></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-right">
-                                                  <b>  <%= counts[4].RATING_COUNT %></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="rating-label">4<span
-                                                        class="fa fa-star star-active mx-1"></span></td>
-                                                <td class="rating-bar">
-                                                    <div class="bar-container">
-                                                        <div class="bar" style="width: <%= counts[3].RATING_COUNT *leng  %>px; "></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-right">
-                                                 <b> <%= counts[3].RATING_COUNT %></b>  
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="rating-label">3<span
-                                                        class="fa fa-star star-active mx-1"></span></td>
-                                                <td class="rating-bar">
-                                                    <div class="bar-container">
-                                                        <div class="bar" style="width: <%= counts[2].RATING_COUNT *leng  %>px; "></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-right">
-                                                 <b><%= counts[2].RATING_COUNT %></b>   
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="rating-label">2<span
-                                                        class="fa fa-star star-active mx-1"></span></td>
-                                                <td class="rating-bar">
-                                                    <div class="bar-container">
-                                                        <div class="bar" style="width: <%= counts[1].RATING_COUNT *leng  %>px; "></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-right">
-                                                    <b><%= counts[1].RATING_COUNT %></b> 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="rating-label">1<span
-                                                        class="fa fa-star star-active mx-1"></span></td>
-                                                <td class="rating-bar">
-                                                    <div class="bar-container">
-                                                        <div class="bar" style="width: <%= counts[0].RATING_COUNT *leng  %>px; "></div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-right"><b>
-                                                    <%= counts[0].RATING_COUNT %></b>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                                <!--  -->
                             </div>
-                        </div>
-                        <%}%>
-                            <!-- first card sesh -->
-                            <div class="container" style="height:58%; overflow-y: scroll;">
-                            <% allreviews.forEach(function(review) { %>
-                                <div class="card">
-                                    <div class="row d-flex">
-                                        <div class=""> <img class="profile-pic" src="../../images/user.png"> </div>
-                                        <div class="d-flex flex-column">
-                                            <h3 class="mt-0 mb-0">
-                                                <%= review.USERNAME%>
-                                            </h3>
-                                            <div>
-                                                <% if (review.RATING===0) { %>
-                                                    <h3 style="margin-left: 40%;">Rating: Unrated</h3>
-                                                    <% } else { %>
-                                                        <h4 class="justify-content-center">
-                                                            <span>
-                                                                <%= review.RATING %>
-                                                            </span>
-                                                            <% for (let i=1; i <=5; i++) { %>
-                                                                <% if(i<=review.RATING) { %>
-                                                                    <span class="fa fa-star star-active ml-3"></span>
-                                                                    <% } else { %>
-                                                                        <span class="fa fa-star star-inactive ml-3"></span>
-                                                                        <% } %>
-                                                                            <% } %>
-                                                        </h4>
-                                                        <% } %>
+                            <%}%>
+                                <!-- first card sesh -->
+                                <div class="container" style="height:58%; overflow-y: scroll;">
+                                    <% allreviews.forEach(function(review) { %>
+                                        <div class="card">
+                                            <div class="row d-flex">
+                                                <div class=""> <img class="profile-pic" src="../../images/user.png">
+                                                </div>
+                                                <div class="d-flex flex-column">
+                                                    <h3 class="mt-0 mb-0">
+                                                        <%= review.USERNAME%>
+                                                    </h3>
+                                                    <div>
+                                                        <% if (review.RATING===0) { %>
+                                                            <h3 style="margin-left: 40%;">Rating: Unrated</h3>
+                                                            <% } else { %>
+                                                                <h4 class="justify-content-center">
+                                                                    <span>
+                                                                        <%= review.RATING %>
+                                                                    </span>
+                                                                    <% for (let i=1; i <=5; i++) { %>
+                                                                        <% if(i<=review.RATING) { %>
+                                                                            <span
+                                                                                class="fa fa-star star-active ml-3"></span>
+                                                                            <% } else { %>
+                                                                                <span
+                                                                                    class="fa fa-star star-inactive ml-3"></span>
+                                                                                <% } %>
+                                                                                    <% } %>
+                                                                </h4>
+                                                                <% } %>
 
+                                                    </div>
+                                                </div>
+                                                <div class="ml-auto">
+                                                    <h5 style="color: #000;">10 Sept</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row text-left">
+
+                                                <h5 class="content justify-content-center" style="color: #000;">
+                                                    <%=review.DESCRIPTION %>
+                                                </h5>
                                             </div>
                                         </div>
-                                        <div class="ml-auto">
-                                            <h5 style="color: #000;">10 Sept</h5>
-                                        </div>
-                                    </div>
-                                    <div class="row text-left">
-
-                                        <h5 class="content justify-content-center" style="color: #000;">
-                                            <%=review.DESCRIPTION %>
-                                        </h5>
-                                    </div>
+                                        <%})%>
                                 </div>
-                                <%})%>
-                        </div>
                 </div>
             </div>
         </div>
         <% } else{ %>
-            <div class="container" style="margin-top: 20%;">  
+            <div class="container" style="margin-top: 20%;">
                 <h3 style="margin-left: 30%;">No review so far</h3>
             </div>
-          
+
             <% } %>
                 <script type='text/javascript'></script>
 </body>
-

@@ -24,6 +24,9 @@ router.get('/', async (req, res) => {
 
     const counts=await review.getReviewCountsofDriver(req.driver.ID);
     const max_ratings=await review.getMaximumRatingofDriver(req.driver.ID);
+    const avg_review=await review.getAverageRating(req.driver.ID);
+
+    console.log('avg=    ',avg_review[0].AVG_RATING);
 
    res.render('driverLayout.ejs', {
     driver: req.driver,
@@ -32,6 +35,8 @@ router.get('/', async (req, res) => {
     allreviews: allreviews,
     counts: counts,
     max_rating: max_ratings[0].MAX_RATING,
+    avg_rating:avg_review[0].AVG_RATING,
+
     navbar: 1
 });
 

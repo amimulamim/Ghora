@@ -161,7 +161,7 @@ function initMap() {
            console.log("distance is ="+ response.routes[0].legs[0].distance.text);
            console.log("Expected duration: "+ response.routes[0].legs[0].duration.text);
             const output=document.querySelector('#output');
-              output.innerHTML="<div class='alert-info'> FROM:" + document.getElementById("origin-input").value +".<br/> To: "+ document.getElementById("destination-input").value+".<br/> Driving Distance: "+ response.routes[0].legs[0].distance.text+".<br/> Duration: "+ response.routes[0].legs[0].duration.text+".</div>";
+            //  output.innerHTML="<div class='alert-info'> FROM:" + document.getElementById("origin-input").value +".<br/> To: "+ document.getElementById("destination-input").value+".<br/> Driving Distance: "+ response.routes[0].legs[0].distance.text+".<br/> Duration: "+ response.routes[0].legs[0].duration.text+".</div>";
               //directionsRenderer.setDirections(response);
 
 
