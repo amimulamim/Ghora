@@ -26,7 +26,11 @@ router.get('/', async (req, res) => {
     const max_ratings=await review.getMaximumRatingofDriver(req.driver.ID);
     const avg_review=await review.getAverageRating(req.driver.ID);
 
-    console.log('avg=    ',avg_review[0].AVG_RATING);
+    //console.log('avg=    ',avg_review[0].AVG_RATING);
+    let max_rate=0;
+    if(max_ratings.length>0){
+        max_rate=max_ratings[0].MAX_RATING;
+    }
 
    res.render('driverLayout.ejs', {
     driver: req.driver,
@@ -34,8 +38,8 @@ router.get('/', async (req, res) => {
     title: req.driver.NAME,
     allreviews: allreviews,
     counts: counts,
-    max_rating: max_ratings[0].MAX_RATING,
-    avg_rating:avg_review[0].AVG_RATING,
+    max_rating: max_rate,
+    avg_rating:avg_review,
 
     navbar: 1
 });

@@ -19,6 +19,8 @@ const completedRouter=require('./Driver/completed');
 const alllocationsRouter=require('./Driver/alllocations.js');
 const reviewRouter=require('./Driver/reviews');
 const paymentsRouter=require('./Driver/payments.js');
+const allLocationRouter=require('./Driver/allDriverLoc');
+
 const files = require('../Driver/files.js');
 //const finishedRouter = require('./Driver/finished');
 
@@ -47,6 +49,7 @@ router.use('/accept',runningRouter);
 router.use('/completed',completedRouter);
 router.use('/reviews',reviewRouter);
 router.use('/payments',paymentsRouter);
+router.use('/allLocation',allLocationRouter);
 
 router.route('/files/:id?')
   .get(files.get)

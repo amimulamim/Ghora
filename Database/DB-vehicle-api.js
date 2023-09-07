@@ -57,7 +57,7 @@ async function vehicleInfo(plate){
         M.MANUFACTURER COMPANY
     FROM 
         VEHICLE V JOIN MODEL M
-        ON(V.MODELNAME=M.NAME)
+        ON(UPPER(V.MODELNAME)=UPPER(M.NAME))
     WHERE
         V.PLATE_NO=:plate
         `;

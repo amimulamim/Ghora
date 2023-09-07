@@ -20,6 +20,7 @@ const completedRouter = require('./User/completed');
 const reviewRouter = require('./User/review');
 const pendingStatusRouter = require('./User/TripRequests/pendingstatus');
 const paymentsRouter = require('./User/payments.js');
+//const allLocationRouter=require('./Driver/allDriverLoc');
 // ROUTE: home page
 //router.use(userAuth);
 router.get('/',require('./User/userHome'));
@@ -46,6 +47,8 @@ router.use('/completed',completedRouter);
 router.use('/review',reviewRouter);
 router.use('/pending_status', pendingStatusRouter);
 router.use('/payments', paymentsRouter);
+
+//router.use('/allLocation',allLocationRouter);
 // async (req,res) => {
 //     //
 //     res.send('accepted')

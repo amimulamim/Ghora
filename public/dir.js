@@ -17,55 +17,148 @@ let coords;
 
 
 
-x.getCurrentPosition(success, failure);
-
-function success(position) {
-  var mylat = position.coords.latitude;
-  var mylong = position.coords.longitude;
-  // var coords=new google.maps.LatLng(mylat,mylong);
-  coords = { lat: mylat, lng: mylong };
-  mapOptions = {
-    zoom: 13,
-    center: coords,
-    mapId: "DEMO_MAP_ID",
-    // mapTypeId:google.maps.MapType.ROADMAP
 
 
+async function getLiveLocation() {
+  if ('geolocation' in navigator) {
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+
+      const { latitude, longitude } = position.coords;
+      return { lat: latitude, lng: longitude };
+    } catch (error) {
+      throw new Error('Failed to retrieve location: ' + error.message);
+    }
+  } else {
+    throw new Error('Geolocation is not supported in this browser.');
   }
-  /*mymarker = new AdvancedMarkerElement({
-    map: map,
-    position: coords,
-    title: "Uluru",
-  });*/
 }
 
-function failure() {
-
-}
-
-// function initMap(){
-//   const until=setInterval(() => {
-//     if(coords===undefined){
-//       return;
-//     }
-//     else{
-//       initializeMap();
-//       clearInterval(until);
-//     }
-
-//   }, 1000);
+// Example usage:
 
 
-// }
 
-function initMap() {
+
+
+async function initMap() {
   //alert(1);
+ // await curloc();
+ let centercoords;
+ await getLiveLocation()
+  .then(location => {
+    console.log('Live Location:', location);
+    centercoords=location;
+    console.log('center coords',centercoords);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+  console.log('liveloc= ',coords);
   const map = new google.maps.Map(document.getElementById("map"), {
     mapTypeControl: false,
-    // center:coords
-    center: { lat: 23.7266616, lng: 90.381105 },
+    //center:coords,
+    center: centercoords,
     zoom: 13,
+    mapId: "DEMO_MAP_ID"
   });
+  const data = await fetch('/driver/allLocation');
+      const locbe=await data.json();
+      console.log('got location at front end dir is: ',locbe);
+      //console.log('got location at back end running is: ',locbe);
+  const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+  const image =
+    "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+
+    const svgMarker = {
+      path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+      fillColor: "blue",
+      fillOpacity: 0.6,
+      strokeWeight: 0,
+      rotation: 0,
+      scale: 2,
+      anchor: new google.maps.Point(0, 20),
+    };
+    const curlocicon={
+      url: './images/curloc.jpg',
+      scaledSize: new google.maps.Size(32, 32),
+
+    }
+  const marker=new google.maps.Marker({
+    map:map,
+    position:centercoords,
+    title:"Your current location",
+     icon:curlocicon,
+   });
+   
+
+
+  const carIcon = {
+    url: './images/caricon2.png', // Path to the car icon image
+    scaledSize: new google.maps.Size(44,25), // Set the size of the icon
+  };
+
+   const bikeIcon = {
+    url: './images/motoicon.png', // Path to the bike icon image
+    scaledSize: new google.maps.Size(44, 25), // Set the size of the icon
+  };
+
+  const cngIcon = {
+    url: './images/cngicon.png', // Path to the CNG icon image
+    scaledSize: new google.maps.Size(42.2, 27.5), // Set the size of the icon
+  };
+
+  // Create markers with custom icons and positions
+
+  const locArray= locbe.locArray;
+  for(let i=0; i<locArray.length; i++) {
+    //console.log("loop theke=",locArray[i])
+    if(locArray[i].V_TYPE=='CAR'){
+      new google.maps.Marker({
+        position: { lat: locArray[i].LAT, lng: locArray[i].LNG }, // Set car marker position
+        map: map,
+        icon: carIcon, // Set car icon
+      });
+    }
+    else if(locArray[i].V_TYPE=='BIKE'){
+      new google.maps.Marker({
+        position: { lat: locArray[i].LAT, lng: locArray[i].LNG }, // Set car marker position
+        map: map,
+        icon: bikeIcon, // Set car icon
+      });
+    }
+    else if(locArray[i].V_TYPE=='CNG'){
+      new google.maps.Marker({
+        position: { lat: locArray[i].LAT, lng: locArray[i].LNG }, // Set car marker position
+        map: map,
+        icon: cngIcon, // Set car icon
+      });
+    }
+  }
+  // const carMarker = new google.maps.Marker({
+  //   position: { lat: 23.72, lng: 90.38 }, // Set car marker position
+  //   map: map,
+  //   icon: carIcon, // Set car icon
+  // });
+
+  // const bikeMarker = new google.maps.Marker({
+  //   position: { lat: 23.73, lng: 90.42 }, // Set bike marker position
+  //   map: map,
+  //   icon: bikeIcon, // Set bike icon
+  // });
+
+  // const cngMarker = new google.maps.Marker({
+  //   position: { lat: 23.74, lng: 90.40 }, // Set CNG marker position
+  //   map: map,
+  //   icon: cngIcon, // Set CNG icon
+  // });
+
+
+
+
+
+
 
   new AutocompleteDirectionsHandler(map);
 }

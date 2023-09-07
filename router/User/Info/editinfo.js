@@ -51,10 +51,9 @@ router.post('/', async (req, res) => {
         if (resphone[0].ID != req.driver.ID)
             errors.push('Phone number is already registered to a driver');
     }
-
-    if(req.body.phone.length!=13){
-        errors.push('Phone number must be 88.. +11 digits ');
-    }
+    if (req.body.phone.length != 11 && req.body.phone.length!=13)
+        errors.push('Phone no must start with 8801');
+    
     if (errors.length > 0) {
         res.render('userlayout.ejs', {
             title: 'Sign Up - Ghora',

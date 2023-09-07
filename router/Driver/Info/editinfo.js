@@ -51,8 +51,8 @@ router.post('/', async (req, res) => {
             errors.push('Phone number is already registered to a driver');
     }
 
-    if (req.body.phone.length != 13) {
-        errors.push('Phone number must be 88.. +11 digits ');
+    if (req.body.phone.length != 13 && req.body.phone.length!=11) {
+        errors.push('Phone number must be 88.. +11 digits  and have total 13 digits');
     }
     if (errors.length > 0) {
         res.render('driverlayout.ejs', {

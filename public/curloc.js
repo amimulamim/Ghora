@@ -68,11 +68,11 @@ async function initMap() {
     title:"Your current location"
   });
 
-  const marker2=new AdvancedMarkerElement({
-    map:map,
-    position:{lat:23.7,lng: 90.3},
-    title:"Your test location"
-  });
+  // const marker2=new AdvancedMarkerElement({
+  //   map:map,
+  //   position:{lat:23.7,lng: 90.3},
+  //   title:"Your test location"
+  // });
 
   const sendresponse = await fetch("/driver", {
     method: "POST",
