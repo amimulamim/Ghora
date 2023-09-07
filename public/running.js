@@ -16,37 +16,41 @@ let coords;
 
 
 
-x.getCurrentPosition(success,failure);
+async function getLiveLocation() {
+  if ('geolocation' in navigator) {
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
 
-function success(position){
-  var mylat=position.coords.latitude;
-  var mylong=position.coords.longitude;
- // var coords=new google.maps.LatLng(mylat,mylong);
- coords = { lat: mylat, lng: mylong };
-  mapOptions={
-    zoom: 13,
-    center: coords,
-    mapId: "DEMO_MAP_ID",
-   // mapTypeId:google.maps.MapType.ROADMAP
-
-
+      const { latitude, longitude } = position.coords;
+      return { lat: latitude, lng: longitude };
+    } catch (error) {
+      throw new Error('Failed to retrieve location: ' + error.message);
+    }
+  } else {
+    throw new Error('Geolocation is not supported in this browser.');
   }
-  /*mymarker = new AdvancedMarkerElement({
-    map: map,
-    position: coords,
-    title: "Uluru",
-  });*/
 }
 
-function failure(){
-
-}
+// Example usage:
 
 
-function initMap() {
+
+async function initMap() {
+  let coords;
+  await getLiveLocation()
+  .then(location => {
+    console.log('Live Location:', location);
+    coords=location;
+  })
+  .catch(error => {
+    console.error(error);
+  });
     const map = new google.maps.Map(document.getElementById("map"), {
       mapTypeControl: false,
-      center: { lat: 23.7266616, lng: 90.381105 } ,
+     // center: { lat: 23.7266616, lng: 90.381105 } ,
+     center:coords,
       zoom: 13,
     });
   

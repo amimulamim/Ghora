@@ -75,7 +75,8 @@
                                                     <form action="/user/cancel" method="POST">
 
                                                         <input type="submit" value="Cancel Request"
-                                                            class="btn btn-primary btn-round-lg btn-lg" style="margin-top: 50;">
+                                                            class="btn btn-primary btn-round-lg btn-lg"
+                                                            style="margin-top: 50;">
 
                                                     </form>
                                                 </div>
@@ -85,7 +86,7 @@
                                 </div>
                             </div>
                         </div>
-    
+
                         <% } %>
 
 
@@ -150,17 +151,16 @@
                                     const data = await fetch('user/requests/old')
                                     const text = await data.text();
                                     //alert("got text: " + text);
-                                    if (text.includes('old')) {
-                                        alert('Sorry!!No nearby driver accepted your request in 30 minutes.Try again!!');
+                                    if (text.includes('old nottaken yes')) {
+                                        alert(text);
+                                        alert('Sorry!!No nearby driver accepted your request in 30 minutes.Try again!! ', text);
                                         const done = await fetch('user/requests/deleteold');
                                         const st = await done.text();
                                         //alert(st);
-                                        if (st.includes('done')) {
-                                            //alert('reloading');
-                                            location.reload()
-                                            clearInterval(timero);
-                                            //window.location = '/user';
-                                        }
+
+                                    }
+                                    else if (text.includes('bedorkar')) {
+                                        clearInterval(timero);
                                     }
 
 
