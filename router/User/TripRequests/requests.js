@@ -46,6 +46,47 @@ router.get('/allowed',async(req,res) =>{
     
 });
 
+router.get('/old',async(req,res) =>{
+    if(req.user==null){
+        console.log('get e user nai');
+        return res.redirect('/user/login');
+    }
+    console.log('get e user ase');
+    const old=await DB_trips.getOldPendingRequests(req.user.USERNAME);
+
+    if(old.length>0){
+        await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
+        res.send('old yes');
+    }
+    else{
+        res.send('no');
+    }
+
+    
+    //console.log(req.body.data);
+    
+});
+
+router.get('/deleteold',async(req,res) =>{
+    if(req.user==null){
+        console.log('get e user nai');
+        return res.redirect('/user/login');
+    }
+    console.log('get e user ase');
+
+        await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
+        res.status(202).send('done');
+    
+
+    
+    //console.log(req.body.data);
+    
+});
+
+
+
+
+
 router.post('/',async(req,res) =>{
     if(req.user==null){
         console.log('post e user nai');

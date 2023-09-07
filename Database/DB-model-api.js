@@ -50,7 +50,7 @@ async function modelInfo(name){
         FROM 
         MODEL
     WHERE
-        NAME=:name
+        UPPER(NAME)=UPPER(:name)
         `;
     const binds = {
         name:name

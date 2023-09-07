@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
     //     errors.push('You can,t change email');
     // if (req.body.password != req.body.password2)
     //     errors.push('PASSWORDS MUST MATCH');
-    if (req.body.phone.length != 13)
+    if (req.body.phone.length != 11 && req.body.phone.length!=13)
         errors.push('Phone no must start with 8801');
     if (errors.length > 0) {
         res.render('userlayout.ejs', {

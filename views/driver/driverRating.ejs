@@ -264,7 +264,7 @@
                                     <div class="col-md-4 d-flex flex-column">
                                         <div class="rating-box">
                                             <h1 class="pt-4">
-                                                <%= avg_rating %>
+                                                <%= avg_rating[0].AVG_RATING %>
                                             </h1>
                                             <p class="">out of 5</p>
                                         </div>
@@ -405,7 +405,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="ml-auto">
-                                                    <h5 style="color: #000;"></h5>
+                                                    <h5 style="color: #000;"><%= review.REVIEW_TIME %></h5>
                                                 </div>
                                             </div>
                                             <div class="row text-left">

@@ -43,8 +43,8 @@ router.post('/', async (req, res) => {
     //     errors.push('You can,t change email');
     if (req.body.password != req.body.password2)
         errors.push('PASSWORDS MUST MATCH');
-    if (req.body.phone.length != 13)
-        errors.push('Phone no must start with 8801');
+    if (req.body.phone.length != 13 && req.body.phone.length!=11)
+        errors.push('Phone no must start with 8801 and have total 13 digits');
     if (errors.length > 0) {
         res.render('driverlayout.ejs', {
             title: 'Sign Up - Ghora',

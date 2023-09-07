@@ -4,6 +4,11 @@
 </h3>
 
 <% if(pending.ID==0){%>
+    <% if(oldPending.length>0){%>
+        <h3 style="margin-left:40%">SORRY!!We couldn't manage a Driver for you in 30 minutes.Please try again .</h3>
+        
+
+        <%} %>
     <iframe src="dir.html" style="height: 80vh"></iframe>
     <% } %>
 
@@ -99,9 +104,34 @@
                         }
 
                     }
+
+                    async function checkOld() {
+                        const data = await fetch('user/requests/old')
+                        const text = await data.text();
+                        //alert("got text: " + text);
+                        if (text.includes('old')) {
+                            alert('Sorry!!No nearby driver accepted your request in 30 minutes.Try again!!');
+                            const done=await fetch('user/requests/deleteold');
+                            const st=await done.text();
+                            //alert(st);
+                            if(st.includes('done')) {
+                                //alert('reloading');
+                                location.reload()
+                            clearInterval(timero);
+                            //window.location = '/user';
+                            }
+                        }
+                        
+
+                    }
+
+
+
+                
                     timer2 = setInterval(check2, 500);
                     timer = setInterval(check, 5000);
                     timeri=setInterval(loadInfo,1000);
                     timerw=setInterval(loadWallet,1000);
+                    timero=setInterval(checkOld,5000);
                     
                 </script>
