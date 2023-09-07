@@ -101,7 +101,7 @@ async function initMap() {
 
    const bikeIcon = {
     url: './images/motoicon.png', // Path to the bike icon image
-    scaledSize: new google.maps.Size(44, 25), // Set the size of the icon
+    scaledSize: new google.maps.Size(88, 50), // Set the size of the icon
   };
 
   const cngIcon = {

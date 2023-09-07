@@ -1,133 +1,179 @@
+<head>
+    <link rel="stylesheet" href="/css/homerunninguser.css">
+</head>
 
-<% if(pending.ID==0){%>
-    <% if(oldPending.length>0){%>
-        <h3 style="margin-left:40%">SORRY!!We couldn't manage a Driver for you in 30 minutes.Please try again .</h3>
-        
+<body>
 
-        <%} %>
-    <iframe src="dir.html" style="height: 100% ;width:100%; margin-left: 5px; margin-right: 5px;"></iframe>
-    <% } %>
-
-        <% if(pending.ID!=0){%>
-            <div class="request-container" ,style="margin-left:60%">
-                <div class="request-details" ,style="margin-left:60%">
-                    <h3 style="margin-left: 40%;"> YOU ALREADY HAVE A PENDING REQUEST</h3>
-                </div>
-
-                <div class="request-details" ,style="margin:left:60%">
-
-                    <p style="margin-left: 40%;"><strong>Pick-up:</strong>
-                        <%= pending.PICK_UP %>
-                    </p>
-                    <p style="margin-left: 40%;"><strong>Drop-off:</strong>
-                        <%= pending.DROP_OFF %>
-                    </p>
-                    <p style="margin-left: 40%;"><strong>Vehicle Type:</strong>
-                        <%= pending.V_TYPE %>
-                    </p>
-                </div>
+    <% if(pending.ID==0){%>
+        <% if(oldPending.length>0){%>
+            <h3 style="margin-left:40%">SORRY!!We couldn't manage a Driver for you in 30 minutes.Please try again .</h3>
 
 
-                <!-- <button class="cancel-button" name="Cancel" style="margin-left: 60%;">Cancel Request</button>  -->
-                <form action="/user/cancel" method="POST">
+            <%} %>
+                <iframe src="dir.html" style="height: 100% ;width:100%; margin-left: 5px; margin-right: 5px;"></iframe>
+                <% } %>
 
-                    <input type="submit" value="Cancel" class="btn  btn-secondary" style="margin-left: 60%;">
+                    <% if(pending.ID!=0){%>
 
-                </form>
-            </div>
+                        <div class="container d-flex justify-content-center">
+                            <div class="card shaodw-lg  card-1">
+                                <div class="card-header pt-3 pb-0 ml-auto border-0 ">
+                                </div>
+                                <div class="card-body  d-flex pt-0" style="margin-top: 10%;">
+                                    <div class="row no-gutters  mx-auto justify-content-start flex-sm-row flex-column">
+                                        <div class="col-md-4  text-center"><img class="irc_mi img-fluid mr-0"
+                                                src="https://cdn4.iconfinder.com/data/icons/logistics-delivery-2-5/64/137-512.png"
+                                                width="150" height="150"></div>
+                                        <div class="col-md-6 ">
+                                            <div class="card border-0 ">
+                                                <div class="card-body">
+                                                    <h5 class="card-title "><b>YOU HAVE A PENDING REQUEST</b>
+                                                    </h5>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p class="card-text ">Pick Up:
 
+                                                            </p>
 
+                                                        </div>
+                                                        <div class="col">
+                                                            <p class="card-text ">
+                                                                <%= pending.PICK_UP %>
+                                                            </p>
 
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p class="card-text ">Drop Off:
 
+                                                            </p>
 
+                                                        </div>
+                                                        <div class="col">
+                                                            <p class="card-text ">
+                                                                <%= pending.DROP_OFF %>
+                                                            </p>
 
-            <% } %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p class="card-text ">Vehicle Type:
 
+                                                            </p>
 
-                <script>
-                    var timer, timer2,timerw,timeri;
-                    async function loadInfo() {
-                        // const stat=await fetch('/user/pending_status');
-                        // const info=await stat.text();
-                        //alert(info);
-                        if (localStorage.getItem('loadInfo') === 'true') {
-                           localStorage.removeItem('loadInfo');
-                        //if(info.includes('already')){
-                            
-                            clearInterval(timeri);
-                            window.location='/user/info';
-                            
-                        }
-                    }
-                    async function loadWallet() {
-                        // const stat=await fetch('/user/pending_status');
-                        // const info=await stat.text();
-                        //alert(info);
-                        if (localStorage.getItem('loadWallet') === 'true') {
-                           localStorage.removeItem('loadWallet');
-                        //if(info.includes('already')){
-                            
-                            
-                            window.location='/user/wallet';
-                            clearInterval(timerw);
-                            
-                        }
-                    }
-                    async function check2() {
-                        // const stat=await fetch('/user/pending_status');
-                        // const info=await stat.text();
-                        //alert(info);
-                        if (localStorage.getItem('reloadUser') === 'true') {
-                           localStorage.removeItem('reloadUser');
-                        //if(info.includes('already')){
-                            location.reload()
-                            clearInterval(timer2);
-                        }
-                    }
-                    async function check() {
-                        const data = await fetch('user/request_status')
-                        const text = await data.text();
-                        //alert("got text: " + text);
-                        if (text.includes('accepted')) {
-                            alert('Your Ride Request Has Been Accepted')
-                            clearInterval(timer);
-                            window.location = '/user/running'
-                        }
-                        else if (text.includes('already done')) {
-                            // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
-                            clearInterval(timer);
-                            //window.location = '/user/running'
-                        }
+                                                        </div>
+                                                        <div class="col">
+                                                            <p class="card-text ">
+                                                                <%= pending.V_TYPE %>
+                                                            </p>
 
-                    }
+                                                        </div>
+                                                    </div>
 
-                    async function checkOld() {
-                        const data = await fetch('user/requests/old')
-                        const text = await data.text();
-                        //alert("got text: " + text);
-                        if (text.includes('old')) {
-                            alert('Sorry!!No nearby driver accepted your request in 30 minutes.Try again!!');
-                            const done=await fetch('user/requests/deleteold');
-                            const st=await done.text();
-                            //alert(st);
-                            if(st.includes('done')) {
-                                //alert('reloading');
-                                location.reload()
-                            clearInterval(timero);
-                            //window.location = '/user';
-                            }
-                        }
-                        
+                                                    <form action="/user/cancel" method="POST">
 
-                    }
+                                                        <input type="submit" value="Cancel Request"
+                                                            class="btn btn-primary btn-round-lg btn-lg" style="margin-top: 50;">
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <% } %>
 
 
+                            <script>
+                                var timer, timer2, timerw, timeri;
+                                async function loadInfo() {
+                                    // const stat=await fetch('/user/pending_status');
+                                    // const info=await stat.text();
+                                    //alert(info);
+                                    if (localStorage.getItem('loadInfo') === 'true') {
+                                        localStorage.removeItem('loadInfo');
+                                        //if(info.includes('already')){
 
-                
-                    timer2 = setInterval(check2, 500);
-                    timer = setInterval(check, 5000);
-                    timeri=setInterval(loadInfo,1000);
-                    timerw=setInterval(loadWallet,1000);
-                    timero=setInterval(checkOld,5000);
-                    
-                </script>
+                                        clearInterval(timeri);
+                                        window.location = '/user/info';
+
+                                    }
+                                }
+                                async function loadWallet() {
+                                    // const stat=await fetch('/user/pending_status');
+                                    // const info=await stat.text();
+                                    //alert(info);
+                                    if (localStorage.getItem('loadWallet') === 'true') {
+                                        localStorage.removeItem('loadWallet');
+                                        //if(info.includes('already')){
+
+
+                                        window.location = '/user/wallet';
+                                        clearInterval(timerw);
+
+                                    }
+                                }
+                                async function check2() {
+                                    // const stat=await fetch('/user/pending_status');
+                                    // const info=await stat.text();
+                                    //alert(info);
+                                    if (localStorage.getItem('reloadUser') === 'true') {
+                                        localStorage.removeItem('reloadUser');
+                                        //if(info.includes('already')){
+                                        location.reload()
+                                        clearInterval(timer2);
+                                    }
+                                }
+                                async function check() {
+                                    const data = await fetch('user/request_status')
+                                    const text = await data.text();
+                                    //alert("got text: " + text);
+                                    if (text.includes('accepted')) {
+                                        alert('Your Ride Request Has Been Accepted')
+                                        clearInterval(timer);
+                                        window.location = '/user/running'
+                                    }
+                                    else if (text.includes('already done')) {
+                                        // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
+                                        clearInterval(timer);
+                                        //window.location = '/user/running'
+                                    }
+
+                                }
+
+                                async function checkOld() {
+                                    const data = await fetch('user/requests/old')
+                                    const text = await data.text();
+                                    //alert("got text: " + text);
+                                    if (text.includes('old')) {
+                                        alert('Sorry!!No nearby driver accepted your request in 30 minutes.Try again!!');
+                                        const done = await fetch('user/requests/deleteold');
+                                        const st = await done.text();
+                                        //alert(st);
+                                        if (st.includes('done')) {
+                                            //alert('reloading');
+                                            location.reload()
+                                            clearInterval(timero);
+                                            //window.location = '/user';
+                                        }
+                                    }
+
+
+                                }
+
+
+
+
+                                timer2 = setInterval(check2, 500);
+                                timer = setInterval(check, 5000);
+                                timeri = setInterval(loadInfo, 1000);
+                                timerw = setInterval(loadWallet, 1000);
+                                timero = setInterval(checkOld, 5000);
+
+                            </script>
+</body>

@@ -1,78 +1,66 @@
 <html>
-  <head>
-    <title>Continue to request a ride</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-    <link rel="stylesheet" type="text/css" href="./dirstyle.css" />
-    <!-- <link rel="stylesheet" href="/css/frontfarecard.css"> -->
-    <script type="module" src="./dir.js"></script>
-    <!-- <script src="/js/frontfarecard.js"></script> -->
-  </head>
-  <body>
-    <h3 style="margin-left: 300px;">Request For a Ride</h3>
-    <div style="display: none;">
-      <input
-        id="origin-input"
-        class="controls"
-        type="text"
-        
-        placeholder="Enter an origin location"
-        style="margin-left: 20%;border-style: solid; border-color:blueviolet;"
-      >
+<head>
+  <title>Continue to request a ride</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-      <input
-        id="destination-input"
-        class="controls"
-        type="text"
-        placeholder="Enter a destination location"
-        style="margin-left: 20%;border-style: solid; border-color:blueviolet"
-    
-      >
+  <link rel="stylesheet" type="text/css" href="./dirstyle.css" />
+  <!-- <link rel="stylesheet" href="/css/frontfarecard.css"> -->
+  <script type="module" src="./dir.js"></script>
+  <!-- <script src="/js/frontfarecard.js"></script> -->
+</head>
 
-      <div id="mode-selector" class="controls" style="display: none;">
-        <input
-          type="radio"
-          name="type"
-          id="changemode-walking"
-          checked="checked"
-          style="margin-left: 20%;"
-          
-        >
-        <label for="changemode-walking">Walking</label>
+<body>
+  <h3 style="margin-left: 300px;">Request For a Ride</h3>
+  <div style="display: none;">
+    <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location"
+      style="margin-left: 20%;border-style: solid; border-color:blueviolet;">
 
-        <input type="radio" name="type" id="changemode-transit" />
-        <label for="changemode-transit">Transit</label>
+    <input id="destination-input" class="controls" type="text" placeholder="Enter a destination location"
+      style="margin-left: 20%;border-style: solid; border-color:blueviolet">
 
-        <input type="radio" name="type" id="changemode-driving" />
-        <label for="changemode-driving">Driving</label>
-      </div> 
+    <div id="mode-selector" class="controls" style="display: none;">
+      <input type="radio" name="type" id="changemode-walking" checked="checked" style="margin-left: 20%;">
+      <label for="changemode-walking">Walking</label>
+
+      <input type="radio" name="type" id="changemode-transit" />
+      <label for="changemode-transit">Transit</label>
+
+      <input type="radio" name="type" id="changemode-driving" />
+      <label for="changemode-driving">Driving</label>
     </div>
+  </div>
+  <div class="container">
     <div class="row" style="height: 100%;">
-      
-        <div id="map" class="col" style="margin-top: 5%;position: relative; z-index: 2; height: 80%;width: 80%; border-radius: 20px;border-style: solid; border-color:brown;"></div>
-     
-      <div class="col" style="width: 20%; position: relative; margin:0%; padding: 0%;">
-        <div class="card" style="margin-bottom: 0%; margin-top: -20%; z-index: 3; position: relative; background-color:transparent;">
+
+      <div id="map" class="col"
+        style="margin-top: 5%; height: 80%;width: 70%; border-radius: 20px;border-style: solid; border-color:brown;">
+      </div>
+
+      <div class="col" style="width: 20%;">
+        <div class="card"
+          style="margin-bottom: 0%; margin-top: -20%; z-index: 3; position: relative; background-color:transparent;">
           <div id="output" style="margin-bottom: 0%;margin-left: 40%;"></div>
-         <button id="Car" style="display: none; margin-left: 50%;">Car</button>
-         <button id="Bike" style="display: none; margin-left: 50%;">Bike</button>
+          <button id="Car" style="display: none; margin-left: 50%;">Car</button>
+          <button id="Bike" style="display: none; margin-left: 50%;">Bike</button>
           <button id="CNG" style="display: none;margin-left: 50%;">CNG</button>
         </div>
       </div>
     </div>
-
-   
-
+  </div>
 
 
 
 
 
 
-<!-- card begin -->
 
 
-			<!-- <div class="card card0 rounded-0" style="margin-top: -20%; display: none; z-index: 3; position: relative;">
+
+  <!-- card begin -->
+
+
+  <!-- <div class="card card0 rounded-0" style="margin-top: -20%; display: none; z-index: 3; position: relative;">
 				<div class="row">
 					<div class="col-md-5 d-md-block d-none p-0 box">
 						<div class="card rounded-0 border-0 card1" id="bill">
@@ -119,7 +107,7 @@
 
 
 
-    <!-- 
+  <!-- 
       The `defer` attribute causes the callback to execute after the full HTML
       document has been parsed. For non-blocking uses, avoiding race conditions,
       and consistent behavior across browsers, consider loading using Promises.
@@ -138,11 +126,11 @@
 
 
 
-      <!-- card end -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA&callback=initMap&libraries=places&v=weekly"
-      defer
-    ></script>
- 
-  </body>
+  <!-- card end -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA&callback=initMap&libraries=places&v=weekly"
+    defer></script>
+
+</body>
+
 </html>
