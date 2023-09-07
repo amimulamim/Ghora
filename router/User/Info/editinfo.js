@@ -37,14 +37,24 @@ router.post('/', async (req, res) => {
     }
 
     console.log(req.body);
-    let results, errors = [];
-    // results = DB_auth_user.getuserIDByEmail(req.body.email);
-    // if (results.length > 0)
-    //     errors.push('You can,t change email');
-    // if (req.body.password != req.body.password2)
-    //     errors.push('PASSWORDS MUST MATCH');
-    if (req.body.phone.length != 13)
-        errors.push('Phone no must start with 8801');
+    let results,resphone,resusername, errors = [];
+    results = await DB_auth_user.getUsernameByEmail(req.body.email);
+    resphone = await DB_auth_user.getUsernameByPhone(req.body.phone);
+    console.log("phone =",req.body.phone)
+    
+    if (results.length > 0) {
+        if (results[0].ID != req.driver.ID)
+            errors.push('Email is already registered to a user');
+    }
+
+    if (resphone.length > 0) {
+        if (resphone[0].ID != req.driver.ID)
+            errors.push('Phone number is already registered to a driver');
+    }
+
+    if(req.body.phone.length!=13){
+        errors.push('Phone number must be 88.. +11 digits ');
+    }
     if (errors.length > 0) {
         res.render('userlayout.ejs', {
             title: 'Sign Up - Ghora',

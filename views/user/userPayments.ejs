@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,18 +13,19 @@
             overflow-y: auto;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
 
         th {
-            background-color: #5b1350;
+            background-color: #f2f2f2;
         }
 
         tr:nth-child(even) {
-            background-color: #dc71dc;
+            background-color: #f2f2f2;
         }
 
         tr:hover {
@@ -33,33 +33,53 @@
         }
     </style>
 </head>
+
 <body>
-   <% if(payments.length>0){ %>
-    <h1 style="margin-left: 40%;">FARE PAID:</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Transaction No</th>
-                <th>Trip_id</th>
-                <th>Driver Name</th>
-                <th>Amount</th>
-                <th>Payment Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% payments.forEach(function(payment) { %>
-                <tr>
-                    <td><%= payment.TRANSACTION_NO %></td>
-                    <td><%= payment.TR_ID %></td>
-                    <td><%= payment.DRIVER_NAME %></td>
-                    <td><%= payment.AMOUNT %></td>
-                    <td><%= payment.PAYMENT_TIME %></td>
-                </tr>
-            <% }); %>
-        </tbody>
-    </table>
-    <% } else {%>
-        <h1 style="margin-left: 40%;">You have not received any payment</h1>
-        <% } %>
+    <div class="container justify-content-center">
+    <% if(payments.length>0){ %>
+        <div class="row" style="width: 100%; overflow-x: hidden;">
+            <h1 style="margin-left: 35%;">Payments</h1>
+        </div>
+        <div class="row" style="width: 100%; overflow-x: hidden;">
+            
+            <table class="table-info" style="margin-left: 0;" >
+                <thead>
+                    <tr>
+                        <th>Transaction No</th>
+                        <th>Trip ID</th>
+                        <th>Driver Name</th>
+                        <th>Amount</th>
+                        <th>Payment Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% payments.forEach(function(payment) { %>
+                        <tr>
+                            <td>
+                                <%= payment.TRANSACTION_NO %>
+                            </td>
+                            <td>
+                                <%= payment.TR_ID %>
+                            </td>
+                            <td>
+                                <%= payment.DRIVER_NAME %>
+                            </td>
+                            <td>
+                                <%= payment.AMOUNT %>
+                            </td>
+                            <td>
+                                <%= payment.PAYMENT_TIME %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        
+        </div>
+        <% } else {%>
+            <h1 style="margin-left: 30%;">You have not done any payment</h1>
+            <% } %>
+        </div>
 </body>
-</html>
+
+

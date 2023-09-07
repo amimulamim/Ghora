@@ -111,15 +111,15 @@ class AutocompleteDirectionsHandler {
 
     this.setupClickListener(
       "Car",
-      
+
     );
     this.setupClickListener(
       "Bike",
-      
+
     );
     this.setupClickListener(
       "CNG",
-      
+
     );
     this.setupPlaceChangedListener(originAutocomplete, "ORIG");
     this.setupPlaceChangedListener(destinationAutocomplete, "DEST");
@@ -156,14 +156,14 @@ class AutocompleteDirectionsHandler {
     }
 
     rideButton.addEventListener("click", async () => {
-      console.log("dist,dura= ",this.distanceBetween,' ',this.durationBetween);
-      console.log("fare= ",this.carfare);
-      let fare= this.carfare;
-      if(id=='Bike'){
-        fare=this.bikefare;
+      console.log("dist,dura= ", this.distanceBetween, ' ', this.durationBetween);
+      console.log("fare= ", this.carfare);
+      let fare = this.carfare;
+      if (id == 'Bike') {
+        fare = this.bikefare;
       }
-      else if(id=='CNG'){fare=this.cngfare;}
-      console.log("fare is :",fare);
+      else if (id == 'CNG') { fare = this.cngfare; }
+      console.log("fare is :", fare);
 
       const req_data = {
         origin: 'https://maps.googleapis.com/maps/api/geocode/json?place_id=' + this.originPlaceId + '&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
@@ -182,8 +182,7 @@ class AutocompleteDirectionsHandler {
             if (text.includes('must')) {
               alert('Your Must add a Wallet to request for a ride');
               //clearInterval(timer);
-              localStorage.setItem('loadInfo', 'true');
-             // window.location = '/user/info';
+              window.location = '/user/info';
             }
             else if (text.includes('BALANCE')) {
               // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
@@ -194,19 +193,19 @@ class AutocompleteDirectionsHandler {
               // Sample text containing the balance information
               let BALANCE = 0;
 
-              // Regular expression pattern to match a number (integer or floating-point)
-              const pattern = /[-+]?\d*\.?\d+/;
+        // Regular expression pattern to match a number (integer or floating-point)
+        const pattern = /[-+]?\d*\.?\d+/;
 
-              // Extract the number from the text
-              const match = text.match(pattern);
+        // Extract the number from the text
+        const match = text.match(pattern);
 
-              if (match) {
-                const number = parseFloat(match[0]);
-                BALANCE = number;
-                console.log(number);
-              } else {
-                console.log("Number not found in the text.");
-              }
+        if (match) {
+          const number = parseFloat(match[0]);
+          BALANCE = number;
+          console.log(number);
+        } else {
+          console.log("Number not found in the text.");
+        }
 
               //console.log('front end e wallet data: ' + JSON.stringify(data));
               console.log('front end e balance= ', BALANCE);
@@ -218,12 +217,10 @@ class AutocompleteDirectionsHandler {
               }
               else {
                 alert('You Do not have enough balance in your wallet to request for this ride');
+                window.location = '/user/wallet';
 
-                //window.location = '/user/wallet';
-                localStorage.setItem('loadWallet', 'true');
-
-              }
-            } 
+        }
+      }
 
 
     });
@@ -237,12 +234,12 @@ class AutocompleteDirectionsHandler {
 
 
 
-     
+
 
 
 
       console.log('api req=' + 'https://maps.googleapis.com/maps/api/geocode/json?place_id=' + idp + '&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA');
-      
+
 
 
 
@@ -262,7 +259,7 @@ class AutocompleteDirectionsHandler {
     });
   }
 
-  showRoute(){
+  showRoute() {
     if (!this.originPlaceId || !this.destinationPlaceId) {
       return;
     }
@@ -279,12 +276,12 @@ class AutocompleteDirectionsHandler {
         if (status === "OK") {
           me.directionsRenderer.setDirections(response);
 
-          
+
           const output = document.querySelector('#output');
-          
+
           output.innerHTML = "<div class='alert-info'> FROM:" + document.getElementById("origin-input").value + ".<br/> To: " + document.getElementById("destination-input").value + ".<br/> Driving Distance: " + response.routes[0].legs[0].distance.text + ".<br/> Duration: " + response.routes[0].legs[0].duration.text + ".</div>";
-          this.distanceBetween= response.routes[0].legs[0].distance.text;
-          this.durationBetween=response.routes[0].legs[0].duration.text;
+          this.distanceBetween = response.routes[0].legs[0].distance.text;
+          this.durationBetween = response.routes[0].legs[0].duration.text;
 
 
 
@@ -298,18 +295,18 @@ class AutocompleteDirectionsHandler {
           const bikefare = Math.max(distnce * 50, duratn * 15);
           const cngfare = Math.max(distnce * 75, duratn * 25);
 
-          this.carfare=carfare;
-          console.log("inserted cf,this cf= ",carfare,this.carfare);
-          this.bikefare=bikefare;
-          this.cngfare=cngfare;
-          
+          this.carfare = carfare;
+          console.log("inserted cf,this cf= ", carfare, this.carfare);
+          this.bikefare = bikefare;
+          this.cngfare = cngfare;
+
           this.carbutton.style.display = "block";
           this.carbutton.textContent = "Car " + carfare + " Tk";
           this.bikebutton.style.display = "block";
           this.bikebutton.textContent = "Bike " + bikefare + " Tk";
           this.cngbutton.style.display = "block";
           this.cngbutton.textContent = "CNG " + cngfare + " Tk";
-         
+
 
 
         }
@@ -318,289 +315,8 @@ class AutocompleteDirectionsHandler {
         }
 
       }
-
-    );
-
-
-
-
-
-
-
-
-  }
-
-
-
-
-
-  async route() {
-    if (!this.originPlaceId || !this.destinationPlaceId) {
-      return;
-    }
-
-    const me = this;
-
-    this.directionsService.route(
-      {
-        origin: { placeId: this.originPlaceId },
-        destination: { placeId: this.destinationPlaceId },
-        travelMode: this.travelMode,
-      },
-      async (response, status) => {
-        if (status === "OK") {
-          me.directionsRenderer.setDirections(response);
-
-          //directionsRenderer.setDirections(response);
-          //  console.log("distance is ="+ response.routes[0].legs[0].distance.text);
-          //  console.log("Expected duration: "+ response.routes[0].legs[0].duration.text);
-          //  console.log("response is ",response);
-          const output = document.querySelector('#output');
-          //   response.routes[0].legs[0].distance.text
-          //   for (let i = 0; i < ; i++) {
-          //     console.log( myroute.legs[i].distance.value);
-          // }
-          output.innerHTML = "<div class='alert-info'> FROM:" + document.getElementById("origin-input").value + ".<br/> To: " + document.getElementById("destination-input").value + ".<br/> Driving Distance: " + response.routes[0].legs[0].distance.text + ".<br/> Duration: " + response.routes[0].legs[0].duration.text + ".</div>";
-
-
-          // Assuming you have a form and a button with the id "submit-button"
-
-          const req_data = {
-            origin: 'https://maps.googleapis.com/maps/api/geocode/json?place_id=' + this.originPlaceId + '&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
-            destination: 'https://maps.googleapis.com/maps/api/geocode/json?place_id=' + this.destinationPlaceId + '&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
-            origin: 'https://maps.googleapis.com/maps/api/geocode/json?place_id=' + this.originPlaceId + '&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
-            destination: 'https://maps.googleapis.com/maps/api/geocode/json?place_id=' + this.destinationPlaceId + '&key=AIzaSyBPcblOBNzRF6zi8xrbXLdrTWTPn7_P2JA',
-            travelMode: this.travelMode,
-            distance: response.routes[0].legs[0].distance.text,
-            duration: response.routes[0].legs[0].duration.text,
-            v_type: 'CAR',
-            fare: 100
-
-          };
-
-          const carbutton = document.getElementById("Car");
-          const bikebutton = document.getElementById("Bike");
-          const cngbutton = document.getElementById("CNG");
-          // Show the button
-          const distnce = parseFloat(response.routes[0].legs[0].distance.text);
-          const duratn = parseFloat(response.routes[0].legs[0].duration.text);
-          const carfare = Math.max(distnce * 100, duratn * 30);
-          var bikefare = Math.max(distnce * 50, duratn * 15);
-          var cngfare = Math.max(distnce * 75, duratn * 25);
-          console.log("carfare =", carfare);
-          console.log("bikefare =", bikefare);
-          console.log("cngfare =", cngfare);
-          carbutton.style.display = "block";
-          carbutton.textContent = "Car " + carfare + " Tk";
-          bikebutton.style.display = "block";
-          bikebutton.textContent = "Bike " + bikefare + " Tk";
-          cngbutton.style.display = "block";
-          cngbutton.textContent = "CNG " + cngfare + " Tk";
-
-
-
-          carbutton.addEventListener("click", async () => {
-            req_data.v_type = 'CAR';
-            req_data.fare = carfare;
-            const data = await fetch('user/requests/allowed');
-            const text = await data.text();
-            //alert("got text: " + text);
-            if (text.includes('must')) {
-              alert('Your Must add a Wallet to request for a ride');
-              //clearInterval(timer);
-              window.location = '/user/info';
-            }
-            else if (text.includes('BALANCE')) {
-              // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
-              //clearInterval(timer);
-              //window.location = '/user/running'
-              console.log('text= ', text);
-              //const BALANCE=parseFloat(text);
-              // Sample text containing the balance information
-              let BALANCE = 0;
-
-              // Regular expression pattern to match a number (integer or floating-point)
-              const pattern = /[-+]?\d*\.?\d+/;
-
-              // Extract the number from the text
-              const match = text.match(pattern);
-
-              if (match) {
-                const number = parseFloat(match[0]);
-                BALANCE = number;
-                console.log(number);
-              } else {
-                console.log("Number not found in the text.");
-              }
-
-              //console.log('front end e wallet data: ' + JSON.stringify(data));
-              console.log('front end e balance= ', BALANCE);
-              if (BALANCE >= carfare) {
-                console.log('req sent successfully');
-                await sendingResponse(req_data);
-                localStorage.setItem('reloadUser', 'true');
-                // setTimeout(() => location.reload(), 2000)
-              }
-              else {
-                alert('You Do not have enough balance in your wallet to request for this ride');
-                window.location = '/user/wallet';
-
-              }
-            } 
-
-          });
-
-          bikebutton.addEventListener("click", async () => {
-            req_data.v_type = 'BIKE';
-            req_data.fare = bikefare;
-            const data = await fetch('user/requests/allowed')
-            const text = await data.text();
-            //alert("got text: " + text);
-            if (text.includes('must')) {
-              alert('Your Must add a Wallet to request for a ride');
-              //clearInterval(timer);
-              window.location = '/user/info';
-            }
-            else if (text.includes('BALANCE')) {
-              // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
-              //clearInterval(timer);
-              //window.location = '/user/running'
-              console.log('text= ', text);
-              //const BALANCE=parseFloat(text);
-              // Sample text containing the balance information
-              let BALANCE = 0;
-
-              // Regular expression pattern to match a number (integer or floating-point)
-              const pattern = /[-+]?\d*\.?\d+/;
-
-              // Extract the number from the text
-              const match = text.match(pattern);
-
-              if (match) {
-                const number = parseFloat(match[0]);
-                BALANCE = number;
-                console.log(number);
-              } else {
-                console.log("Number not found in the text.");
-              }
-
-              //console.log('front end e wallet data: ' + JSON.stringify(data));
-              console.log('front end e balance= ', BALANCE);
-              if (BALANCE >= bikefare) {
-                console.log('req sent successfully');
-                await sendingResponse();
-                localStorage.setItem('reloadUser', 'true');
-                //setTimeout(() => location.reload(), 2000)
-              
-              }
-              else {
-                alert('You Do not have enough balance in your wallet to request for this ride');
-                window.location = '/user/wallet';
-
-              }
-            }
-           // await sendingResponse();
-          });
-
-          cngbutton.addEventListener("click", async () => {
-            req_data.v_type = 'CNG';
-            req_data.fare = cngfare;
-           // await sendingResponse();
-           const data = await fetch('user/requests/allowed')
-           const text = await data.text();
-           //alert("got text: " + text);
-           if (text.includes('must')) {
-             alert('Your Must add a Wallet to request for a ride');
-             //clearInterval(timer);
-             window.location = '/user/info';
-           }
-           else if (text.includes('BALANCE')) {
-             // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
-             //clearInterval(timer);
-             //window.location = '/user/running'
-             console.log('text= ', text);
-             //const BALANCE=parseFloat(text);
-             // Sample text containing the balance information
-             let BALANCE = 0;
-
-             // Regular expression pattern to match a number (integer or floating-point)
-             const pattern = /[-+]?\d*\.?\d+/;
-
-             // Extract the number from the text
-             const match = text.match(pattern);
-
-             if (match) {
-               const number = parseFloat(match[0]);
-               BALANCE = number;
-               console.log(number);
-             } else {
-               console.log("Number not found in the text.");
-             }
-
-             //console.log('front end e wallet data: ' + JSON.stringify(data));
-             console.log('front end e balance= ', BALANCE);
-             if (BALANCE >= cngfare) {
-               console.log('req sent successfully');
-               await sendingResponse();
-               localStorage.setItem('reloadUser', 'true');
-              // setTimeout(() => location.reload(), 2000)
-               
-
-             }
-             else {
-               alert('You Do not have enough balance in your wallet to request for this ride');
-               window.location = '/user/wallet';
-
-             }
-           }
-          });
-
-
-
-
-
-          async function sendingResponse() {
-            const sendresponse = await fetch("/user/requests", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(req_data),
-            });
-
-            if (sendresponse.ok) {
-              // Data saved successfully
-              console.log("Data saved successfully");
-              console.log("data is:", req_data);
-            }
-
-            else {
-              console.log("Data not saved");
-            }
-          }
-
-
-
-
-
-
-
-
-
-
-
-
-        } else {
-          window.alert("Directions request failed due to " + status);
-        }
-      },
     );
   }
-
-
-
-
-
 }
 
 window.initMap = initMap;

@@ -1,86 +1,67 @@
 
-	<head>
-		<title> Transparent Login form </title>
-		<link rel="stylesheet" href="/css/signup.css">
-	
 
-	</head>
-	<body>
-	<div class="loginBox">		
-		<img src="user.png" class="user">
-		<h2>Log In Here</h2>
-        <form action="/user/signup" method="POST" class="card-body">
-            <!-- handle -->
-            <div >
-                <input type="text" class="form-control" name="username" required
-                       value="<%= (typeof form != 'undefined') ? form.username : '' %>">
-                <label for="handle">Username</label>
-            </div>
-        
-            <div >
-                <input type="text"  name="name" required
-                       value="<%= (typeof form != 'undefined') ? form.name : '' %>">
-                <label for="handle">Name</label>
+    <head>
+        <title>
+            <%=title%>
+        </title>
+        <link rel="stylesheet" href="/css/usersign.css">
+    
+    
+    </head>
+    
+    <body style="background:url('../../images/background.jpg');">
+        <div >
+            <div class="loginBox">
+    
+                <img src="../../images/user.png" class="user">
+                <h2>Sign Up</h2>
+                <form action="/user/signup" method="POST">
+                    <p>Username</p>
+                    <input type="text" name="username" required value="<%= (typeof form != 'undefined') ? form.username : '' %>">
 
-            </div>
-            <!-- email -->
-            <div >
-
-                <input type="email"  name="email" required
-                       value="<%= (typeof form != 'undefined') ? form.email : '' %>">
-                <label for="email">Email</label>
-
-            </div>
-            <!-- phone no -->
-            <div >
-                <input type="number"  name="phone" required
-                       value="<%= (typeof form != 'undefined') ? form.phone : '' %>" minlength="11" maxlength="13">
-                <label for="phone">Phone Number</label>
-            </div>
-            <!-- password -->
-            <div >
-                <input type="password" name="password" required
-                       value="<%= (typeof form != 'undefined') ? form.password : '' %>">
-                <label for="password">Password</label>
-
-            </div>
-            <!-- confirm password -->
-            <div >
-                <input type="password"  name="password2" required
-                       value="<%= (typeof form != 'undefined') ? form.password2 : '' %>">
-                <label for="password2">Confirm Password</label>
-            </div>
-
-            <!-- Date of Birth -->
-            <!--        <div class="form-group row m-2">-->
-            <!--            <label for="birthdate" class="col-4 col-form-label">Date of Birth</label>-->
-            <!--            <div class="pl-3">-->
-            <!--                <input type="date" class="form-control" name="birthdate" required-->
-            <!--                value="<%= (typeof form != 'undefined') ? form.birthdate : '' %>" >-->
-            <!--            </div>-->
-            <!--        </div>-->
-            <!-- error list -->
-            <% if (errors.length > 0) { %>
-                <div class="row m-2 mx-0 pb-0 alert alert-danger">
-                    <ul>
-                        <% for (e of errors) { %>
-                            <li> <%= e %> </li>
+                    <p>Name</p>
+                    <input type="text" name="name" required value="<%= (typeof form != 'undefined') ? form.name : '' %>">
+                    <p>Email</p>
+                    <input type="email" name="email" required value="<%= (typeof form != 'undefined') ? form.email : '' %>">
+    
+    
+                    <p>Phone</p>
+                    <input type="number" name="phone" required
+                        value="<%= (typeof form != 'undefined') ? form.phone : '' %>" minlength="11" maxlength="11">
+    
+                    <p>Password</p>
+                    <input type="password" name="password" required
+                        value="<%= (typeof form != 'undefined') ? form.password : '' %>">
+    
+                    <p>Confirm Password</p>
+                    <input type="password" name="password2" required
+                        value="<%= (typeof form != 'undefined') ? form.password2 : '' %>">
+    
+    
+                    <input type="submit" name="" value="sign up">
+    
+                    <% if (errors.length> 0) { %>
+                        <div class="row m-2 mx-0 pb-0 alert alert-danger">
+                            <ul>
+                                <% for (e of errors) { %>
+                                    <li>
+                                        <%= e %>
+                                    </li>
+                                    <% } %>
+                            </ul>
+                        </div>
                         <% } %>
-                    </ul>
+    
+                </form>
+    
+                <div class="d-flex justify-content-around">
+                    <p>Already have an account?<a class="js--registration-form-btn" href="/user/login"><b>Login
+                                Now!</b></a>
+                    </p>
                 </div>
-            <% } %>
-            <!-- submit -->
-            <div class="d-grid gap-2 mt-3">
-                <button type="submit" style="background-color: #33c24d;border: 0">Create
-                    Account
-                </button>
             </div>
-
-        </form>
-        <div class="d-flex justify-content-around">
-            <p>Already have an account?<a class="js--registration-form-btn" href="/user/login"><b>Login Now!</b></a>
-            </p>
         </div>
-	</div>
-	</body>
+    </body>
+    
+    </html>
 

@@ -1,134 +1,129 @@
-
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <link rel="stylesheet" href="/path/to/styleprofile.css"> -->
-  <style>
-    /* Reset some default styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .profile-container {
-      background-color: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      padding: 300px;
-
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .field {
-      display: flex;
-      position: relative;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .label {
-      font-weight: bold;
-      margin-right: 10px;
-      width: 120px;
-    }
-
-    .value {
-      flex-grow: 1;
-    }
-
-    .edit {
-      color: #3498db;
-      cursor: pointer;
-      position: relative;
-    }
-  </style>
-
-
-
-  <title>
-    <%= title %>
-  </title>
+  <link rel="stylesheet" href="/css/driverprofile.css">
 </head>
 
 <body>
-  <div class="profile-container">
-    <h1><b>
-        <%= info[0].NAME %>
-      </b></h1>
 
-    <div class="profile-info">
-      <div class="field">
-        <span class="label">USERNAME:</span>
-        <span class="value">
-          <%= info[0].USERNAME %>
-        </span>
-        <!-- <span class="edit"><a href="#">Edit</a></span> -->
-      </div>
-      <div class="field">
-        <span class="label">Name:</span>
-        <span class="value">
-          <%= info[0].NAME %>
-        </span>
-        <!-- <span class="edit"><a href="#">Edit</a></span> -->
-      </div>
-      <div class="field">
-        <span class="label">Email:</span>
-        <span class="value">
-          <%= info[0].EMAIL %>
-        </span>
-        <!-- <span class="edit"><a href="#">Edit</a></span> -->
-      </div>
-      <div class="field">
-        <span class="label">Phone:</span>
-        <span class="value">
-          <%= info[0].PHONE %>
-        </span>
-        <!-- <span class="edit"><a href="#">Edit</a></span> -->
-      </div>
-      <div class="field">
-        <span class="label">Sex:</span>
-        <span class="value">
-          <%= info[0].SEX %>
-        </span>
-        <!-- <span class="edit"><a href="#">Edit</a></span> -->
-      </div>
-      <div class="field">
-        <span class="label">Wallet ID:</span>
-        <span class="value">
-          <%= info[0].WALLET_ID %>
-        </span>
-        <!-- <span class="edit"><a href="#">Edit</a></span> -->
-      </div>
+  <div id="content" class="p-4 p-md-5">
+    <!-- <%- include('../driver/header') %> -->
+    <div class="container emp-profile">
+      <form method="post">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="profile-img">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+                alt="" />
+              <div class="file btn btn-lg btn-primary">
+                Change Photo
+                <input type="file" name="file" />
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="profile-head">
+              <h5>
+                <%= info[0].NAME %>
+              </h5>
+              <h6>
+                User
+              </h6>
+              <p class="proile-rating">E-mail : <span>
+                  <%= info[0].EMAIL %>
+                </span></p>
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home"
+                    aria-selected="true">Information</a>
+                </li>
 
-      <div>
-        <span class="edit"><a href="/user/info/edit">Edit Info</a></span>
-        <span class="changepass"><a href="/user/info/changepassword">change password</a></span>
-      </div>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <a type="submit" class="profile-edit-btn" href="/user/info/edit">Edit Profile</a>
+            <a class="profile-edit-btn" href="/user/info/changepassword">Change Password</a>
 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="profile-work">
+              <p>Premium User</p>
+
+
+
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="tab-content profile-tab" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Username</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>
+                      <%=info[0].USERNAME%>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Name</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>
+                      <%= info[0].NAME %>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Email</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>
+                      <%= info[0].EMAIL %>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Phone</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>
+                      <%= info[0].PHONE %>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Gender</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>
+                      <%= info[0].SEX %>
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Wallet ID</label>
+                  </div>
+                  <div class="col-md-6">
+                    <p>
+                      <%= info[0].WALLET_ID %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- </div> -->
     </div>
-  </div>
-</body>
 
-</html>
+</body>
