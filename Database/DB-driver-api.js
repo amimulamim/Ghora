@@ -136,14 +136,33 @@ async function getWalletId(email){
     return (await database.execute(sql,binds,database.options)).rows;
 
 }
-async function getallDriverLocations(){
-    const sql=
-   `SELECT COUNT(DISTINCT CONCAT(ROUND(LAT, 1), ROUND(LNG, 1))) FROM DRIVER
-   `;
-   const binds={};
-   return (await database.execute(sql,binds,database.options)).rows;
-}
 
+
+async function getallDriverLocations(){
+    // const sql=
+    // `
+    // SELECT DISTINCT ROUND(lat, 2) AS LAT,ROUND(lng, 2) AS LNG,GETVTYPEBYID(ID)  AS V_TYPE FROM DRIVER
+    // `;
+    const sql=
+    `
+    SELECT DISTINCT D.LAT AS LAT,D.LNG AS LNG,GETVTYPEBYID(D.ID)  AS V_TYPE 
+    FROM 
+    DRIVER D JOIN
+    AVAILABILITY A on D.ID=A.D_ID 
+    WHERE IS_AVAILABLE=1 AND LAST_UPDATED>=SYSTIMESTAMP-INTERVAL '1' HOUR`;
+    const binds = {
+    }
+
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
+}
 
 module.exports = {
     getAllDrivers,

@@ -141,8 +141,8 @@ create table users(
 create table trip_request(
 	ID          NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
 	    username    VARCHAR2(100) NOT NULL,
-			time_request TIMESTAMP NOT NULL,
-			offered_price NUMBER,
+			time_request TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+			--offered_price NUMBER,
 			--pickup,dropoff are LOC_id 
 			pick_up NUMBER NOT NULL,
 			drop_off NUMBER NOT NULL,
@@ -154,27 +154,44 @@ create table trip_request(
 
 );
 --10
-create table running_trip(
+-- create table running_trip(
+-- 
+-- 	tr_id NUMBER,
+-- 	d_id NUMBER,
+-- 	start_time timestamp NOT NULL,
+-- 	finish_time timestamp ,
+-- 	constraint running_trip_pk PRIMARY KEY(tr_id,d_id)
+-- 
+-- 
+-- );
 
+CREATE table RUNNING_TRIP(
 	tr_id NUMBER,
 	d_id NUMBER,
-	start_time timestamp NOT NULL,
-	finish_time timestamp ,
-	constraint running_trip_pk PRIMARY KEY(tr_id,d_id)
-
-
+	username VARCHAR(100) not null,
+				time_request TIMESTAMP ,
+				start_time timestamp DEFAULT CURRENT_TIMESTAMP,
+				plat NUMBER not null,
+				plng NUMBER not null,
+				dlat NUMBER not null,
+				dlng NUMBER not null,
+		
+		constraint running_trip_pk PRIMARY KEY(tr_id,d_id),
+		constraint running_trips_driver_fk foreign key(d_id) references driver(id) on DELETE set null
+	
 );
 --11 check this table,i am confused
+
 create Table trip_history(
 	
-	tr_ID          NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
+	tr_ID          NUMBER,
 	    username    VARCHAR2(100) NOT NULL,
 			start_time TIMESTAMP NOT NULL,
-			finish_time timestamp NOT NULL ,
+			finish_time timestamp  ,
 			
 			--pickup,dropoff are LOC_id 
-			pick_up NUMBER NOT NULL,
-			drop_off NUMBER NOT NULL,
+			--pick_up NUMBER NOT NULL,
+			--drop_off NUMBER NOT NULL,
 			review_id NUMBER,
 			plate_no CHAR(20) NOT NULL,
 			
@@ -183,9 +200,9 @@ create Table trip_history(
 			
 			constraint trip_history_pk  primary key(tr_id),
 			constraint trip_history_users_fk  foreign key(username) references users(username) ,
-			constraint trip_history_vehicle_fk  foreign key(plate_no) references vehicle(plate_no),
-			constraint th_pick_location_fk Foreign key(pick_up) references Location(id),
-			constraint th_drop_location_fk Foreign key(drop_off) references Location(id)
+			constraint trip_history_vehicle_fk  foreign key(plate_no) references vehicle(plate_no)
+			--constraint th_pick_location_fk Foreign key(pick_up) references Location(id),
+			--constraint th_drop_location_fk Foreign key(drop_off) references Location(id)
 			
 			
 	
@@ -196,7 +213,7 @@ create Table trip_history(
 CREATE table payments(
 	transaction_no char(20),
 	amount NUMBER,
-	payment_time timestamp,
+	payment_time timestamp DEFAULT CURRENT_TIMESTAMP,
 	tr_id NUMBER UNIQUE,
 	plan_id NUMBER,
 	
@@ -224,6 +241,7 @@ add  wallet_id NUMBER;
 --
  alter table users
 add constraint user_wallet_fk foreign key(wallet_id) references wallet(id);
+
 --
 alter table driver
 add  wallet_id NUMBER;
@@ -286,7 +304,122 @@ add ID        NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ;
 alter table USERS
 add NAME char(100);
 
+alter table DRIVER
+drop  constraint driver_location_fk;
 
+ALTER TABLE USERS
+DROP constraint  users_location_fk;
+
+ALTER TABLE USERS
+add (lat NUMBER,
+lng NUMBER);
+
+ALTER TABLE DRIVER
+add (lat NUMBER,
+lng NUMBER);
+
+ALTER TABLE users drop COLUMN LOC_ID;
+
+
+ALTER TABLE DRIVER drop COLUMN LOC_ID;
+
+ALTER TABLE TRIP_REQUEST 
+Drop COLUMN PICK_UP;
+ALTER TABLE TRIP_REQUEST 
+DRop COLUMN DROP_OFF;
+
+
+ALTER TABLE TRIP_HISTORY
+Drop COLUMN PICK_UP;
+ALTER TABLE TRIP_HISTORY 
+DRop COLUMN DROP_OFF;
+
+
+
+
+DROP TABLE LOCATION;
+
+ALTER TABLE TRIP_REQUEST
+add (plat NUMBER,
+plng NUMBER,
+dlat NUMBER,
+dlng NUMBER
+);
+
+DROP TABLE LOCATION;
+
+ALTER TABLE TRIP_HISTORY
+add (plat NUMBER,
+plng NUMBER,
+dlat NUMBER,
+dlng NUMBER
+);
+
+
+
+ALTER TABLE DRIVER
+add (lat NUMBER,
+lng NUMBER);
+
+ALTER TABLE TRIP_REQUEST
+add(v_type VARCHAR(50) );
+
+
+
+ALTER TABLE RUNNING_TRIP
+add  notified INTEGER DEFAULT 0;
+
+ALTER TABLE DRIVER
+add constraint driver_wallet_uk UNIQUE(WALLET_ID);
+
+ALTER TABLE users
+add constraint users_wallet_uk unique(WALLET_ID);
+
+ALTER TABLE RUNNING_TRIP
+add FARE NUMBER;
+
+ALTER table TRIP_REQUEST
+add fare NUMBER;
+
+ALTER table TRIP_HISTORY
+add fare NUMBER;
+
+
+alter TABLE TRIP_HISTORY
+drop COLUMN REVIEW_ID;
+
+
+
+
+ALTER TABLE USERS
+MODIFY (NAME VARCHAR2(200));
+
+
+
+
+
+create table jsao_files (
+  id           number generated always as identity not null,
+  file_name    varchar2(255) not null,
+  content_type varchar2(255) not null,
+  blob_data    blob,
+  constraint jsao_files_pk primary key (id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+--finish_time not null dropped
+-- ALTER table TRIP_HISTORY
+-- drop constraint SYS_C008277;
 
 -- 
 -- ALTER TABLE DRIVER
