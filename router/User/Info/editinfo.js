@@ -37,19 +37,25 @@ router.post('/', async (req, res) => {
     }
 
     console.log(req.body);
-    let results,resphone,resusername, errors = [];
+    let results,resphone,resusername,resw, errors = [];
     results = await DB_auth_user.getUsernameByEmail(req.body.email);
     resphone = await DB_auth_user.getUsernameByPhone(req.body.phone);
+    resw = await DB_auth_user.getUserByWallet(req.body.wallet);
     console.log("phone =",req.body.phone)
     
     if (results.length > 0) {
-        if (results[0].ID != req.driver.ID)
+        if (results[0].USERNAME != req.user.USERNAME) {
             errors.push('Email is already registered to a user');
+        }
     }
 
     if (resphone.length > 0) {
-        if (resphone[0].ID != req.driver.ID)
-            errors.push('Phone number is already registered to a driver');
+        if (resphone[0].USERNAME != req.user.USERNAME)
+            errors.push('Phone number is already registered to a USER');
+    }
+    if (resw.length > 0) {
+        if (resw[0].USERNAME != req.user.USERNAME)
+            errors.push('wallet is already registered to another user');
     }
     if (req.body.phone.length != 11 && req.body.phone.length!=13)
         errors.push('Phone no must start with 8801');

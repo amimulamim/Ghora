@@ -270,9 +270,9 @@
                                         </div>
                                         <div>
                                             <% for (let i=1; i <=5; i++) { %>
-                                                <% if(i<=avg_rating) { %>
+                                                <% if(i<=avg_rating[0].AVG_RATING) { %>
                                             <span class="fa fa-star star-active mx-1"></span>
-                                            <%} else if( (i-1 )< avg_rating && i > avg_rating) { %>
+                                            <%} else if( (i-1 )< avg_rating[0].AVG_RATING && i > avg_rating[0].AVG_RATING) { %>
                                                 
                                                 <span class="fa-solid fa-star-half-stroke orangecolor"></span>
                                             <% }else{ %>
@@ -291,7 +291,7 @@
                                                     <td class="rating-bar">
                                                         <div class="bar-container">
                                                             <div class="bar"
-                                                                style="width: <%= counts[4].RATING_COUNT *leng  %>px; ">
+                                                                style="width:<%=counts[4].RATING_COUNT*leng%>px;">
                                                             </div>
                                                         </div>
                                                     </td>
@@ -376,7 +376,7 @@
                                     <% allreviews.forEach(function(review) { %>
                                         <div class="card">
                                             <div class="row d-flex">
-                                                <div class=""> <img class="profile-pic" src="../../images/user.png">
+                                                <div class=""> <img class="profile-pic" src="../../images/<%=review.IMAGE %>">
                                                 </div>
                                                 <div class="d-flex flex-column">
                                                     <h3 class="mt-0 mb-0">

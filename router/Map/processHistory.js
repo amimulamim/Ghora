@@ -6,6 +6,7 @@ const address = require('../Map/formattedAddress');
 const mapCalc = require('../Map/calculations');
 const review = require('../../Database/DB-review');
 const payments = require('../../Database/DB-payment-api');
+const image=require('../../Database/DB-image')
 
 
 async function processAllHistory(requestsNearby){
@@ -62,6 +63,8 @@ async function processOneTrip(row){
         if(pay_info.length>0) { 
             console.log('transaction no: ',pay_info[0].TRANSACTION_NO );
          } 
+         const dvimg=await image.getImageOfDriver(row.PLATE_NO);
+         const usimg=await image.getImageOfUser(row.USERNAME);
         const trip={
             TR_ID: row.TR_ID,
             USERNAME: row.USERNAME,
@@ -72,7 +75,9 @@ async function processOneTrip(row){
             PLATE_NO: row.PLATE_NO,
             FARE: row.FARE,
             PAYMENT:pay_info,
-            REVIEW:rating
+            REVIEW:rating,
+            DVIMAGE:dvimg[0].IMAGE,
+            USIMG:usimg[0].IMAGE,
             
             
         }

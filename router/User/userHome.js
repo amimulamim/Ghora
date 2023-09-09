@@ -77,6 +77,7 @@ router.get('/', async (req, res) =>{
     console.log('pendinf id= ',pendingRequest.ID);
     const oldPending=await DB_trips.getOldPendingRequests(req.user.USERNAME);
     await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
+    
     res.render('userLayout.ejs', {
         title:req.user.NAME,
         page:['userHome'],

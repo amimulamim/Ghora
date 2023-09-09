@@ -4,6 +4,7 @@
 //const { json } = require('body-parser');
 const address = require('../Map/formattedAddress');
 const mapCalc = require('../Map/calculations');
+const image=require('../../Database/DB-image');
 
 async function processAllNearby(requestsNearby,mylocation){
     let allTrips= [];
@@ -63,6 +64,7 @@ async function processAllNearby(requestsNearby,mylocation){
         .catch(error => {
             console.error(error);
         });
+        const img=await image.getImageOfUser(row.USERNAME);
     const nearbyReq = {
         USERNAME: row.USERNAME,
         PICK_UP: pickupaddress,
@@ -70,7 +72,9 @@ async function processAllNearby(requestsNearby,mylocation){
         DISTANCE: distbetween,
         
         DURATION: durationbetween,
-        ID: row.ID
+
+        ID: row.ID,
+        IMAGE:img[0].IMAGE
 
 
 
@@ -110,12 +114,16 @@ async function processOneReq(row){
             console.error(error);
         });
 
+        const img=await image.getImageOfUser(row.USERNAME);
+        console.log('img isssssssssssssssssssssssssss: ',img);
+        console.log('image ',10,'is    :',img[0].IMAGE)
         const pending={
             USERNAME: row.USERNAME,
             PICK_UP: pickupaddress,
             DROP_OFF: dropoffaddress,
             V_TYPE:row.V_TYPE,
-            ID: row.ID
+            ID: row.ID,
+            IMAGE: img[0].IMAGE
         }
         return pending;
 

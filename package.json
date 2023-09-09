@@ -30,6 +30,7 @@
     "jsdom": "^22.1.0",
     "jsonwebtoken": "^9.0.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "node-geocoder": "^4.2.0",
     "oracledb": "^6.0.3",
     "react-native-geocoder": "^0.5.0",

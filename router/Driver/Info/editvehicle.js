@@ -58,6 +58,8 @@ router.post('/', async (req, res) => {
     let result1,result2, errors = [];
     result1 = await DB_model_api.modelInfo(req.body.model);
     result2 = await DB_vehicle_api.vehicleInfo(req.body.plate);
+    console.log("model info: " ,result1);
+    console.log("vehicle info: " ,result2);
     if (result2.length == 0) {
         if (result1.length == 0) {
             let model = {
@@ -65,17 +67,20 @@ router.post('/', async (req, res) => {
                 company: req.body.company,
                 type: req.body.type
             }
-            let ins = DB_model_api.addNewModel(model);
+            let ins = await DB_model_api.addNewModel(model);
+            console.log("model inserted: " );
         }
         else {
-            if (result1[0].MANUFACTURER != req.body.company || result1[0].V_TYPE != req.body.type) {
+            if (result1[0].MANUFACTURER.toUpperCase() != req.body.company.toUpperCase() || result1[0].V_TYPE.toUpperCase() != req.body.type.toUpperCase()) {
                 errors.push('Wrong credentials about model');
             }
         }
 
     }
     else {
-        errors.push('plate already exists');
+        if(req.driver.ID!=result2[0].DID)
+       {console.log('plate already exists');
+        errors.push('plate already exists');}
     }
 
 
@@ -136,12 +141,18 @@ router.post('/', async (req, res) => {
             }
             console.log('ki hoilo bae',vehicle);
            
-            let r = await DB_vehicle_api.editVehicleInfo(vehicle);
+            //let r = await DB_vehicle_api.editVehicleInfo(vehicle);
+            let v=await  DB_vehicle_api.addNewVehicle(vehicle);
             console.log('ki hoilo ');
 
         }
-        
+        console.log('eto tuku success');
+        const oldplate=DB_auth_driver.getLoginInfoByID(req.driver.ID);
+
         let r2 = await DB_driver_edit.editVehiclePlate(req.driver.ID, req.body.plate);
+        if(driverInfo[0].PLATE_NO!=null){
+            await DB_driver_edit.deleteOldVehicle(driverInfo[0].PLATE_NO);
+        }
 
         //let result2 = await DB_auth_driver.getLoginInfoByEmail(driver.email);
         // login the user too
