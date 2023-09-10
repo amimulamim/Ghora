@@ -56,6 +56,7 @@ router.post('/', async (req, res) => {
     if (!match) {
         const driverWallet = await DB_driver.getWalletIdByID(req.driver.ID);
         const walletinfo = await DB_wallet.getWalletInfo(driverWallet[0].WALLET_ID);
+        console.log('walllllllllllllllllll',walletinfo);
 
         await DB_wallet.addBalance(walletinfo[0].ID, req.body.amount);
 

@@ -374,7 +374,7 @@ class AutocompleteDirectionsHandler {
 
           const output = document.querySelector('#output');
 
-          output.innerHTML = "<div class='alert-info' style='display: inline; background-color: greenyellow; '><b> FROM:" + document.getElementById("origin-input").value + ".<br/><br/> To: " + document.getElementById("destination-input").value + ".<br/> <br/>Driving Distance: " + response.routes[0].legs[0].distance.text + ".<br/><br/> Duration: " + response.routes[0].legs[0].duration.text + ".</b></div>";
+          output.innerHTML = "<div class='alert-info'  style=' background-color: greenyellow; '><b> FROM:" + document.getElementById("origin-input").value + ".<br/><br/> To: " + document.getElementById("destination-input").value + ".<br/> <br/>Driving Distance: " + response.routes[0].legs[0].distance.text + ".<br/><br/> Duration: " + response.routes[0].legs[0].duration.text + ".</b></div>";
           this.distanceBetween = response.routes[0].legs[0].distance.text;
           this.durationBetween = response.routes[0].legs[0].duration.text;
 
@@ -396,7 +396,11 @@ class AutocompleteDirectionsHandler {
           this.cngfare = cngfare;
 
           this.carbutton.style.display = "block";
-          this.carbutton.textContent = "Car      " + Math.ceil(carfare) + " Tk";
+  //         const fareSpan = document.createElement('span');
+  // fareSpan.textContent = Math.ceil(carfare) + " Tk";
+  // fareSpan.classList.add('fare-info');
+  // carbutton.appendChild(fareSpan);
+          this.carbutton.textContent = this.carbutton.textContent +"  "+ Math.ceil(carfare) + " Tk";
           this.bikebutton.style.display = "block";
           this.bikebutton.textContent = "Bike    " + Math.ceil(bikefare) + " Tk";
           this.cngbutton.style.display = "block";

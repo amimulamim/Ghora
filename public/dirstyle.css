@@ -59,3 +59,10 @@
     font-size: 13px;
     font-weight: 300;
   }
+
+  /* Add some basic styling for the fare info */
+.fare-info {
+  font-size: 14px;
+  margin-left: 5px;
+  color: #555;
+}

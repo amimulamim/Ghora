@@ -54,14 +54,23 @@ router.get('/old', async (req, res) => {
     console.log('get e user ase');
     const cur = await DB_trips.getPendingRequests(req.user.USERNAME);
     const old = await DB_trips.getOldPendingRequests(req.user.USERNAME);
+    console.log('cur, old =',cur,' ',old);
     if (cur.length == 0) {
         console.log('timer baad');
-        res.send('bedorkar');
+       
+        if (old.length > 0) {
+            // await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
+             console.log("baaaaaaaaaaaaaaaaaaakiiiiiiiiii=",old[0].ID);
+             res.send('old nottaken yes', old[0].ID, ' ', old[0].TIME_REQUEST);
+         }
+         else{
+            res.send('bedorkar');
+         }
     }
     else {
 
         if (old.length > 0) {
-            await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
+           // await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
             console.log("baaaaaaaaaaaaaaaaaaakiiiiiiiiii=",old[0].ID);
             res.send('old nottaken yes', old[0].ID, ' ', old[0].TIME_REQUEST);
         }
@@ -104,8 +113,8 @@ router.post('/', async (req, res) => {
     console.log('post e user ase', req.user.USERNAME);
 
     console.log('dir theke aslam', req.body);
-
-
+ 
+    
 
     const origin = await fetch(req.body.origin);
     const json = await origin.json();
@@ -151,7 +160,11 @@ router.post('/', async (req, res) => {
 
     // let madeRequest =
     // await DB_trips.cancelRequest(req.user.USERNAME);
+    const already=await DB_trips.getPendingRequests(req.user.USERNAME);
+    console.log('already same= length',already,' ',already.length)
+    if(already.length==0){
     await DB_trips.makeTripRequests(tripRequest);
+    }
     let checkedRequest = await DB_trips.getAllInfoRequest(tripRequest);
 
     if (checkedRequest[0] === undefined) {
@@ -168,7 +181,7 @@ router.post('/', async (req, res) => {
 
     }
 
-
+    
 
 
 

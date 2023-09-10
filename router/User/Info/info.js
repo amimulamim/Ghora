@@ -23,6 +23,7 @@ router.get('/', async (req, res) => {
         console.log("here psaisi "+req.user.EMAIL);
         
         userInfo=await DB_user.getAllInfo(req.user.EMAIL);
+        
        // console.log(userInfo[0].NAME);
         res.render('userLayout.ejs',{
             user: req.user,

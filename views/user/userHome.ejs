@@ -2,11 +2,11 @@
     <link rel="stylesheet" href="/css/homerunninguser.css">
 </head>
 
-<body style="background-color: rosybrown;">
+<body style="background-color:transparent">
 
     <% if(pending.ID==0){%>
         <% if(oldPending.length>0){%>
-            <h3 style="margin-left:30%">SORRY!!We couldn't manage a Driver for you in 30 minutes.Please try again .</h3>
+            <h3 style="margin-left:10%">SORRY!!We couldn't manage a Driver for you in 30 minutes.Please try again .</h3>
 
 
             <%} %>
@@ -160,16 +160,16 @@
                                     const text = await data.text();
                                     //alert("got text: " + text);
                                     if (text.includes('old nottaken yes')) {
-                                        alert(text);
+                                        //alert(text);
                                         alert('Sorry!!No nearby driver accepted your request in 30 minutes.Try again!! ', text);
                                         const done = await fetch('user/requests/deleteold');
                                         const st = await done.text();
                                         //alert(st);
                                         if (st.includes('done')) {
                                             //alert('reloading');
-                                            location.reload()
+                                            //location.reload()
                                             clearInterval(timero);
-                                            //window.location = '/user';
+                                            window.location = '/user';
                                         }
                                     }
                                     else if (text.includes('bedorkar')) {
