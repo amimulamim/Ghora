@@ -17,7 +17,15 @@ async function getDriverByEmail(email)
 const binds = {
     email: email
 }
-return (await database.execute(sql, binds, database.options)).rows;
+ try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 
 }
 
@@ -38,7 +46,15 @@ async function getDriverByPlate(plate)
 const binds = {
     plate: plate
 }
-return (await database.execute(sql, binds, database.options)).rows;
+ try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 
 }
 
@@ -73,7 +89,15 @@ async function getAllDrivers(){
             DRIVER
         `;
     const binds = {}
-    return (await database.execute(sql, binds, database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 
@@ -98,7 +122,15 @@ async function getAllInfo(email){
     const binds={
         email:email
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 async function getAllInfoByID(id){
     const sql=`
@@ -120,7 +152,15 @@ async function getAllInfoByID(id){
     const binds={
         id:id
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function getWalletId(email){
@@ -151,7 +191,15 @@ async function getWalletIdByID(id){
         id: id
     }
 
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 
 }
 

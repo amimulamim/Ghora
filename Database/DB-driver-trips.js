@@ -23,7 +23,15 @@ async function getAllTripRequests(){
     `;
     const binds={
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 
@@ -49,7 +57,15 @@ async function getNearByTripRequestsOfDriver(did){
     const binds={
         id:did
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 
@@ -75,7 +91,15 @@ async function getAllTripsByPlate(plate){
     const binds={
         plate:plate
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 async function CompletedTripofPlate(plate){
     const sql= `
@@ -88,7 +112,15 @@ async function CompletedTripofPlate(plate){
     const binds={
         plate:plate
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 
 }
 
@@ -103,7 +135,15 @@ async function CompletedTripofDriverbyId(d_id){
     const binds={
         d_id:d_id
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 
 }
 

@@ -18,7 +18,15 @@ async function getPaymentDetails(tid){
     const binds={
         id:tid
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 
 
 

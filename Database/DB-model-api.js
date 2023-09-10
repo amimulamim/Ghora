@@ -12,7 +12,15 @@ async function addNewModel(model){
         type:model.type,
         company:model.company
     }
-    return (await database.execute(sql, binds, database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function vehicle_details(plate_no){
@@ -28,7 +36,16 @@ WHERE PLATE_NO=:plate`;
     const binds = {
         plate:plate_no
     }
-    return (await database.execute(sql, binds,database.options)).rows;
+    //return (await database.execute(sql, binds,database.options)).rows;
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 
@@ -40,7 +57,16 @@ async function getVTypeByID(id){
     const binds = {
         id:id
     }
-    return (await database.execute(sql, binds,database.options)).rows;
+    //return (await database.execute(sql, binds,database.options)).rows;
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function modelInfo(name){
@@ -55,7 +81,16 @@ async function modelInfo(name){
     const binds = {
         name:name
     }
-    return (await database.execute(sql, binds,database.options)).rows;
+    //return (await database.execute(sql, binds,database.options)).rows;
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 module.exports={

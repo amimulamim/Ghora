@@ -37,7 +37,15 @@ async function editName(driver){
         id:driver.ID,
         name:driver.NAME
     }
-    return (await database.execute(sql, binds, database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function editPassword(driver){
@@ -50,7 +58,15 @@ async function editPassword(driver){
         id:driver.ID,
         password:driver.PASSWORD
     }
-    return (await database.execute(sql, binds, database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function editPhone(driver){
@@ -63,7 +79,15 @@ async function editPhone(driver){
         id:driver.ID,
         phone:driver.PHONE
     }
-    return (await database.execute(sql, binds, database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function editSex(driver){
@@ -76,7 +100,15 @@ async function editSex(driver){
         id:driver.ID,
         sex:driver.SEX
     }
-    return (await database.execute(sql, binds, database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function editVehiclePlate(id,plate){
@@ -89,7 +121,15 @@ async function editVehiclePlate(id,plate){
         id:id,
         plate:plate
     }
-    return (await database.execute(sql, binds, database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function editWallet(driver){
@@ -102,7 +142,15 @@ async function editWallet(driver){
         id:driver.ID,
         wallet_id:driver.WALLET_ID
     }
-    return (await database.execute(sql, binds, database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 

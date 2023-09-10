@@ -24,7 +24,15 @@ async function makeTripRequests(tripRequest){
 
         
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
     
 }
 
@@ -48,7 +56,15 @@ async function getTripRequestsOfUser(username){
     const binds={
         username:username
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }  
 
 async function getTripUnnotifiedOfUser(username){
@@ -73,7 +89,15 @@ async function getTripUnnotifiedOfUser(username){
         username:username,
         notified:0
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function getTripRunningsOfUser(username){
@@ -97,7 +121,15 @@ async function getTripRunningsOfUser(username){
     const binds={
         username:username
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 } 
 
 
@@ -128,7 +160,15 @@ async function getAllInfoRequest(tripRequest){
         v_type:tripRequest.v_type
         
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
     
 }
 
@@ -146,7 +186,15 @@ async function getAllTripsByID(ID){
     const binds={
         id:ID
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function getPendingRequests(username){
@@ -170,7 +218,15 @@ async function getPendingRequests(username){
     const binds={
         username:username,
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function getOldPendingRequests(username){
@@ -194,7 +250,15 @@ async function getOldPendingRequests(username){
     const binds={
         username:username,
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 
@@ -210,7 +274,15 @@ async function deleteOldPendingRequests(username){
     const binds={
         username:username,
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 
@@ -232,7 +304,15 @@ async function cancelRequest(username)  {
     const binds={
         username:username
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function Notified(username) {
@@ -245,7 +325,15 @@ async function Notified(username) {
         username:username,
         notified:1
     }
-    return (await database.execute(sql, binds, database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 async function getAllTripsByUsername(username){
     const sql= `
@@ -265,7 +353,15 @@ async function getAllTripsByUsername(username){
     const binds={
         username:username
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 
@@ -280,7 +376,15 @@ async function CompletedTripofUser(username){
     const binds={
         username:username
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 
 }
 
