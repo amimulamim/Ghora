@@ -74,7 +74,22 @@ async function getAllInfo(email){
         console.error('Error executing SQL:', error);
     }
 }
-async function getWalletId(username){
+async function getWalletId(email){
+    const sql=
+   `SELECT
+     WALLET_ID
+     FROM 
+     USERS
+     WHERE EMAIL= :email 
+    `;
+    const binds={
+        email:email
+    }
+
+    return (await database.execute(sql,binds,database.options)).rows;
+
+}
+async function getWalletIdByUsername(username){
     const sql=
    `SELECT
      WALLET_ID
@@ -134,5 +149,6 @@ module.exports = {
     getUsersByEmail,
     getAllInfo,
     getWalletId,
-    getAllInfoByUsername
+    getAllInfoByUsername,
+    getWalletIdByUsername
 }
