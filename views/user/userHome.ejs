@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="/css/homerunninguser.css">
 </head>
 
-<body>
+<body style="background-color: chocolate;">
 
     <% if(pending.ID==0){%>
         <% if(oldPending.length>0){%>
@@ -10,7 +10,9 @@
 
 
             <%} %>
+            <div class="container" style="height: 100%; width: 100%; margin-top: 5px;">
                 <iframe src="dir.html" style="height: 100% ;width:100%; margin-left: 5px; margin-right: 5px;"></iframe>
+            </div>
                 <% } %>
 
                     <% if(pending.ID!=0){%>
