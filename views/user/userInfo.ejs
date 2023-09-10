@@ -7,7 +7,7 @@
   <div id="content" class="p-4 p-md-5">
     <!-- <%- include('../driver/header') %> -->
     <div class="container emp-profile">
-      <form method="post">
+      <div method="post">
         <div class="row">
           <div class="col-md-4">
             <div class="profile-img">
@@ -48,6 +48,12 @@
           <div class="col-md-2">
             <a type="submit" class="profile-edit-btn" href="/user/info/edit">Edit Profile</a>
             <a class="profile-edit-btn" href="/user/info/changepassword">Change Password</a>
+            <form method="post" action="/user/info/changephoto"  enctype="multipart/form-data">
+                                    
+              <input type="file" name="photo"  required>
+              <button type="submit">Upload</button>
+              
+          </form>
 
           </div>
         </div>
@@ -127,7 +133,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </div>
       <!-- </div> -->
     </div>
 

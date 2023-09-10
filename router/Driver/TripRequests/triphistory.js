@@ -17,7 +17,9 @@ router.get('/', async (req, res) => {
     let driverInfo,triphistory=[];
     driverInfo=await DB_driver.getAllInfoByID(req.driver.ID);
     //triphistory=await DB_driver_trips.getAllTripsByPlate(driverInfo[0].PLATE_NO);
-    triphistory=await DB_driver_trips.CompletedTripofPlate(driverInfo[0].PLATE_NO);
+    //triphistory=await DB_driver_trips.CompletedTripofPlate(driverInfo[0].PLATE_NO);
+    triphistory=await DB_driver_trips.CompletedTripofDriverbyId(driverInfo[0].ID);
+
     console.log('kaha fas gaya');
     const processAllHistory = await processing.processAllHistory(triphistory);
     console.log("all history : " , processAllHistory)

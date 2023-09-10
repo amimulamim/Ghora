@@ -24,6 +24,57 @@ async function getImageOfUser(username) {
 
 }
 
+async function setImageOfUser(username,photoname){
+    const sql = `
+    UPDATE USERS SET IMAGE=:photo WHERE username=:username
+    `;
+    const binds={
+        photo:photoname,
+        username: username
+    };
+
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+      //  console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
+
+
+
+}
+
+
+async function setImageOfDriver(did,photoname){
+    const sql = `
+    UPDATE DRIVER SET IMAGE=:photo WHERE ID=:did
+    `;
+    const binds={
+        photo:photoname,
+        did:did
+    };
+
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+      //  console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
+
+
+
+}
+
+
+
+
+
 async function getImageOfDriver(did) {
     const sql = `SELECT ID,GETIMAGEOFDRIVER(:did) AS IMAGE
     FROM  DRIVER
@@ -50,7 +101,7 @@ async function getImageOfDriver(did) {
 async function getImageOfDriver(plate) {
     const sql = `SELECT ID,GETIMAGEOFDRIVER(ID) AS IMAGE
     FROM  DRIVER
-    WHERE PLATE_NO=:plate
+    WHERE ID=GETDRIVERIDFROMPLATE(:plate)
     `;
     const binds={
         plate:plate
@@ -74,5 +125,7 @@ async function getImageOfDriver(plate) {
 // function to get id from email
 module.exports={
     getImageOfDriver,
-    getImageOfUser
+    getImageOfUser,
+    setImageOfDriver,
+    setImageOfUser
 }

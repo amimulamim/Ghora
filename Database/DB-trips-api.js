@@ -186,7 +186,9 @@ async function completedTripDetailsofDriver(did){
 
     FROM 
         TRIP_HISTORY
-        WHERE PLATE_NO=getPlate(:d_id)
+        WHERE 
+        GETDRIVERIDFROMPLATE(PLATE_NO)=:d_id
+        --PLATE_NO=getPlate(:d_id)
     ORDER BY TR_ID DESC
     `;
     const binds={

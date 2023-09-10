@@ -92,11 +92,27 @@ async function CompletedTripofPlate(plate){
 
 }
 
+async function CompletedTripofDriverbyId(d_id){
+    const sql= `
+    SELECT 
+    TR_ID,USERNAME,START_TIME,NVL(FINISH_TIME,GET_PAYMENT_TIME(TR_ID)) AS FINISH_TIME,PLATE_NO,PLAT,PLNG,DLAT,DLNG,FARE
+    FROM TRIP_HISTORY
+    WHERE GETDRIVERIDFROMPLATE(PLATE_NO)=:d_id 
+    ORDER BY TR_ID DESC
+    `;
+    const binds={
+        d_id:d_id
+    }
+    return (await database.execute(sql,binds,database.options)).rows;
+
+}
+
 
 
 module.exports={
     getAllTripRequests,
     getAllTripsByPlate,
     getNearByTripRequestsOfDriver,
-    CompletedTripofPlate
+    CompletedTripofPlate,
+    CompletedTripofDriverbyId
 }

@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const DB_user=require('../../../Database/DB-user-api');
 const infoEditRouter=require('./editinfo');
 const passwordEditRouter=require('./changePassword');
+const photoEditRouter=require('./changePhoto.js');
 //const DB_auth_user = require('../../../Database/DB-user-auth-api');
 //const authUtils = require('../../../utils/auth-utils');
 
@@ -35,6 +36,7 @@ router.get('/', async (req, res) => {
 });
 router.use('/edit',infoEditRouter);
 router.use('/changepassword',passwordEditRouter);
+router.use('/changephoto',photoEditRouter);
 
 
 // ROUTE: login (post)

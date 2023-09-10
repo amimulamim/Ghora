@@ -64,6 +64,11 @@ async function processOneTrip(row){
             console.log('transaction no: ',pay_info[0].TRANSACTION_NO );
          } 
          const dvimg=await image.getImageOfDriver(row.PLATE_NO);
+         let drvimg='userdefault.jpeg';
+         if(dvimg.length>0) {
+            drvimg=dvimg[0].IMAGE;
+        console.log('drvimg id: ',drvimg[0].ID);
+        }
          const usimg=await image.getImageOfUser(row.USERNAME);
         const trip={
             TR_ID: row.TR_ID,
@@ -76,7 +81,7 @@ async function processOneTrip(row){
             FARE: row.FARE,
             PAYMENT:pay_info,
             REVIEW:rating,
-            DVIMAGE:dvimg[0].IMAGE,
+            DVIMAGE:drvimg,
             USIMG:usimg[0].IMAGE,
             
             

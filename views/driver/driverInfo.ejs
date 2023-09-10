@@ -7,7 +7,7 @@
     <div id="content" class="p-4 p-md-5">
         <!-- <%- include('../driver/header') %> -->
         <div class="container emp-profile">
-            <form method="post">
+            <div method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
@@ -17,10 +17,13 @@
                                 src="/images/<%= driver.IMAGE%>" 
                                 alt="" />
                                    
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file" />
-                            </div>
+                            <!-- <div class="file btn btn-lg btn-primary"> 
+                                
+                                
+                                
+                                
+                                
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -47,6 +50,13 @@
                         <a type="submit" class="profile-edit-btn" href="/driver/info/edit">Edit Profile</a>
                         <a class="profile-edit-btn" href="/driver/info/changepassword">Change Password</a>
                         <a class="profile-edit-btn" href="/driver/info/editvehicle">Vehicle Update</a>
+                       
+                        <form method="post" action="/driver/info/changephoto"  enctype="multipart/form-data">
+                                    
+                            <input type="file" name="photo"  required>
+                            <button type="submit">Upload</button>
+                            
+                        </form>
                     </div>
                 </div>
                 <div class="row">
@@ -135,6 +145,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
 </body>

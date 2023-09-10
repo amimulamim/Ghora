@@ -394,11 +394,11 @@ class AutocompleteDirectionsHandler {
           this.cngfare = cngfare;
 
           this.carbutton.style.display = "block";
-          this.carbutton.textContent = "Car      " + carfare + " Tk";
+          this.carbutton.textContent = "Car      " + Math.ceil(carfare) + " Tk";
           this.bikebutton.style.display = "block";
-          this.bikebutton.textContent = "Bike    " + bikefare + " Tk";
+          this.bikebutton.textContent = "Bike    " + Math.ceil(bikefare) + " Tk";
           this.cngbutton.style.display = "block";
-          this.cngbutton.textContent = "CNG      " + cngfare + " Tk";
+          this.cngbutton.textContent = "CNG      " + Math.ceil(cngfare) + " Tk";
 
 
 

@@ -135,6 +135,7 @@ router.post('/', async (req, res) => {
                 id: vehicleInfo[0].VID,
                 plate: req.body.plate,
                 model: req.body.model,
+                plan:1
                 // company: req.body.company,
                 // type: req.body.type
 
@@ -150,9 +151,9 @@ router.post('/', async (req, res) => {
         const oldplate=DB_auth_driver.getLoginInfoByID(req.driver.ID);
 
         let r2 = await DB_driver_edit.editVehiclePlate(req.driver.ID, req.body.plate);
-        if(driverInfo[0].PLATE_NO!=null){
-            await DB_driver_edit.deleteOldVehicle(driverInfo[0].PLATE_NO);
-        }
+        // if(driverInfo[0].PLATE_NO!=null){
+        //     await DB_driver_edit.deleteOldVehicle(driverInfo[0].PLATE_NO);
+        // }
 
         //let result2 = await DB_auth_driver.getLoginInfoByEmail(driver.email);
         // login the user too

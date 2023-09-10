@@ -59,7 +59,8 @@ async function getPaymentsOfDriver(did) {
     PAYMENTS  P JOIN TRIP_HISTORY T
     on P.TR_ID=T.TR_ID
     JOIN DRIVER D 
-    ON D.PLATE_NO=T.PLATE_NO
+    ON GETDRIVERIDFROMPLATE(T.PLATE_NO)=D.ID
+    --D.PLATE_NO=T.PLATE_NO
     WHERE D.ID=:did
     ORDER BY T.TR_ID DESC
     `;
