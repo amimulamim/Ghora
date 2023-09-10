@@ -51,11 +51,12 @@ router.post('/', async (req, res) => {
     console.log(req.body);
     let results, errors = [];
     results = await DB_auth_user.getLoginInfoByUsername(req.user.USERNAME);
-    console.log('compare ' + results[0].PASSWORD);
-    const match = await bcrypt.compare(req.body.password, results[0].PASSWORD);
-    if (!match) {
-        const userWallet = await DB_user.getWalletIdByUsername(req.user.USERNAME);
-        const walletinfo = await DB_wallet.getWalletInfo(userWallet[0].WALLET_ID);
+    const userWallet = await DB_user.getWalletIdByUsername(req.user.USERNAME);
+    const walletinfo = await DB_wallet.getWalletInfo(userWallet[0].WALLET_ID);
+    // console.log('compare ' + results[0].PASSWORD);
+    // const match = await bcrypt.compare(req.body.password, results[0].PASSWORD);
+    if (walletinfo.length>0 && req.body.password==walletinfo[0].PASSWORD) {
+ 
 
         await DB_wallet.addBalance(walletinfo[0].ID, req.body.amount);
 
@@ -69,7 +70,6 @@ router.post('/', async (req, res) => {
             driver: req.driver,
             errors: errors,
             title: req.driver.NAME,
-            wallet: walletInfo,
             navbar: 1,
             form: {
                 password: req.body.password,

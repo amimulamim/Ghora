@@ -8,7 +8,8 @@ async function getWalletInfo(id)
     SELECT 
         ID,
         ACCOUNT_NO,
-        BALANCE
+        BALANCE,
+        PASSWORD
     FROM 
         WALLET
     WHERE
