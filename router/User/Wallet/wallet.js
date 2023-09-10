@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     } else {
         let errors=[];
         console.log("wakkllet paisi ",req.user);
-        const userwalletId=await DB_user.getWalletId(req.user.USERNAME);
+        const userwalletId=await DB_user.getWalletIdByUsername(req.user.USERNAME);
         let walletInfo=[];
         if(userwalletId[0].WALLET_ID==null){
             errors.push("NO WALLET FOUND");
@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
     console.log('compare ' + results[0].PASSWORD);
     const match = await bcrypt.compare(req.body.password, results[0].PASSWORD);
     if (!match) {
-        const userWallet = await DB_user.getWalletId(req.user.USERNAME);
+        const userWallet = await DB_user.getWalletIdByUsername(req.user.USERNAME);
         const walletinfo = await DB_wallet.getWalletInfo(userWallet[0].WALLET_ID);
 
         await DB_wallet.addBalance(walletinfo[0].ID, req.body.amount);
