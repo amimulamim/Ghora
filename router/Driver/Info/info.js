@@ -22,33 +22,6 @@ const router = express.Router({mergeParams : true});
 
 
 
- const db_img=require('../../../Database/DB-image');
-
-
-
-
-
-// // creating router
-// //const router = express.Router({mergeParams : true});
-
-const multer=require('multer');
-
-
-const storage=multer.diskStorage({
-destination:function(req,file,cb){
-    cb(null,'./public/images/')
-},
-filename:function(req,file,cb){
-cb(null,file.originalname)
-}
-
-});
-//Users/Acer/Desktop/oraclenodejs/Ghora/public/images/
-
-const upload=multer({storage:storage})
-//C:\Users\Acer\Desktop\oraclenodejs\Ghora\public\images
-
-
 
 
 
@@ -62,6 +35,7 @@ router.get('/', async (req, res) => {
         console.log("here psaisi "+req.driver.EMAIL);
         
         driverInfo=await DB_driver.getAllInfo(req.driver.EMAIL);
+      //  const rating = await 
        // console.log(driverInfo[0].NAME);
        console.log(driverInfo[0].PHONE);
         res.render('driverLayout.ejs',{
@@ -76,19 +50,7 @@ router.get('/', async (req, res) => {
 });
 
 
-router.post('/',upload.single('photo'),async(req, res,next) => {
-    if (req.driver == null) {
-        console.log('ekhane somapti file=',req.file)
-        return res.redirect('/driver/login');
-    }
-    console.log(" here file= ",req.file);
-    await db_img.setImageOfDriver(req.driver.ID,req.file.originalname);
-    console.log("did,file= ",req.driver.ID,' ',req.file.originalname)
 
-
-
-    res.redirect('/driver');
-    });
 
 //subrouters
 

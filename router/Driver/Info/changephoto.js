@@ -40,7 +40,7 @@ router.post('/',upload.single('photo'),async(req, res,next) => {
 
 
 
-    res.redirect('/driver');
+    res.redirect('/driver/info');
     });
 
 
