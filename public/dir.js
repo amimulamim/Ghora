@@ -275,7 +275,8 @@ class AutocompleteDirectionsHandler {
             if (text.includes('must')) {
               alert('Your Must add a Wallet to request for a ride');
               //clearInterval(timer);
-              window.location = '/user/info';
+              //window.location = '/user/info';
+              localStorage.setItem('loadInfo','true');
             }
             else if (text.includes('BALANCE')) {
               // alert('Your Ride Request Has ALREEEEEEAAAAAAAAADY Been Accepted')
@@ -310,7 +311,8 @@ class AutocompleteDirectionsHandler {
               }
               else {
                 alert('You Do not have enough balance in your wallet to request for this ride');
-                window.location = '/user/wallet';
+               // window.location = '/user/wallet';
+               localStorage.setItem('loadWallet', 'true');
 
         }
       }
