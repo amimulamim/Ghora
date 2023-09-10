@@ -47,7 +47,12 @@ router.post('/', async (req, res) => {
         // check if email is alredy used or not
         console.log(req.body);
         results = await DB_auth_user.getUsernameByEmail(req.body.email);
-        resphone = await DB_auth_user.getUsernameByPhone(req.body.phone);
+
+        let phonecheck=req.body.phone;
+        if(req.body.phone.length==11){
+            phonecheck = '88'+req.body.phone;
+        }
+        resphone = await DB_auth_user.getUsernameByPhone(phonecheck);
         console.log("phone =",req.body.phone)
         resusername=await DB_auth_user.getLoginInfoByUsername(req.body.username);
         

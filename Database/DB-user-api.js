@@ -38,7 +38,8 @@ async function getAllInfo(email){
         EMAIL,
         PHONE,
         SEX,
-        WALLET_ID
+        WALLET_ID,
+        IMAGE
     FROM 
         USERS
     WHERE 

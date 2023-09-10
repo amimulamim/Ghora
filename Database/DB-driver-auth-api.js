@@ -1,7 +1,24 @@
 const database = require('./database');
 
 
+async function getDriverByWallet(walletId) {
+    const sql=`
+    SELECT ID FROM DRIVER WHERE WALLET_ID = :walletId
+    `;
+    const binds = {
+        walletId: walletId
+    }
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+       // console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
 
+}
 // function to get id from email
 async function getDriverIDByEmail(email){
     const sql = `
@@ -94,7 +111,8 @@ async function getLoginInfoByEmail(email){
             SEX,
             PLATE_NO,
             LAT,
-            LNG
+            LNG,
+            GETIMAGEOFDRIVER(ID) AS IMAGE
         FROM
             DRIVER
         WHERE
@@ -128,7 +146,8 @@ async function getLoginInfoByID(id){
         SEX,
         PLATE_NO,
         LAT,
-        LNG
+        LNG,
+        GETIMAGEOFDRIVER(:id) AS IMAGE
     FROM
         DRIVER
     WHERE
@@ -189,7 +208,8 @@ module.exports = {
     getLoginInfoByEmail,
     getLoginInfoByID,
     getDriverIDByPhone,
-    changePassword
+    changePassword,
+    getDriverByWallet
   // updateUserTokenById,
    // getUserPromptById,
    // updateLoginTimeById

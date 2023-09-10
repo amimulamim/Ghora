@@ -1,6 +1,7 @@
 // libraries
 const express = require('express');
 const bcrypt = require('bcrypt');
+const multer=require('multer');
 
 // my modules
 const DB_driver=require('../../../Database/DB-driver-api');
@@ -54,6 +55,7 @@ router.get('/', async (req, res) => {
 router.use('/edit',infoEditRouter);
 router.use('/editvehicle',vehicleEditRouter);
 router.use('/changepassword',passwordEditRouter);
+//router.use('/changephoto',photoEditRouter);
 
 
 module.exports = router;

@@ -26,7 +26,8 @@ router.get('/', async (req, res) => {
             email: req.driver.EMAIL,
             phone: driverInfo[0].PHONE,
             sex: driverInfo[0].SEX,
-            wallet: driverInfo[0].WALLET_ID
+            wallet: driverInfo[0].WALLET_ID,
+           // image:driverInfo[0].IMAGE
         }
     });
 
@@ -37,9 +38,10 @@ router.post('/', async (req, res) => {
     }
 
     console.log(req.body);
-    let results, resphone, errors = [];
+    let results, resphone,resw, errors = [];
     results = await DB_auth_driver.getDriverIDByEmail(req.body.email);
     resphone = await DB_auth_driver.getDriverIDByPhone(req.body.phone);
+    resw = await DB_auth_driver.getDriverByWallet(req.body.wallet);
 
     if (results.length > 0) {
         if (results[0].ID != req.driver.ID)
@@ -50,6 +52,14 @@ router.post('/', async (req, res) => {
         if (resphone[0].ID != req.driver.ID)
             errors.push('Phone number is already registered to a driver');
     }
+
+    if (resw.length > 0) {
+        if (resw[0].ID != req.driver.ID)
+            errors.push('wallet is already registered to another driver');
+    }
+
+
+    
 
     if (req.body.phone.length != 13 && req.body.phone.length!=11) {
         errors.push('Phone number must be 88.. +11 digits  and have total 13 digits');
@@ -75,7 +85,8 @@ router.post('/', async (req, res) => {
             email: req.body.email,
             phone: req.body.phone,
             sex: req.body.sex,
-            wallet: req.body.wallet
+            wallet: req.body.wallet,
+            
         }
 
         // await bcrypt.hash(driver.password, 8, async (err, hash) => {

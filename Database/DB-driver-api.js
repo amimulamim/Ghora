@@ -28,7 +28,8 @@ async function getDriverByPlate(plate)
         ID,
         EMAIL,
         NAME,
-        MODEL_DETAILS(:plate) AS VNAME
+        MODEL_DETAILS(:plate) AS VNAME,
+        GETIMAGEOFDRIVER(ID) AS IMAGE
     FROM 
         DRIVER
     WHERE
@@ -87,7 +88,8 @@ async function getAllInfo(email){
         WALLET_ID,
         PLATE_NO,
         LAT,
-        LNG
+        LNG,
+        IMAGE
     FROM 
         DRIVER 
     WHERE 
@@ -156,7 +158,7 @@ async function getallDriverLocations(){
     try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;
-        console.log('db func hote: ', rows);
+        //console.log('db func hote: ', rows);
         return rows;
         // Process the result rows
     } catch (error) {

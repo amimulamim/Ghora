@@ -36,7 +36,8 @@ function authUser(req, res, next){
                         EMAIL: results[0].EMAIL,
                         NAME: results[0].NAME,
                         PHONE:results[0].PHONE,
-                        WALLET_ID:results[0].WALLET_ID
+                        WALLET_ID:results[0].WALLET_ID,
+                        IMAGE:results[0].IMAGE
 
                         //IMAGE:results[0].IMAGE
                     }
@@ -85,8 +86,8 @@ function authDriver(req, res, next){
                         PHONE:results[0].PHONE,
                         WALLET_ID:results[0].WALLET_ID,
                         LAT:results[0].LAT,
-                        LNG:results[0].LNG
-                        //IMAGE:results[0].IMAGE
+                        LNG:results[0].LNG,
+                        IMAGE:results[0].IMAGE
                     }
                 }
                 next();

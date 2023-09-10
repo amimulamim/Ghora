@@ -1,6 +1,23 @@
 const database = require('./database');
 
+async function getUserByWallet(walletId) {
+    const sql=`
+    SELECT USERNAME FROM USERS WHERE WALLET_ID = :walletId
+    `;
+    const binds = {
+        walletId: walletId
+    }
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+       // console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
 
+}
 
 // function to get id from email
 async function getUsernameByEmail(email){
@@ -71,7 +88,8 @@ async function getLoginInfoByEmail(email){
             WALLET_ID,
             SEX,
             LAT,
-            LNG
+            LNG,
+            GETIMAGEOFUSER(USERNAME) AS IMAGE
         FROM
             USERS
         WHERE
@@ -104,9 +122,8 @@ async function getLoginInfoByUsername(username){
             WALLET_ID,
             SEX,
             LAT,
-            LNG
-
-            --IMAGE
+            LNG,
+            GETIMAGEOFUSER(:username) AS IMAGE
         FROM
             USERS
         WHERE
@@ -186,7 +203,8 @@ module.exports = {
     getLoginInfoByEmail,
     getLoginInfoByUsername,
     getUsernameByPhone,
-    changePassword
+    changePassword,
+    getUserByWallet
   // updateUserTokenById,
    // getUserPromptById,
    // updateLoginTimeById

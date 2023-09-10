@@ -23,9 +23,13 @@
                                 </div>
                                 <div class="card-body  d-flex pt-0" style="margin-top: 10%;">
                                     <div class="row no-gutters  mx-auto justify-content-start flex-sm-row flex-column">
-                                        <div class="col-md-4  text-center"><img class="irc_mi img-fluid mr-0"
+                                        <div class="col-md-4  text-center">
+                                           
+                                            <img class="irc_mi img-fluid mr-0"
                                                 src="https://cdn4.iconfinder.com/data/icons/logistics-delivery-2-5/64/137-512.png"
-                                                width="150" height="150"></div>
+                                                width="150" height="150">
+                                          
+                                            </div>
                                         <div class="col-md-6 ">
                                             <div class="card border-0 ">
                                                 <div class="card-body">
@@ -77,7 +81,8 @@
                                                     <form action="/user/cancel" method="POST">
 
                                                         <input type="submit" value="Cancel Request"
-                                                            class="btn btn-primary btn-round-lg btn-lg" style="margin-top: 50;">
+                                                            class="btn btn-primary btn-round-lg btn-lg"
+                                                            style="margin-top: 50;">
 
                                                     </form>
                                                 </div>
@@ -87,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-    
+
                         <% } %>
 
 
@@ -152,8 +157,9 @@
                                     const data = await fetch('user/requests/old')
                                     const text = await data.text();
                                     //alert("got text: " + text);
-                                    if (text.includes('old')) {
-                                        alert('Sorry!!No nearby driver accepted your request in 30 minutes.Try again!!');
+                                    if (text.includes('old nottaken yes')) {
+                                        alert(text);
+                                        alert('Sorry!!No nearby driver accepted your request in 30 minutes.Try again!! ', text);
                                         const done = await fetch('user/requests/deleteold');
                                         const st = await done.text();
                                         //alert(st);
@@ -163,6 +169,9 @@
                                             clearInterval(timero);
                                             //window.location = '/user';
                                         }
+                                    }
+                                    else if (text.includes('bedorkar')) {
+                                        clearInterval(timero);
                                     }
 
 

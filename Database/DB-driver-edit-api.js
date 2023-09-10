@@ -28,6 +28,28 @@ async function updateDriverInfo(driver) {
     return await database.execute(sql, binds, {});
 
 }
+
+async function deleteOldVehicle(plate) {
+    const sql = `
+    DELETE FROM VEHICLE WHERE PLATE_NO=:plate
+    `;
+    const binds = {
+     plate:plate,   
+    }
+    try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+       // console.log('pool er jonno database theke  : ',rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL while login info newa:', error);
+    }
+
+
+
+}
+
 async function editName(driver) {
     const sql = `
     UPDATE DRIVER
@@ -120,5 +142,6 @@ module.exports = {
     // editSex,
     // editWallet
     editVehiclePlate,
-    updateDriverInfo
+    updateDriverInfo,
+    deleteOldVehicle,
 }

@@ -47,7 +47,14 @@ router.post('/', async (req, res) => {
         // check if email is alredy used or not
         console.log(req.body);
         results = await DB_auth_driver.getDriverIDByEmail(req.body.email);
-        resphone = await DB_auth_driver.getDriverIDByPhone(req.body.phone);
+        let phonecheck=req.body.phone;
+        if(req.body.phone.length==11){
+            phonecheck = '88'+req.body.phone;
+        }
+        resphone = await DB_auth_driver.getDriverIDByPhone(phonecheck);
+
+        console.log("email unique: " ,results);
+        console.log("phone unique: " ,resphone);
         
         if(results.length > 0)
             errors.push('Email is already registered to a user');

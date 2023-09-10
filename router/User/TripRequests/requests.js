@@ -1,162 +1,171 @@
 //libraries
-const express=require('express');
-const DB_trips=require('../../../Database/DB-user-trips');
+const express = require('express');
+const DB_trips = require('../../../Database/DB-user-trips');
 const { json } = require('body-parser');
-const   mapCalc=require('../../Map/calculations');
-const address=require('../../Map/formattedAddress');
-const wallet=require('../../../Database/DB-wallet-api');
+const mapCalc = require('../../Map/calculations');
+const address = require('../../Map/formattedAddress');
+const wallet = require('../../../Database/DB-wallet-api');
 
 //const DB_users=require('../../Database/DB-user-api');
 //creating routers
-const router=express.Router({mergeParams:true});
+const router = express.Router({ mergeParams: true });
 
-router.get('/',async(req,res) =>{
-    if(req.user==null){
+router.get('/', async (req, res) => {
+    if (req.user == null) {
         console.log('get e user nai');
         return res.redirect('/user/login');
     }
     console.log('get e user ase');
 
-   
+
     //console.log(req.body.data);
     res.redirect('/user');
-    
+
 });
-router.get('/allowed',async(req,res) =>{
-    if(req.user==null){
+router.get('/allowed', async (req, res) => {
+    if (req.user == null) {
         console.log('get e user nai');
         return res.redirect('/user/login');
     }
     console.log('get e user ase');
-    if(req.user.WALLET_ID==null){
+    if (req.user.WALLET_ID == null) {
         console.log('get e user  wallet nai');
         res.send('You must have a wallet in your profile to make a request');
     }
-    else{
+    else {
         console.log('get e user  wallet ase');
         const wallet_info = await wallet.getWalletInfo(req.user.WALLET_ID);
-        console.log("wallet info: ",wallet_info);
-        const bal='BALANCE: '+wallet_info[0].BALANCE;
+        console.log("wallet info: ", wallet_info);
+        const bal = 'BALANCE: ' + wallet_info[0].BALANCE;
         res.send(bal);
         //res.status(202).json(wallet_info[0]);
     }
 
-    
+
     //console.log(req.body.data);
-    
+
 });
 
-router.get('/old',async(req,res) =>{
-    if(req.user==null){
+router.get('/old', async (req, res) => {
+    if (req.user == null) {
         console.log('get e user nai');
         return res.redirect('/user/login');
     }
     console.log('get e user ase');
-    const old=await DB_trips.getOldPendingRequests(req.user.USERNAME);
-
-    if(old.length>0){
-        await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
-        res.send('old yes');
+    const cur = await DB_trips.getPendingRequests(req.user.USERNAME);
+    const old = await DB_trips.getOldPendingRequests(req.user.USERNAME);
+    if (cur.length == 0) {
+        console.log('timer baad');
+        res.send('bedorkar');
     }
-    else{
-        res.send('no');
+    else {
+
+        if (old.length > 0) {
+            await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
+            console.log("baaaaaaaaaaaaaaaaaaakiiiiiiiiii=",old[0].ID);
+            res.send('old nottaken yes', old[0].ID, ' ', old[0].TIME_REQUEST);
+        }
+        else {
+            console.log("baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            res.send('no');
+        }
     }
 
-    
+
     //console.log(req.body.data);
-    
+
 });
 
-router.get('/deleteold',async(req,res) =>{
-    if(req.user==null){
+router.get('/deleteold', async (req, res) => {
+    if (req.user == null) {
         console.log('get e user nai');
         return res.redirect('/user/login');
     }
     console.log('get e user ase');
 
-        await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
-        res.status(202).send('done');
-    
+    await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
+    res.status(202).send('done');
 
-    
+
+
     //console.log(req.body.data);
-    
+
 });
 
 
 
 
 
-router.post('/',async(req,res) =>{
-    if(req.user==null){
+router.post('/', async (req, res) => {
+    if (req.user == null) {
         console.log('post e user nai');
         return res.redirect('/user/login');
     }
-    console.log('post e user ase',req.user.USERNAME);
-    
-    console.log('dir theke aslam',req.body);
+    console.log('post e user ase', req.user.USERNAME);
+
+    console.log('dir theke aslam', req.body);
 
 
 
-    const origin=await fetch(req.body.origin);
-    const json=await origin.json();
-    console.log("origin=",json.results[0].geometry);
+    const origin = await fetch(req.body.origin);
+    const json = await origin.json();
+    console.log("origin=", json.results[0].geometry);
 
-    const destination=await fetch(req.body.destination);
-    const json2=await destination.json();
-    console.log("destination=",json2.results[0].geometry);
-    const reqpickup={
-        lat:json.results[0].geometry.location.lat,
-        lng:json.results[0].geometry.location.lng
+    const destination = await fetch(req.body.destination);
+    const json2 = await destination.json();
+    console.log("destination=", json2.results[0].geometry);
+    const reqpickup = {
+        lat: json.results[0].geometry.location.lat,
+        lng: json.results[0].geometry.location.lng
     }
-    const reqdropoff={
-        lat:json2.results[0].geometry.location.lat,
-        lng:json2.results[0].geometry.location.lng
+    const reqdropoff = {
+        lat: json2.results[0].geometry.location.lat,
+        lng: json2.results[0].geometry.location.lng
     }
-    console.log("pickup=",reqpickup);
-    console.log("dropoff=",reqdropoff);
+    console.log("pickup=", reqpickup);
+    console.log("dropoff=", reqdropoff);
 
 
-//     mapCalc.calculateDistance(reqpickup, reqdropoff)
-//   .then(result => {
-//     const { distance, duration } = result;
-//     console.log(`Distance checking: ${distance}`);
-//     console.log(`Duration checking: ${duration}`);
-//   })
-//   .catch(error => {
-//     console.error(error);
-//   });
-      
+    //     mapCalc.calculateDistance(reqpickup, reqdropoff)
+    //   .then(result => {
+    //     const { distance, duration } = result;
+    //     console.log(`Distance checking: ${distance}`);
+    //     console.log(`Duration checking: ${duration}`);
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
 
 
 
 
-    const tripRequest={
-        pickup:reqpickup,
-        dropoff:reqdropoff,
-        user:req.user,
-        v_type:req.body.v_type,
-        fare:req.body.fare
+
+    const tripRequest = {
+        pickup: reqpickup,
+        dropoff: reqdropoff,
+        user: req.user,
+        v_type: req.body.v_type,
+        fare: req.body.fare
     }
-    console.log('tripreq ready=',tripRequest);
+    console.log('tripreq ready=', tripRequest);
 
-   // let madeRequest =
+    // let madeRequest =
     // await DB_trips.cancelRequest(req.user.USERNAME);
     await DB_trips.makeTripRequests(tripRequest);
-    let checkedRequest =await DB_trips.getAllInfoRequest(tripRequest);
+    let checkedRequest = await DB_trips.getAllInfoRequest(tripRequest);
 
-    if(checkedRequest[0]===undefined){
+    if (checkedRequest[0] === undefined) {
         console.log("ERROR at creating user request for trip");
         res.redirect('/user');
     }
-    else{
-    //await authUtils.loginUser(res, result2[0].EMAIL)
-    // redirect to home page
-    //res.redirect(`/profile/${user.handle}/settings`);
-    console.log("successful request for ride");
-    console.log("refreshing user");
-    res.redirect('/user');
-    
+    else {
+        //await authUtils.loginUser(res, result2[0].EMAIL)
+        // redirect to home page
+        //res.redirect(`/profile/${user.handle}/settings`);
+        console.log("successful request for ride");
+        console.log("refreshing user");
+        res.redirect('/user');
+
     }
 
 
@@ -172,10 +181,10 @@ router.post('/',async(req,res) =>{
 
 
 
-   
 
 
-    
+
+
 
 
 
@@ -184,12 +193,12 @@ router.post('/',async(req,res) =>{
 
 // router.post("/", async (req, res) => {
 //     const data = req.body.data;
-  
+
 //     try {
 //       // Call a function from your database module to save the data
 //       //await database.saveData(data);
 //       console.log("data received= ",data);
-  
+
 //       res.status(200).send("Data received at backend");
 //     } catch (error) {
 //       console.error("Error receiving data:", error);
@@ -199,4 +208,4 @@ router.post('/',async(req,res) =>{
 
 
 
-module.exports = router ;
+module.exports = router;
