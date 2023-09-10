@@ -50,16 +50,16 @@ async function getAllInfo(email){
     }
     return (await database.execute(sql,binds,database.options)).rows;
 }
-async function getWalletId(email){
+async function getWalletId(username){
     const sql=
    `SELECT
      WALLET_ID
      FROM 
      USERS
-     WHERE EMAIL= :email 
+     WHERE USERNAME= :username 
     `;
     const binds={
-        email: email
+        username:username
     }
 
     return (await database.execute(sql,binds,database.options)).rows;

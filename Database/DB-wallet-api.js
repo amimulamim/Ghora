@@ -20,8 +20,27 @@ const binds = {
 return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function addBalance(id,amount)
+{
+    const sql = `
+    UPDATE WALLET 
+    SET 
+        BALANCE=BALANCE+:amount
+    WHERE
+        ID=:id
+    `;
+const binds = {
+    id:id,
+    amount:amount
+}
+return await database.execute(sql, binds, {});
+}
+
+
+
 
 
 module.exports = {
-    getWalletInfo
+    getWalletInfo,
+    addBalance
 }

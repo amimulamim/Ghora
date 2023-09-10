@@ -123,16 +123,16 @@ async function getAllInfoByID(id){
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
-async function getWalletId(email){
+async function getWalletId(id){
     const sql=
    `SELECT
      WALLET_ID
      FROM 
      DRIVER
-     WHERE EMAIL= :email 
+     WHERE ID= :id 
     `;
     const binds={
-        email: email
+        id: id
     }
 
     return (await database.execute(sql,binds,database.options)).rows;
