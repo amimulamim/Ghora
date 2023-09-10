@@ -33,7 +33,7 @@ async function getUsernameByEmail(email){
         email : email
     }
 
-    //return (await database.execute(sql, binds, database.options)).rows;
+    
     try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;
@@ -99,7 +99,7 @@ async function getLoginInfoByEmail(email){
         email: email
     }
 
-   // return (await database.execute(sql, binds, database.options)).rows;
+
    try {
     const result = await database.execute(sql, binds, database.options);
     const rows = result.rows;
@@ -133,7 +133,7 @@ async function getLoginInfoByUsername(username){
         username :username
     }
 
-    //return (await database.execute(sql, binds, database.options)).rows;
+    
     try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;
@@ -158,7 +158,7 @@ async function getUsernameByPhone(phone){
         phone : phone
     }
 
-    //return (await database.execute(sql, binds, database.options)).rows;
+    
     try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;

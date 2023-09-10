@@ -13,7 +13,15 @@ SELECT
     const binds={
         did:did
     }
-    return (await database.execute(sql,binds,database.options)).rows;//[0].IS_AVAILABLE;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }//[0].IS_AVAILABLE;
 }
 
 async function is_available_from_running(id){
@@ -25,7 +33,15 @@ WHERE D_ID =:id`;
     const binds={
         id:id
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
 async function make_available(id){
@@ -36,7 +52,15 @@ async function make_available(id){
     const binds={
         id:id
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 async function make_unavailable(id){   
     const sql= `
@@ -46,7 +70,15 @@ async function make_unavailable(id){
     const binds={
         id:id
     }
-    return (await database.execute(sql,binds,database.options)).rows;
+     try {
+        const result = await database.execute(sql, binds, database.options);
+        const rows = result.rows;
+        //console.log('db func hote: ', rows);
+        return rows;
+        // Process the result rows
+    } catch (error) {
+        console.error('Error executing SQL:', error);
+    }
 }
 
     module.exports={

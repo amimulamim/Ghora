@@ -58,7 +58,7 @@ async function getDriverIDByPhone(phone){
         phone : phone
     }
 
-    //return (await database.execute(sql, binds, database.options)).rows;
+    
     try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;
@@ -122,7 +122,7 @@ async function getLoginInfoByEmail(email){
         email: email
     }
 
-   // return (await database.execute(sql, binds, database.options)).rows;
+   
    try {
     const result = await database.execute(sql, binds, database.options);
     const rows = result.rows;
@@ -157,7 +157,7 @@ async function getLoginInfoByID(id){
         id: id
     }
 
-   // return (await database.execute(sql, binds, database.options)).rows;
+   
 
    try {
     const result = await database.execute(sql, binds, database.options);
