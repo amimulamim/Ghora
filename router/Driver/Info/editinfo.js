@@ -40,7 +40,13 @@ router.post('/', async (req, res) => {
     console.log(req.body);
     let results, resphone,resw, errors = [];
     results = await DB_auth_driver.getDriverIDByEmail(req.body.email);
-    resphone = await DB_auth_driver.getDriverIDByPhone(req.body.phone);
+
+    let phonecheck=req.body.phone;
+    if(phonecheck.length==11){
+        phonecheck='88'+phonecheck;
+    }
+    
+    resphone = await DB_auth_driver.getDriverIDByPhone(phonecheck);
     resw = await DB_auth_driver.getDriverByWallet(req.body.wallet);
 
     if (results.length > 0) {
@@ -61,7 +67,7 @@ router.post('/', async (req, res) => {
 
     
 
-    if (req.body.phone.length != 13 && req.body.phone.length!=11) {
+    if ((req.body.phone.length != 13 && req.body.phone.length!=11) || !(phonecheck.startsWith('8801'))) {
         errors.push('Phone number must be 88.. +11 digits  and have total 13 digits');
     }
     if (errors.length > 0) {

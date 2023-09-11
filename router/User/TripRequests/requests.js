@@ -90,9 +90,10 @@ router.get('/deleteold', async (req, res) => {
         console.log('get e user nai');
         return res.redirect('/user/login');
     }
-    console.log('get e user ase');
-
+    
+    console.log('deleting old ');
     await DB_trips.deleteOldPendingRequests(req.user.USERNAME);
+    console.log('deleted old done');
     res.status(202).send('done');
 
 

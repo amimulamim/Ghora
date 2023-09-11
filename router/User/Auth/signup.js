@@ -76,7 +76,7 @@ router.post('/', async (req, res) => {
             errors.push('Password must be at least 6 characters');
         }
         //check valid phone no.
-        if(req.body.phone.length!=11 && req.body.phone.length!=13){
+        if((req.body.phone.length!=11 && req.body.phone.length!=13)  || !(phonecheck.startsWith('8801'))){
             errors.push('Valid phone number must be provided');
         }
 
