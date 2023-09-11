@@ -9,21 +9,7 @@ const DB_review = require('../../Database/DB-review');
 // creating router
 const router = express.Router({mergeParams : true});
 
-// // ROUTE: sign up (get)
-// router.get('/', (req, res) => {
-//     // check if already logged in
-//     if(req.user == null){
-//         const errors = [];
-//         res.render('userlayout.ejs', {
-//             title : 'Login - Ghora',
-//             page : ['userLogin'],
-//             user : null,
-//             errors : errors
-//         });
-//     } else {
-//         res.redirect('/user');
-//     }
-// });
+
 
 router.post('/', async (req, res) => {
     // check if already logged in

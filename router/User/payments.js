@@ -33,15 +33,6 @@ router.get('/', async (req, res) => {
     navbar: 1
 });
 
-
-
-
-
-
-    
-
-
-
 });
 
 module.exports =router ;

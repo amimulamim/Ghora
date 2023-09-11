@@ -143,7 +143,8 @@ async function getAllInfoByID(id){
         WALLET_ID,
         PLATE_NO,
         LAT,
-        LNG
+        LNG,
+        IMAGE
     FROM 
         DRIVER 
     WHERE 

@@ -15,7 +15,7 @@ router.get('/', async (req, res) =>{
     }
     let e_mail=req.driver.EMAIL;
     console.log('tererere'+e_mail);
-    const driverInfo=await DB_drivers.getAllInfo(e_mail);
+    const driverInfo=await DB_drivers.getAllInfoByID(req.driver.ID);
     //res.status(200).json(driverdInfo.data);
     // map.initMap();
     

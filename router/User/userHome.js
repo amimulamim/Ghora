@@ -35,7 +35,7 @@ router.get('/', async (req, res) =>{
     }
     let e_mail=req.user.EMAIL;
     console.log('tererere'+e_mail);
-    const userInfo=await DB_users.getAllInfo(e_mail);
+    const userInfo=await DB_users.getAllInfoByUsername(req.user.USERNAME);
     //res.status(200).json(userInfo.data);
     const pendingreq=await DB_trips.getPendingRequests(req.user.USERNAME);
     const currunning=await DB_running_trips.runningOfUser(req.user.USERNAME);
@@ -43,14 +43,7 @@ router.get('/', async (req, res) =>{
     let cur_req=0;
      let pendingRequest;
      let runningtrip;
-     //={
-    // USERNAME: req.user.USERNAME,
-    //         PICK_UP: "",
-    //         DROP_OFF: "",
-    //         V_TYPE:"",
-    //         ID: 0
-    // }
-   // console.log("got pending,length= ",pendingreq," ",pendingreq.length);
+    
     if(currunning.length>0){
         console.log("already in a trip");
         res.redirect("/user/running");

@@ -5,6 +5,7 @@ const { json } = require('body-parser');
 const mapCalc = require('../../Map/calculations');
 const address = require('../../Map/formattedAddress');
 const wallet = require('../../../Database/DB-wallet-api');
+const userInfo=require('../../../Database/DB-user-api')
 
 //const DB_users=require('../../Database/DB-user-api');
 //creating routers
@@ -28,13 +29,23 @@ router.get('/allowed', async (req, res) => {
         return res.redirect('/user/login');
     }
     console.log('get e user ase');
-    if (req.user.WALLET_ID == null) {
+    let userAllInfo=[];
+    console.log('req user= ',req.user)
+    userAllInfo=await userInfo.getAllInfoByUsername(req.user.USERNAME);
+
+    console.log(' doirgho     ',userAllInfo.length);
+    if(userAllInfo.length<=0)
+    {
+        console.log('user i nai');
+        res.send('Muhit r Amim');
+    }
+    else if (userAllInfo[0].WALLET_ID == null) {
         console.log('get e user  wallet nai');
         res.send('You must have a wallet in your profile to make a request');
     }
     else {
         console.log('get e user  wallet ase');
-        const wallet_info = await wallet.getWalletInfo(req.user.WALLET_ID);
+        const wallet_info = await wallet.getWalletInfo(userAllInfo[0].WALLET_ID);
         console.log("wallet info: ", wallet_info);
         const bal = 'BALANCE: ' + wallet_info[0].BALANCE;
         res.send(bal);

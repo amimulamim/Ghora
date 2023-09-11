@@ -22,6 +22,4 @@ router.get('/', async (req, res) => {
 
 router.use('/driver',driverRouter);
 router.use('/user',usersRouter);
-router.use('/hello',hRouter);
-
 module.exports = router;

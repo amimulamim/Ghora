@@ -28,13 +28,6 @@ const files = require('../Driver/files.js');
 //router.use(driverAuth);
 router.get('/',dvhomeRouter);
 router.post('/',dvhomeRouter);
-router.get('/a',async(req,res)=>
-{
-    console.log(req.driver);
-    res.send('hahahaha');
-
-});
-
 //setting up sub routers
 router.use('/requests',tripReqRouter);
 router.use('/login', loginRouter);

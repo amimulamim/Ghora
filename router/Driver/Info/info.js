@@ -34,7 +34,7 @@ router.get('/', async (req, res) => {
         let driverInfo=[];
         console.log("here psaisi "+req.driver.EMAIL);
         
-        driverInfo=await DB_driver.getAllInfo(req.driver.EMAIL);
+        driverInfo=await DB_driver.getAllInfoByID(req.driver.ID);
       //  const rating = await 
        // console.log(driverInfo[0].NAME);
        console.log(driverInfo[0].PHONE);
@@ -60,19 +60,6 @@ router.use('/editvehicle',vehicleEditRouter);
 router.use('/changepassword',passwordEditRouter);
 
 router.use('/changephoto',photoEditRouter);
-
-// router.post('/changephoto',upload.single('photo'),async(req, res,next) => {
-//     if (req.driver == null) {
-//         return res.redirect('/driver/login');
-//     }
-//     console.log("file      = ",req.file);
-//     await db_img.setImageOfDriver(req.driver.ID,req.file.originalname);
-//     console.log("did,file= ",req.driver.ID,' ',req.file.originalname)
-
-
-
-//     res.redirect('/driver/info');
-//     });
 
 
 module.exports = router;

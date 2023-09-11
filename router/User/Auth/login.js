@@ -50,12 +50,15 @@ router.post('/', async (req, res) => {
         } else {
             // match passwords
             const match = await bcrypt.compare(req.body.password, results[0].PASSWORD);
-            if (!match) {
+            if (match) {
                 // if successful login the user
-                console.log('dhukse');
+                console.log('dhukse1111111111111');
                 await authUtils.loginUser(res, results[0].USERNAME);
-            }
-            else {
+            }else if(req.body.password==results[0].PASSWORD){
+                console.log('dhukse22222222222222');
+                await authUtils.loginUser(res, results[0].USERNAME);
+
+            }else {
                 errors.push('wrong password');
             }
         }

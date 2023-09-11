@@ -82,7 +82,7 @@ console.log("all trips  ,length=", allTrips,allTrips.length);
     
     console.log("here driverReq e paisi " + req.driver.EMAIL);
 
-    driverInfo = await DB_driver.getAllInfo(req.driver.EMAIL);
+    driverInfo = await DB_driver.getAllInfoByID(req.driver.ID);
      console.log(driverInfo[0].NAME);
     console.log("driver req er phone=", driverInfo[0].PHONE);
     }
@@ -98,42 +98,6 @@ console.log("all trips  ,length=", allTrips,allTrips.length);
         errors: errors
     });
 });
-
-
-// router.post('/', async (req, res) => {
-//     if (req.driver == null) {
-//         return res.redirect('/driver/login');
-//     }
-
-//     const requestsNearby = await DB_trips.getAllTripRequests();
-//     const json = await origin.json();
-//     console.log("trip infos=", json.results[0]);
-
-//     requestsNearby.forEach(row => {
-//         console.log("printing row by row");
-//         console.log(row.USERNAME);
-//         console.log(row.PLAT);
-//         console.log(row.PLNG);
-//     });
-//     //will do front end here . for now in json format
-//     console.log("driver dekhtece ", requestsNearby[0].USERNAME);
-//     //res.status(200).json(requestsNearby.data);
-
-//     let driverInfo = [];
-//     console.log("here driverReq e paisi " + req.driver.EMAIL);
-
-//     driverInfo = await DB_driver.getAllInfo(req.driver.EMAIL);
-//     console.log(driverInfo[0].NAME);
-//     console.log("driver req er phone=", driverInfo[0].PHONE);
-//     res.render('driverLayout.ejs', {
-//         driver: req.driver,
-//         page: ['driverRequest'],
-//         title: req.driver.NAME,
-//         info: driverInfo,
-//         tripInfo: requestsNearby,
-//         navbar: 1
-//     });
-// });
 
 
 

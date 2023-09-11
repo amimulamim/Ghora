@@ -121,9 +121,9 @@ async function getAllInfoByUsername(username){
         PHONE,
         SEX,
         WALLET_ID,
-      
         LAT,
-        LNG
+        LNG,
+        IMAGE
     FROM 
         USERS
     WHERE 
@@ -135,7 +135,7 @@ async function getAllInfoByUsername(username){
      try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;
-        //console.log('db func hote: ', rows);
+        console.log('databASE func hote   : ', rows);
         return rows;
         // Process the result rows
     } catch (error) {

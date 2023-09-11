@@ -12,33 +12,6 @@ const address = require('../Map/formattedAddress');
 //creating routers
 const router = express.Router({ mergeParams: true });
 
-// router.post('/',async(req,res)=>{
-//     if (req.driver == null) {
-//         return res.redirect('/driver/login');
-//     }
-//     const running = await DB_trips.runningOfDriver(req.driver.ID);
-//     if(running.length===0){
-//         res.redirect('/driver');
-//     }
-//     else{
-//     await DB_trips.createTripHistory(running[0]);
-//     console.log('redirecting to complete')
-//     res.redirect('/driver/completed');
-
-//    //res.render('driverLayout.ejs', {
-//     // title:req.driver.NAME,
-//     // page:['driverHome'],
-//     // driver:req.driver
-
-   
-
-//     // });
-//     }
-
-
-// });
-
-
 router.get('/',async(req,res)=>
 {
     if (req.user == null) {

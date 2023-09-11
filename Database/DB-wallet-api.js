@@ -42,7 +42,15 @@ const binds = {
     id:id,
     amount:amount
 }
-return await database.execute(sql, binds, {});
+try {
+    const result = await database.execute(sql, binds, database.options);
+    const rows = result.rows;
+    //console.log('db func hote: ', rows);
+    return rows;
+    // Process the result rows
+} catch (error) {
+    console.error('Error executing SQL:', error);
+}
 }
 
 

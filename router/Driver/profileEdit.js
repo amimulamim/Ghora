@@ -104,7 +104,7 @@ router.post('/', async (req, res) => {
                     let result2 = await DB_auth_driver.getLoginInfoByEmail(driver.email);
                     // login the user too
                     //await DB_cart.addNewCart(result2[0].ID);
-                    await authUtils.loginDriver(res, result2[0].EMAIL)
+                    await authUtils.loginDriver(res, result2[0].ID)
                     // redirect to home page
                     //res.redirect(`/profile/${user.handle}/settings`);
                     res.redirect('/driver');

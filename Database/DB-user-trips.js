@@ -51,7 +51,7 @@ async function getTripRequestsOfUser(username){
 
     FROM 
         TRIP_REQUEST
-        WHERE TIME_REQUEST>=SYSTIMESTAMP-INTERVAL '30' MINUTE AND USERNAME=:username
+        WHERE TIME_REQUEST>=SYSTIMESTAMP-INTERVAL '1' MINUTE AND USERNAME=:username
     `;
     const binds={
         username:username
@@ -213,7 +213,7 @@ async function getPendingRequests(username){
     FROM 
         TRIP_REQUEST
         WHERE USERNAME=:username 
-        AND TIME_REQUEST>=SYSTIMESTAMP-INTERVAL '30' MINUTE
+        AND TIME_REQUEST>=SYSTIMESTAMP-INTERVAL '1' MINUTE
     `;
     const binds={
         username:username,
@@ -245,7 +245,7 @@ async function getOldPendingRequests(username){
     FROM 
         TRIP_REQUEST
         WHERE USERNAME=:username 
-        AND TIME_REQUEST<SYSTIMESTAMP-INTERVAL '30' MINUTE
+        AND TIME_REQUEST<SYSTIMESTAMP-INTERVAL '1' MINUTE
     `;
     const binds={
         username:username,
@@ -269,7 +269,7 @@ async function deleteOldPendingRequests(username){
     FROM 
         TRIP_REQUEST
         WHERE USERNAME=:username 
-        AND TIME_REQUEST<SYSTIMESTAMP-INTERVAL '30' MINUTE
+        AND TIME_REQUEST<SYSTIMESTAMP-INTERVAL '1' MINUTE
     `;
     const binds={
         username:username,

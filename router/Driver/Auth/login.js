@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
             errors : errors
         })
     } else {
-        console.log("log "+req.driver.email)
+        console.log("log "+req.driver.EMAIL)
         res.redirect('/driver');
     }
 });
@@ -50,12 +50,15 @@ router.post('/', async (req, res) => {
         } else {
             // match passwords
             const match = await bcrypt.compare(req.body.password, results[0].PASSWORD);
-            if(!match){
-                // if successful login the driver
-                console.log('dhukse');
-                await authUtils.loginDriver(res, results[0].ID);
-            }
-            else{
+            if (match) {
+                // if successful login the user
+                console.log('dhukse1111111111111');
+                await authUtils.loginDriver(res, results[0].USERNAME);
+            }else if(req.body.password==results[0].PASSWORD){
+                console.log('dhukse22222222222222');
+                await authUtils.loginDriver(res, results[0].USERNAME);
+
+            }else {
                 errors.push('wrong password');
             }
         }

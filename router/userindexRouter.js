@@ -24,13 +24,6 @@ const paymentsRouter = require('./User/payments.js');
 // ROUTE: home page
 //router.use(userAuth);
 router.get('/',require('./User/userHome'));
-router.get('/a',async(req,res)=>
-{
-    console.log(req.user);
-    res.send('hahahaha');
-
-});
-
 //setting up sub routers
 router.use('/requests',tripReqRouter);
 router.use('/login', loginRouter);

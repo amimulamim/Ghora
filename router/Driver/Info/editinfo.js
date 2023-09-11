@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     }
     console.log('etai driver', req.driver);
     let driverInfo, errors = [];
-    driverInfo = await DB_auth_driver.getLoginInfoByEmail(req.driver.EMAIL);
+    driverInfo = await DB_auth_driver.getLoginInfoByID(req.driver.ID);
     console.log('eta', driverInfo[0]);
     res.render('driverlayout.ejs', {
         title: 'Edit Profile - Ghora',

@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
     }
     console.log('etai user', req.user);
     let userInfo, errors = [];
-    userInfo = await DB_auth_user.getLoginInfoByEmail(req.user.EMAIL);
+    userInfo = await DB_auth_user.getLoginInfoByUsername(req.user.USERNAME);
     console.log('eta', userInfo[0]);
     res.render('userlayout.ejs', {
         title: 'Edit Profile - Ghora',
