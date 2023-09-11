@@ -54,6 +54,18 @@ router.post('/', async (req, res) => {
         }
         else {
             errors.push('Password Must Be At Least 6 Characters');
+           
+            res.render('userlayout.ejs', {
+                title: 'Edit Profile - Ghora',
+                page: ['userPasswordEdit'],
+                user: req.user,
+                errors: errors,
+                form: {
+                    prevpass: req.body.prevpass,
+                    newpass: req.body.newpass
+                    //sex:req.body.sex
+                }
+            });
         }
     }
     else {

@@ -12,8 +12,15 @@ async function addNewVehicle(vehicle){
         model:vehicle.model,
         plan:vehicle.plan
     }
-    return await database.execute(sql, binds, {});
+    try{
+        let v= await database.execute(sql, binds, {});
+        return v;
+    }catch(error){
+        console.log('error adding');
+
+    }
 }
+    
 async function deleteVehicle(plate){
     const sql = `
     DELETE FROM

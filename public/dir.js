@@ -374,7 +374,7 @@ class AutocompleteDirectionsHandler {
 
           const output = document.querySelector('#output');
 
-          output.innerHTML = "<div class='alert-info'  style=' background-color: greenyellow; '><b> FROM:" + document.getElementById("origin-input").value + ".<br/><br/> To: " + document.getElementById("destination-input").value + ".<br/> <br/>Driving Distance: " + response.routes[0].legs[0].distance.text + ".<br/><br/> Duration: " + response.routes[0].legs[0].duration.text + ".</b></div>";
+          output.innerHTML = "<div class='alert-info'  style=' background-color: transparent; '><b> FROM:" + document.getElementById("origin-input").value + ".<br/><br/> To: " + document.getElementById("destination-input").value + ".<br/> <br/>Driving Distance: " + response.routes[0].legs[0].distance.text + ".<br/><br/> Duration: " + response.routes[0].legs[0].duration.text + ".</b></div>";
           this.distanceBetween = response.routes[0].legs[0].distance.text;
           this.durationBetween = response.routes[0].legs[0].duration.text;
 

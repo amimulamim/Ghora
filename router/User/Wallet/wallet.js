@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
         res.render('userlayout.ejs', {
         
             page: ['userWallet'],
-            driver: req.driver,
+            user: req.user,
             errors: errors,
             title: req.driver.NAME,
             navbar: 1,

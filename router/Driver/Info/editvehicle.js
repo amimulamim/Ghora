@@ -105,12 +105,6 @@ router.post('/', async (req, res) => {
         });
     } else {
 
-
-        // await bcrypt.hash(driver.password, 8, async (err, hash) => {
-        //     if (err) {
-        //         console.log("ERROR hashing password");
-        //     } else {
-        //         driver.password = hash;
         console.log('kkkkkkk', req.driver.EMAIL);
         // console.log(vehicle);
         let driverInfo = await DB_auth_driver.getLoginInfoByID(req.driver.ID);
@@ -127,7 +121,15 @@ router.post('/', async (req, res) => {
 
             }
             console.log('ei plate er vehicle nai',vehicle);
-            let ad = await DB_vehicle_api.addNewVehicle(vehicle);
+
+            try{
+                await DB_vehicle_api.addNewVehicle(vehicle);
+
+            }catch(error){
+                console.log('gdfgdgddgd');
+                errors.push('this plate number is invalid');
+            }
+           
 
         } else {
 
@@ -143,26 +145,48 @@ router.post('/', async (req, res) => {
             console.log('ki hoilo bae',vehicle);
            
             //let r = await DB_vehicle_api.editVehicleInfo(vehicle);
-            let v=await  DB_vehicle_api.addNewVehicle(vehicle);
-            console.log('ki hoilo ');
+            try{
+                let v=await  DB_vehicle_api.addNewVehicle(vehicle);
+                console.log('ki hoilo ');
+
+            }catch(error){
+                console.log('Vehicle update unsuccesful')
+                errors.push('Vehicle update unsuccesful')
+            }
+       
 
         }
         console.log('eto tuku success');
         const oldplate=DB_auth_driver.getLoginInfoByID(req.driver.ID);
 
-        let r2 = await DB_driver_edit.editVehiclePlate(req.driver.ID, req.body.plate);
-        // if(driverInfo[0].PLATE_NO!=null){
-        //     await DB_driver_edit.deleteOldVehicle(driverInfo[0].PLATE_NO);
-        // }
+        try{
+            let r2 = await DB_driver_edit.editVehiclePlate(req.driver.ID, req.body.plate);
 
-        //let result2 = await DB_auth_driver.getLoginInfoByEmail(driver.email);
-        // login the user too
-        //await DB_cart.addNewCart(result2[0].ID);
-        //await authUtils.loginDriver(res, result2[0].EMAIL)
-        // redirect to home page
-        //res.redirect(`/profile/${user.handle}/settings`);
+        }catch(error){
+            console.log('vehicle editing failed')
+            errors.push('vehicle editing failed')
+        }
+        if (errors.length > 0) {
+            res.render('driverlayout.ejs', {
+                title: 'Edit Profile - Ghora',
+                page: ['driverVehicleEdit'],
+                driver: req.driver,
+                errors: errors,
+                form: {
+                    plate: req.body.plate,
+                    model: req.body.model,
+                    company: req.body.company,
+                    type: req.body.type
+                }
+            });
+        }else{
+           return  res.redirect('/driver/info');
+
+        }
+
+
       
-        res.redirect('/driver/info');
+       
 
         //     }
         // });

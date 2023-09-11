@@ -53,10 +53,10 @@ router.post('/', async (req, res) => {
             if (match) {
                 // if successful login the user
                 console.log('dhukse1111111111111');
-                await authUtils.loginDriver(res, results[0].USERNAME);
+                await authUtils.loginDriver(res, results[0].ID);
             }else if(req.body.password==results[0].PASSWORD){
                 console.log('dhukse22222222222222');
-                await authUtils.loginDriver(res, results[0].USERNAME);
+                await authUtils.loginDriver(res, results[0].ID);
 
             }else {
                 errors.push('wrong password');

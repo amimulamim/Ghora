@@ -147,7 +147,16 @@ async function editVehiclePlate(id, plate) {
         id: id,
         plate: plate
     }
-    return await database.execute(sql, binds, {});
+    try
+    {
+        console.log('done')
+        return await database.execute(sql, binds, {});
+
+    }catch(error){
+        console.log('done2')
+
+    }
+   
 }
 
 async function editWallet(driver) {

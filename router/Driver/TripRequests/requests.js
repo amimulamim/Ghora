@@ -48,27 +48,6 @@ router.get('/', async (req, res) => {
         errors.push('Please add a WALLET_ID to receive payments');
      }
 
-    // const json=await requestsNearby.json();
-   // console.log("trip infos=");
-
-    //let allTrips = [];
-
-//    async function process(requestsNearby){ 
-//     return new Promise((resolve) => {
-//         setTimeout(()=>{
-    
-
-
-
-
-
-
-//     resolve(allTrips);
-//     }, 1000);
-// });
-// }  
-
-//const tripsall=await process(requestsNearby);
 
 console.log("all trips  ,length=", allTrips,allTrips.length);
 //console.log("trip req all =", tripsall);
