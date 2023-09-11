@@ -1,6 +1,11 @@
 
 <head>
   <link rel="stylesheet" href="/css/drivernavigationbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+        @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+  </style>
 </head>
 
 <body>
@@ -21,22 +26,26 @@
 
           <!-- <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a> -->
         
-        <li> <a href="/user"> Home</a></li>
+        <li> 
+          
+          <a href="/user"><i class="fas fa-home"></i>  Home</a>
+        </li>
 
-        <li><a href="/user/history"> history</a></li>
+        <li><a href="/user/history"><i class="fa fa-history" aria-hidden="true"></i>  History</a></li>
         <li>
-          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">About</a>
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa-solid fa-info"></i>  About</a>
           <ul class="collapse list-unstyled" id="pageSubmenu">
-            <li><a href="/user/info">info</a></li>
-            <li>
-              <a href="/user/info/edit">Edit info</a>
-            </li>
+            
+              <li><a href="/user/info"><i class="fas fa-user"></i>   Profile</a></li>
+             
+              <li><a href="/user/info/edit"><i class="fas fa-user-edit"></i>  Edit Profile</a></li>
+            
 
           </ul>
         </li>
-        <li><a href="/user/wallet"> Balance</a></li>
-        <li><a href="/user/requests"> Request For a Ride</a></li>
-        <li><a href="/user/payments"> Payments</a></li>
+         <li><a href="/user/wallet"><i class="fas fa-address-card"></i>    Wallet</a></li>
+        <li><a href="/user/requests"><i class="fa-solid fa-car"></i> Request For a Ride</a></li>
+        <li><a href="/user/payments"><i class="fa-amazon-pay"></i> Payments</a></li>
 
       </ul>
 

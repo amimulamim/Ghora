@@ -39,9 +39,14 @@ router.post('/', async (req, res) => {
     console.log(req.body);
     let results,resphone,resusername,resw, errors = [];
     results = await DB_auth_user.getUsernameByEmail(req.body.email);
-    resphone = await DB_auth_user.getUsernameByPhone(req.body.phone);
+    
     resw = await DB_auth_user.getUserByWallet(req.body.wallet);
     console.log("phone =",req.body.phone)
+    let phonecheck=req.body.phone;
+    if(phonecheck.length==11){
+        phonecheck='88'+phonecheck;
+    }
+    resphone = await DB_auth_user.getUsernameByPhone(phonecheck);
     
     if (results.length > 0) {
         if (results[0].USERNAME != req.user.USERNAME) {
@@ -57,8 +62,9 @@ router.post('/', async (req, res) => {
         if (resw[0].USERNAME != req.user.USERNAME)
             errors.push('wallet is already registered to another user');
     }
-    if (req.body.phone.length != 11 && req.body.phone.length!=13)
+    if ((req.body.phone.length != 11 && req.body.phone.length!=13)||!(phonecheck.startsWith('8801'))) {
         errors.push('Phone no must start with 8801');
+    }
     
     if (errors.length > 0) {
         res.render('userlayout.ejs', {

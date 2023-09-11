@@ -53,6 +53,7 @@ router.post('/', async (req, res) => {
     results = await DB_auth_driver.getLoginInfoByID(req.driver.ID);
     const driverWallet = await DB_driver.getWalletIdByID(req.driver.ID);
     const walletinfo = await DB_wallet.getWalletInfo(driverWallet[0].WALLET_ID);
+        console.log('walllllllllllllllllll',walletinfo);
    
     
     if (walletinfo.length>0 && req.body.password==walletinfo[0].PASSWORD) {

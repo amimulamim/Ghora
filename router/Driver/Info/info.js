@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt');
 const DB_driver=require('../../../Database/DB-driver-api');
 const DB_driver_edit=require('../../../Database/DB-driver-edit-api');
 const DB_vehicle_api=require('../../../Database/DB-vehicle-api');
+const DB_review=require('../../../Database/DB-review');
+
 const vehicleEditRouter=require('./editvehicle');
 const infoEditRouter=require('./editinfo');
 // const addVehicleRouter=require('./addVehicle');
@@ -35,6 +37,12 @@ router.get('/', async (req, res) => {
         console.log("here psaisi "+req.driver.EMAIL);
         
         driverInfo=await DB_driver.getAllInfoByID(req.driver.ID);
+
+        let rating=0;
+        const rate=await DB_review.getAverageRating(req.driver.ID);
+        if(rate.length > 0){
+        rating=rate[0].AVG_RATING;
+        }
       //  const rating = await 
        // console.log(driverInfo[0].NAME);
        console.log(driverInfo[0].PHONE);
@@ -43,6 +51,7 @@ router.get('/', async (req, res) => {
             page:['driverInfo'],
             title:req.driver.NAME,
             info:driverInfo,
+            rating:rating,
             navbar:1
         });
 
