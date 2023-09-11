@@ -51,26 +51,24 @@ router.post('/', async (req, res) => {
     console.log(req.body);
     let results, errors = [];
     results = await DB_auth_driver.getLoginInfoByID(req.driver.ID);
-    console.log('compare ' + results[0].PASSWORD);
-    const match = await bcrypt.compare(req.body.password, results[0].PASSWORD);
-    if (!match) {
-        const driverWallet = await DB_driver.getWalletIdByID(req.driver.ID);
-        const walletinfo = await DB_wallet.getWalletInfo(driverWallet[0].WALLET_ID);
+    const driverWallet = await DB_driver.getWalletIdByID(req.driver.ID);
+    const walletinfo = await DB_wallet.getWalletInfo(driverWallet[0].WALLET_ID);
         console.log('walllllllllllllllllll',walletinfo);
-
+   
+    
+    if (walletinfo.length>0 && req.body.password==walletinfo[0].PASSWORD) {
+        
         await DB_wallet.addBalance(walletinfo[0].ID, req.body.amount);
-
         return res.redirect('/driver/wallet');
     }
     else {
-        errors.push('wrong password');
+        errors.push('wrong credentials');
         res.render('driverlayout.ejs', {
             title: 'Edit Profile - Ghora',
             page: ['driverWallet'],
             driver: req.driver,
             errors: errors,
             title: req.driver.NAME,
-            wallet: walletInfo,
             navbar: 1,
             form: {
            
