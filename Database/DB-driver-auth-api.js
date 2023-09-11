@@ -126,7 +126,7 @@ async function getLoginInfoByEmail(email){
    try {
     const result = await database.execute(sql, binds, database.options);
     const rows = result.rows;
-    //console.log('pool er jonno database theke  : ',rows);
+    console.log('pool er jonno database theke  : ',rows);
     return rows;
     // Process the result rows
 } catch (error) {
