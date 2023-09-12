@@ -127,7 +127,11 @@ async function getLoginInfoByUsername(username){
         FROM
             USERS
         WHERE
+<<<<<<< Updated upstream
             lower(USERNAME)=lower(:username)
+=======
+            LOWER(USERNAME)=LOWER(:username)
+>>>>>>> Stashed changes
     `;
     const binds = {
         username :username
