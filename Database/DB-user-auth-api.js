@@ -127,7 +127,7 @@ async function getLoginInfoByUsername(username){
         FROM
             USERS
         WHERE
-            USERNAME=:username
+            lower(USERNAME)=lower(:username)
     `;
     const binds = {
         username :username
@@ -137,7 +137,7 @@ async function getLoginInfoByUsername(username){
     try {
         const result = await database.execute(sql, binds, database.options);
         const rows = result.rows;
-       // console.log('pool er jonno database theke  : ',rows);
+        //console.log('ussssssssssssserrrrrr er jonno database theke  : ',rows,username);
         return rows;
         // Process the result rows
     } catch (error) {

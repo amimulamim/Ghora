@@ -70,7 +70,7 @@ class AuthRepository extends Repository {
         FROM
             USERS
         WHERE
-            USERNAME = :username
+            LOWER(USERNAME) = LOWER(:username)
     `;
         const binds = {
             username: username

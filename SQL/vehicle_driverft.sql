@@ -1,0 +1,51 @@
+CREATE or REPLACE FUNCTION getDriverIDFromPlate(plate in VARCHAR2)
+return NUMBER IS
+
+did NUMBER;
+
+BEGIN
+SELECT id into did FROM DRIVER WHERE PLATE_NO=plate;
+
+if d_id is null THEN
+
+SELECT d_id into did from VEHICLE_LOG WHERE old_plate=plate;
+
+END if;
+return did;
+
+
+
+
+
+
+END;
+
+/
+
+
+
+
+CREATE or REPLACE TRIGGER DRIVER_vehICLE_LOG
+AFTER UPDATE
+OF PLATE_NO
+ON DRIVER
+FOR EACH ROW
+
+DECLARE
+
+BEGIN
+
+
+INSERT INTO VEHICLE_LOG(D_ID,OLD_PLATE,NEW_PLATE) VALUES(:NEW.ID,:OLD.PLATE_NO,:NEW.PLATE_NO);
+
+
+END;
+/
+
+SELECT * FROM VEHICLE_LOG
+
+
+
+
+
+

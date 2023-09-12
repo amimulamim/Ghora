@@ -395,8 +395,70 @@ ALTER TABLE USERS
 MODIFY (NAME VARCHAR2(200));
 
 
+ALTER TABLE USERS
+add IMAGE VARCHAR2(500);
+
+ALTER TABLE DRIVER
+add IMage VARCHAR2(500);
 
 
+
+
+CREATE TABLE VEHICLE_LOG(
+	old_plate VARCHAR2(50),
+	new_plate VARCHAR2(50),
+	d_id NUMBER
+	);
+	
+
+
+
+ALTER TABLE VEHICLE
+drop constraint VEHICLE_MODEL_FK;
+
+ALTER TABLE MODEL 
+drop constraint MODEL_PK;
+
+DECLARE
+
+BEGIN
+
+for R in (SELECT NAME,V_TYPE,MANUFACTURER from MODEL)
+LOOP
+	UPDATE MODEL set name=UPPER(name),V_TYPE=UPPER(V_TYPE),MANUFACTURER=UPPER(MANUFACTURER)
+	WHERE NAME=R.name;
+END LOOP;
+
+
+end;
+/
+
+ALTER TABLE model
+ADD CONSTRAINT pk_model_name PRIMARY KEY (name);
+
+
+
+
+
+
+DECLARE
+
+BEGIN
+
+for R in (SELECT MODELNAME,plate_no from VEHICLE)
+LOOP
+	UPDATE VEHICLE set modelname=UPPER(MODELNAME),PLATE_NO=UPPER(PLATE_NO) WHERE PLATE_NO=R.PLATE_NO;
+END LOOP;
+
+
+end;
+/
+
+ALTER TABLE VEHICLE
+add 	constraint vehicle_model_fk Foreign key(modelname) references model(name) ;
+
+
+alter table DRIV
 
 create table jsao_files (
   id           number generated always as identity not null,

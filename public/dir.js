@@ -386,9 +386,9 @@ class AutocompleteDirectionsHandler {
           // Show the button
           const distnce = parseFloat(response.routes[0].legs[0].distance.text);
           const duratn = parseFloat(response.routes[0].legs[0].duration.text);
-          const carfare = Math.max(distnce * 100, duratn * 30);
-          const bikefare = Math.max(distnce * 50, duratn * 15);
-          const cngfare = Math.max(distnce * 75, duratn * 25);
+          const carfare = Math.max(distnce * 70, duratn * 20);
+          const bikefare = Math.max(distnce * 35, duratn * 10);
+          const cngfare = Math.max(distnce * 60, duratn * 18);
 
           this.carfare = carfare;
           console.log("inserted cf,this cf= ", carfare, this.carfare);
@@ -400,7 +400,7 @@ class AutocompleteDirectionsHandler {
   // fareSpan.textContent = Math.ceil(carfare) + " Tk";
   // fareSpan.classList.add('fare-info');
   // carbutton.appendChild(fareSpan);
-          this.carbutton.textContent = this.carbutton.textContent +"  "+ Math.ceil(carfare) + " Tk";
+          this.carbutton.textContent = "CAR  "+ Math.ceil(carfare) + " Tk";
           this.bikebutton.style.display = "block";
           this.bikebutton.textContent = "Bike    " + Math.ceil(bikefare) + " Tk";
           this.cngbutton.style.display = "block";

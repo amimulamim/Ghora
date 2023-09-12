@@ -52,14 +52,15 @@ router.post('/', async (req, res) => {
         if(req.body.phone.length==11){
             phonecheck = '88'+req.body.phone;
         }
-        resphone = await DB_auth_user.getUsernameByPhone(phonecheck);
+        let resphone = await DB_auth_user.getUsernameByPhone(phonecheck);
         console.log("phone =",req.body.phone)
-        resusername=await DB_auth_user.getLoginInfoByUsername(req.body.username);
+        let resusername=await DB_auth_user.getLoginInfoByUsername(req.body.username);
         
         
         if(results.length > 0)
             errors.push('Email is already registered to a user');
        
+       // if(resphone.length > 0)
         if(resphone.length > 0)
             errors.push('Phone number is already registered to a user');
 

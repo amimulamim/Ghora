@@ -37,9 +37,43 @@ router.post('/', async (req, res) => {
     console.log(req.body);
     let results, errors = [];
     results = await DB_auth_driver.getLoginInfoByID(req.driver.ID);
-    console.log('compare ' + results[0].PASSWORD);
+    console.log('compare ' + results[0].PASSWORD,' ' + req.body.password);
     const match = await bcrypt.compare(req.body.prevpass, results[0].PASSWORD);
+    let match2=false;
+
+    if(req.body.prevpass===results[0].PASSWORD){
+        match2 = true;
+        console.log('ooooooooooooooooooooooooooooooooooooooooooonnovabe milse');
+    }
     if (match) {
+        if (req.body.newpass.length >= 6) {
+            await bcrypt.hash(req.body.newpass, 8, async (err, hash) => {
+                if (err)
+                    console.log("ERROR at hashing password: " + err.message);
+                else {
+
+                    let p = hash;
+                    let result = await DB_auth_driver.changePassword(req.driver.ID, p);
+                }
+            });
+            res.redirect('/driver/info');
+        }
+        else {
+            errors.push('Password Must Be At Least 6 Characters');
+            res.render('driverlayout.ejs', {
+                title: 'Edit Profile - Ghora',
+                page: ['driverPasswordEdit'],
+                driver: req.driver,
+                errors: errors,
+                form: {
+                    prevpass: req.body.prevpass,
+                    newpass: req.body.newpass
+                    //sex:req.body.sex
+                }
+            });
+        }
+    }
+    else if (match2) {
         if (req.body.newpass.length >= 6) {
             await bcrypt.hash(req.body.newpass, 8, async (err, hash) => {
                 if (err)

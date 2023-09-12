@@ -38,7 +38,7 @@ async function getPaymentsOfUser(username){
     PAYMENTS  P JOIN TRIP_HISTORY T 
     ON P.TR_ID=T.TR_ID
 		JOIN DRIVER D
-		ON D.PLATE_NO=T.PLATE_NO
+		ON GETDRIVERIDFROMPLATE(T.PLATE_NO)=D.ID
     WHERE USERNAME=:username
     ORDER BY T.TR_ID DESC
     `;
